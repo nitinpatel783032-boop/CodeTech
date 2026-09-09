@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hd Videos - CodeMaster</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="icon" type="image/png" href="code master.png">
+  <link rel="stylesheet" href="video.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-brand">
+    <span class="logo-icon">&lt;/&gt;</span>
+    <span class="logo-text">CodeMaster</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="html-tutorial.html">HTML</a></li>
+    <li><a href="css-tutorial.html">CSS</a></li>
+    <li><a href="js-tutorial.html">JavaScript</a></li>
+    <li><a href="videos.html" class="nav-video-btn active"><i class="fas fa-play-circle"></i> Hd Videos</a></li>
+    <li><a href="code-master-ai.html">🤖 Code Master AI</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="html-tutorial.html">HTML</a>
+  <a href="css-tutorial.html">CSS</a>
+  <a href="js-tutorial.html">JavaScript</a>
+  <a href="videos.html">Hd Videos</a>
+  <a href="code-master-ai.html">🤖 Code Master AI</a>
+</div>
+
+<!-- HERO -->
+<div class="videos-hero">
+  <div class="vp-badge" style="margin: 0 auto 1rem; display:inline-flex"><i class="fas fa-cube"></i>&nbsp; Hd Learning</div>
+  <h1>Hd Videos se Seekho<br/><span class="gradient-text">Concepts Ko Visually Samjho</span></h1>
+  <p>Har video ek concept ko Hd animation se samjhaata hai — poori tarah free!</p>
+</div>
+
+<!-- FILTER -->
+<div class="video-filter">
+  <button class="filter-btn active" data-filter="all">🌐 Sab</button>
+  <button class="filter-btn" data-filter="html"><i class="fab fa-html5"></i> HTML</button>
+  <button class="filter-btn" data-filter="css"><i class="fab fa-css3-alt"></i> CSS</button>
+  <button class="filter-btn" data-filter="js"><i class="fab fa-js"></i> JavaScript</button>
+</div>
+
+<!-- VIDEO GRID -->
+<div class="videos-grid">
+
+  <!-- 1: HTML DOM -->
+  <div class="video-card fade-in" data-cat="html" onclick="openModal('dom')">
+    <div class="video-thumb vt-html">
+      <div class="dom-tree">
+        <div class="dom-node">&lt;html&gt;</div>
+        <div class="dom-node">&lt;head&gt;</div>
+        <div class="dom-node">&lt;body&gt;</div>
+        <div class="dom-node">&lt;div&gt;</div>
+        <div class="dom-node">&lt;p&gt;</div>
+      </div>
+      <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
+    </div>
+    <div class="video-card-body">
+      <span class="video-tag tag-html">HTML</span>
+      <h3>HTML DOM Tree — Hd Tour</h3>
+      <p>DOM structure ko hd videos se samjho</p>
+      <div class="video-meta"><span><i class="fas fa-clock"></i> 4:12</span><span>⭐ 4.9</span></div>
+    </div>
+  </div>
+
+  <!-- 2: CSS Box Model -->
+  <div class="video-card fade-in" data-cat="css" onclick="openModal('boxmodel')">
+    <div class="video-thumb vt-css">
+      <div class="box-model-anim">
+        <div class="bm-margin"></div>
+        <div class="bm-border"></div>
+        <div class="bm-padding"></div>
+        <div class="bm-content"></div>
+      </div>
+      <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
+    </div>
+    <div class="video-card-body">
+      <span class="video-tag tag-css">CSS</span>
+      <h3>Box Model — Hd Explode View</h3>
+      <p>Margin, Border, Padding, Content ko Hd mein dekho</p>
+      <div class="video-meta"><span><i class="fas fa-clock"></i> 3:45</span><span>⭐ 4.8</span></div>
+    </div>
+  </div>
+
+  <!-- 3: JS Loops -->
+  <div class="video-card fade-in" data-cat="js" onclick="openModal('loops')">
+    <div class="video-thumb vt-js">
+      <div class="loop-anim">
+        <div class="loop-ring"></div>
+        <div class="loop-ring-2"></div>
+        <div class="loop-center">for()</div>
+      </div>
+      <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
+    </div>
+    <div class="video-card-body">
+      <span class="video-tag tag-js">JavaScript</span>
+      <h3>Loops — hd Visual</h3>
+      <p>for, while, forEach loops ka visual walkthrough</p>
+      <div class="video-meta"><span><i class="fas fa-clock"></i> 5:20</span><span>⭐ 4.9</span></div>
+    </div>
+  </div>
+
+  <!-- 4: CSS Flexbox -->
+  <div class="video-card fade-in" data-cat="css" onclick="openModal('flexbox')">
+    <div class="video-thumb vt-css">
+      <div class="flex-anim">
+        <div class="flex-box" style="width:40px;height:40px;background:rgba(0,212,255,0.2);border:2px solid #00d4ff;border-radius:8px;"></div>
+        <div class="flex-box" style="width:55px;height:55px;background:rgba(0,255,136,0.2);border:2px solid #00ff88;border-radius:8px;"></div>
+        <div class="flex-box" style="width:40px;height:40px;background:rgba(168,85,247,0.2);border:2px solid #a855f7;border-radius:8px;"></div>
+      </div>
+      <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
+    </div>
+    <div class="video-card-body">
+      <span class="video-tag tag-css">CSS</span>
+      <h3>Flexbox — Live Animation</h3>
+      <p>justify-content, align-items ko animation mein dekho</p>
+      <div class="video-meta"><span><i class="fas fa-clock"></i> 6:30</span><span>⭐ 5.0</span></div>
+    </div>
+  </div>
+
+  <!-- 5: CSS Grid -->
+  <div class="video-card fade-in" data-cat="css" onclick="openModal('grid')">
+    <div class="video-thumb vt-css">
+      <div class="grid-anim">
+        <div class="grid-cell" style="background:rgba(0,212,255,0.15);border:1px solid rgba(0,212,255,0.5);"></div>
+        <div class="grid-cell" style="background:rgba(0,255,136,0.15);border:1px solid rgba(0,255,136,0.5);"></div>
+        <div class="grid-cell" style="background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.5);"></div>
+        <div class="grid-cell" style="background:rgba(247,223,30,0.1);border:1px solid rgba(247,223,30,0.4);"></div>
+        <div class="grid-cell" style="background:rgba(228,77,38,0.15);border:1px solid rgba(228,77,38,0.5);"></div>
+        <div class="grid-cell" style="background:rgba(0,212,255,0.15);border:1px solid rgba(0,212,255,0.5);"></div>
+      </div>
+      <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
+    </div>
+    <div class="video-card-body">
+      <span class="video-tag tag-css">CSS</span>
+      <h3>CSS Grid — Hd Layout Builder</h3>
+      <p>Grid areas ko Hd space mein arrange karo</p>
+      <div class="video-meta"><span><i class="fas fa-clock"></i> 7:15</span><span>⭐ 4.7</span></div>
+    </div>
+  </div>
+
+  <!-- 6: JS Events -->
+  <div class="video-card fade-in" data-cat="js" onclick="openModal('events')">
+    <div class="video-thumb vt-js">
+      <div class="event-anim">
+        <div class="ripple"></div>
+        <div class="ripple"></div>
+        <div class="ripple"></div>
+        <div class="ripple"></div>
+        <div class="event-center"></div>
+      </div>
+      <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
+    </div>
+    <div class="video-card-body">
+      <span class="video-tag tag-js">JavaScript</span>
+      <h3>DOM Events — Ripple Effect</h3>
+      <p>Click, Hover, Submit events ka visual explanation</p>
+      <div class="video-meta"><span><i class="fas fa-clock"></i> 4:55</span><span>⭐ 4.8</span></div>
+    </div>
+  </div>
+
+  <!-- 7: Async Await -->
+  <div class="video-card fade-in" data-cat="js" onclick="openModal('async')">
+    <div class="video-thumb vt-js">
+      <div class="async-anim">
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+      </div>
+      <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
+    </div>
+    <div class="video-card-body">
+      <span class="video-tag tag-js">JavaScript</span>
+      <h3>Async/Await — Data Flow</h3>
+      <p>Promise chain aur async execution ko visualize karo</p>
+      <div class="video-meta"><span><i class="fas fa-clock"></i> 8:10</span><span>⭐ 4.9</span></div>
+    </div>
+  </div>
+
+  <!-- 8: Responsive -->
+  <div class="video-card fade-in" data-cat="css" onclick="openModal('responsive')">
+    <div class="video-thumb vt-css">
+      <div class="resp-anim">
+        <div class="resp-bar"></div>
+        <div class="resp-bar"></div>
+        <div class="resp-bar"></div>
+        <div class="resp-bar"></div>
+      </div>
+      <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
+    </div>
+    <div class="video-card-body">
+      <span class="video-tag tag-css">CSS</span>
+      <h3>Responsive Design — Media Queries</h3>
+      <p>Mobile to Desktop layout shift ka Hd demo</p>
+      <div class="video-meta"><span><i class="fas fa-clock"></i> 5:40</span><span>⭐ 4.8</span></div>
+    </div>
+  </div>
+
+  <!-- 9: HTML Forms -->
+  <div class="video-card fade-in" data-cat="html" onclick="openModal('forms')">
+    <div class="video-thumb vt-html">
+      <div style="display:flex; flex-direction:column; gap:8px; width:160px;">
+        <div style="height:18px; background:rgba(228,77,38,0.15); border:1px solid rgba(228,77,38,0.4); border-radius:4px; animation: floatNode 2s ease-in-out infinite;"></div>
+        <div style="height:18px; background:rgba(228,77,38,0.1); border:1px solid rgba(228,77,38,0.3); border-radius:4px; animation: floatNode 2s 0.2s ease-in-out infinite;"></div>
+        <div style="height:14px; width:80px; background:rgba(228,77,38,0.25); border-radius:4px; animation: floatNode 2s 0.4s ease-in-out infinite;"></div>
+      </div>
+      <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
+    </div>
+    <div class="video-card-body">
+      <span class="video-tag tag-html">HTML</span>
+      <h3>HTML Forms — Complete Guide</h3>
+      <p>Input types, validation, aur submission ka walkthrough</p>
+      <div class="video-meta"><span><i class="fas fa-clock"></i> 6:25</span><span>⭐ 4.7</span></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== MODAL ===== -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal-box">
+    <div class="modal-screen" id="modalScreen">
+      <!-- YouTube iframe ya placeholder yahan aayega -->
+      <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-info">
+      <span class="video-tag" id="modalTag">HTML</span>
+      <h2 id="modalTitle">Video Title</h2>
+      <p id="modalDesc">Description</p>
+      <div class="modal-meta" id="modalMeta"></div>
+      <!-- YouTube link button -->
+      <div id="modalYTLink" style="margin-top:0.8rem; display:none;">
+        <a id="ytDirectLink" href="#" target="_blank" rel="noopener"
+           style="display:inline-flex; align-items:center; gap:8px;
+                  background:rgba(255,0,0,0.15); border:1px solid rgba(255,0,0,0.4);
+                  color:#ff4444; padding:8px 16px; border-radius:8px;
+                  font-family:var(--font-code); font-size:0.82rem;
+                  text-decoration:none; transition:background 0.2s;">
+          <i class="fab fa-youtube"></i> YouTube par dekho
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-brand"><span class="logo-icon">&lt;/&gt;</span><span class="logo-text">CodeMaster</span></div>
+      <p>India ka #1 Hindi coding tutorial website.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Tutorials</h4>
+      <a href="html-tutorial.html">HTML</a>
+      <a href="css-tutorial.html">CSS</a>
+      <a href="js-tutorial.html">JavaScript</a>
+    </div>
+    <div class="footer-links">
+      <h4>Videos</h4>
+      <a href="#">HTML Videos</a>
+      <a href="#">CSS Videos</a>
+      <a href="#">JS Videos</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 CodeMaster. Made by Nitin 🇮🇳</p>
+  </div>
+</footer>
+<script>
+window.onload = function() {
+  alert("The videos on this website are from a YouTube creator named Code with Harry because the language is very simple and easy for students to understand. This website does not promote any content creators; it is for educational purposes only." + " इस वेबसाइट पर वीडियो एक YouTube क्रिएटर Code with Harry से हैं क्योंकि उनकी भाषा बहुत सरल और छात्रों के लिए समझने में आसान है। यह वेबसाइट किसी भी कंटेंट क्रिएटर को प्रमोट नहीं करती है; यह केवल शैक्षिक उद्देश्यों के लिए है।");
+};
+</script>
+
+<script src="script.js"></script>
+<script src="video.js"></script>
+
+<!-- Code Master AI chat bubble -->
+<link rel="stylesheet" href="assets/css/code-master-ai.css">
+<script src="assets/js/code-master-ai.js"></script>
+<script>initCodeMasterAI("bubble");</script>
+</body>
+</html>

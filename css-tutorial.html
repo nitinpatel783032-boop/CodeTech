@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSS Tutorial - CodeMaster</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="icon" type="image/png" href="code master.png">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-brand">
+    <span class="logo-icon">&lt;/&gt;</span>
+    <span class="logo-text">CodeMaster</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="html-tutorial.html">HTML</a></li>
+    <li><a href="css-tutorial.html" class="active">CSS</a></li>
+    <li><a href="js-tutorial.html">JavaScript</a></li>
+    <li><a href="videos.html" class="nav-video-btn"><i class="fas fa-play-circle"></i> hd Videos</a></li>
+    <li><a href="code-master-ai.html">🤖 Code Master AI</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="html-tutorial.html">HTML</a>
+  <a href="css-tutorial.html">CSS</a>
+  <a href="js-tutorial.html">JavaScript</a>
+  <a href="videos.html">hd Videos</a>
+  <a href="code-master-ai.html">🤖 Code Master AI</a>
+</div>
+
+<div class="tutorial-wrap">
+
+  <aside class="sidebar">
+    <div class="tut-progress">
+      <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
+      <span class="progress-label">100% Complete</span>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">🌱 Beginner</div>
+      <a href="#intro" class="sidebar-link active">CSS Kya Hai?</a>
+      <a href="#syntax" class="sidebar-link">Syntax & Selectors</a>
+      <a href="#colors" class="sidebar-link">Colors & Backgrounds</a>
+      <a href="#text" class="sidebar-link">Text & Fonts</a>
+      <a href="#box" class="sidebar-link">Box Model</a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">📗 Intermediate</div>
+      <a href="#display" class="sidebar-link">Display & Position</a>
+      <a href="#flexbox" class="sidebar-link">Flexbox <span class="badge badge-new">Hot</span></a>
+      <a href="#grid" class="sidebar-link">CSS Grid</a>
+      <a href="#pseudo" class="sidebar-link">Pseudo-classes</a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">🔥 Advanced</div>
+      <a href="#animations" class="sidebar-link">Animations <span class="badge badge-pro">Pro</span></a>
+      <a href="#variables" class="sidebar-link">CSS Variables <span class="badge badge-pro">Pro</span></a>
+      <a href="#responsive" class="sidebar-link">Responsive Design <span class="badge badge-pro">Pro</span></a>
+    </div>
+  </aside>
+
+  <main class="tutorial-main">
+
+    <div class="tut-breadcrumb">
+      <a href="index.html">Home</a>
+      <i class="fas fa-chevron-right" style="font-size:0.7rem; color:var(--text-muted)"></i>
+      <span>CSS Tutorial</span>
+    </div>
+
+    <h1 class="tut-title" id="intro">
+      <span style="color:#264de4"><i class="fab fa-css3-alt"></i></span>
+      CSS Tutorial
+    </h1>
+    <p class="tut-subtitle">CSS (Cascading Style Sheets) se websites ko sundar aur attractive banate hain — colors, layouts, animations sab CSS se!</p>
+
+    <!-- ===== CSS KYA HAI ===== -->
+    <div class="tut-section fade-in">
+      <h2>CSS Kya Hota Hai?</h2>
+      <p>HTML structure banata hai, <strong>CSS usse style deta hai</strong>. Bina CSS ke website plain text ki tarah dikhti hai — CSS se woh khubsoorat banti hai.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>css — Pehla CSS Code</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="cmt">/* Yeh ek CSS comment hai */</span>
+<span class="fn">body</span> {
+  <span class="at">background-color</span>: <span class="vl">#0a0e1a</span>;
+  <span class="at">color</span>: <span class="vl">#e2e8f0</span>;
+  <span class="at">font-family</span>: <span class="vl">sans-serif</span>;
+}
+
+<span class="fn">h1</span> {
+  <span class="at">color</span>: <span class="vl">#264de4</span>;
+  <span class="at">font-size</span>: <span class="vl">2rem</span>;
+  <span class="at">text-align</span>: <span class="vl">center</span>;
+}</pre>
+      </div>
+
+      <div class="callout callout-info">
+        <span class="callout-icon"><i class="fas fa-info-circle"></i></span>
+        <div>CSS 3 tarike se lagaya ja sakta hai: <strong>Inline</strong> (style attribute), <strong>Internal</strong> (&lt;style&gt; tag), <strong>External</strong> (.css file). External best practice hai!</div>
+      </div>
+    </div>
+
+    <!-- ===== SELECTORS ===== -->
+    <div class="tut-section fade-in" id="syntax">
+      <h2>Selectors — Elements Ko Target Karo</h2>
+      <p>Selector batata hai ki CSS kaunse element pe lagegi. Teen main types hain:</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>css — Selectors</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="cmt">/* Element Selector - sare &lt;p&gt; ko target karo */</span>
+<span class="fn">p</span> {
+  <span class="at">color</span>: <span class="vl">#94a3b8</span>;
+}
+
+<span class="cmt">/* Class Selector - .classname */</span>
+<span class="fn">.highlight</span> {
+  <span class="at">background</span>: <span class="vl">yellow</span>;
+  <span class="at">padding</span>: <span class="vl">4px 8px</span>;
+}
+
+<span class="cmt">/* ID Selector - #idname (ek baar use karo) */</span>
+<span class="fn">#main-title</span> {
+  <span class="at">font-size</span>: <span class="vl">2.5rem</span>;
+  <span class="at">font-weight</span>: <span class="vl">bold</span>;
+}
+
+<span class="cmt">/* Multiple selectors ek saath */</span>
+<span class="fn">h1, h2, h3</span> {
+  <span class="at">font-family</span>: <span class="vl">'Arial', sans-serif</span>;
+}
+
+<span class="cmt">/* Child Selector - direct child */</span>
+<span class="fn">nav > ul</span> {
+  <span class="at">list-style</span>: <span class="vl">none</span>;
+}
+
+<span class="cmt">/* Descendant Selector - koi bhi andar wala */</span>
+<span class="fn">div p</span> {
+  <span class="at">margin</span>: <span class="vl">0</span>;
+}
+
+<span class="cmt">/* Attribute Selector */</span>
+<span class="fn">input[type="text"]</span> {
+  <span class="at">border</span>: <span class="vl">2px solid #264de4</span>;
+}</pre>
+      </div>
+
+      <div class="callout callout-tip">
+        <span class="callout-icon"><i class="fas fa-lightbulb"></i></span>
+        <div><strong>Specificity Rule:</strong> ID &gt; Class &gt; Element. Agar conflict ho to zyada specific selector jeetta hai!</div>
+      </div>
+    </div>
+
+    <!-- ===== COLORS & BACKGROUNDS ===== -->
+    <div class="tut-section fade-in" id="colors">
+      <h2>Colors &amp; Backgrounds</h2>
+      <p>CSS mein color alag-alag tarike se diya ja sakta hai. Backgrounds mein solid color se lekar gradient tak sab kuch ho sakta hai!</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>css — Colors</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="cmt">/* Color ke 4 tarike */</span>
+<span class="fn">.box1</span> { <span class="at">color</span>: <span class="vl">red</span>; }                     <span class="cmt">/* Named */</span>
+<span class="fn">.box2</span> { <span class="at">color</span>: <span class="vl">#264de4</span>; }               <span class="cmt">/* Hex */</span>
+<span class="fn">.box3</span> { <span class="at">color</span>: <span class="vl">rgb(38, 77, 228)</span>; }      <span class="cmt">/* RGB */</span>
+<span class="fn">.box4</span> { <span class="at">color</span>: <span class="vl">rgba(38, 77, 228, 0.5)</span>; }<span class="cmt">/* RGBA (alpha=transparency) */</span>
+<span class="fn">.box5</span> { <span class="at">color</span>: <span class="vl">hsl(225, 71%, 52%)</span>; }    <span class="cmt">/* HSL */</span>
+
+<span class="cmt">/* Background Color */</span>
+<span class="fn">.card</span> {
+  <span class="at">background-color</span>: <span class="vl">#0f1526</span>;
+}
+
+<span class="cmt">/* Linear Gradient */</span>
+<span class="fn">.hero</span> {
+  <span class="at">background</span>: <span class="fn">linear-gradient</span>(<span class="vl">135deg, #264de4, #00d4ff</span>);
+}
+
+<span class="cmt">/* Radial Gradient */</span>
+<span class="fn">.circle-bg</span> {
+  <span class="at">background</span>: <span class="fn">radial-gradient</span>(<span class="vl">circle, #a855f7, #0a0e1a</span>);
+}
+
+<span class="cmt">/* Background Image */</span>
+<span class="fn">.banner</span> {
+  <span class="at">background-image</span>: <span class="fn">url</span>(<span class="vl">'image.jpg'</span>);
+  <span class="at">background-size</span>: <span class="vl">cover</span>;       <span class="cmt">/* poora cover karo */</span>
+  <span class="at">background-position</span>: <span class="vl">center</span>;  <span class="cmt">/* center mein rakho */</span>
+  <span class="at">background-repeat</span>: <span class="vl">no-repeat</span>; <span class="cmt">/* repeat mat karo */</span>
+}</pre>
+      </div>
+
+      <div class="try-it-box">
+        <div class="try-it-header">
+          <span><i class="fas fa-code"></i> Colors &amp; Gradients Try Karo!</span>
+          <button class="try-it-run"><i class="fas fa-play"></i> Run</button>
+        </div>
+        <div class="try-it-grid">
+          <div class="try-it-code">
+            <textarea spellcheck="false"><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { background:#0a0e1a; padding:20px; margin:0; font-family:sans-serif; }
+    .grid { display:flex; flex-wrap:wrap; gap:12px; }
+    .box {
+      width:130px; height:80px; border-radius:10px;
+      display:flex; align-items:center; justify-content:center;
+      color:white; font-size:0.75rem; font-weight:bold;
+      text-align:center; padding:5px;
+    }
+    .b1 { background: #264de4; }
+    .b2 { background: rgba(0,212,255,0.7); }
+    .b3 { background: hsl(280,70%,55%); }
+    .b4 { background: linear-gradient(135deg,#264de4,#00d4ff); }
+    .b5 { background: linear-gradient(135deg,#a855f7,#00ff88); }
+    .b6 { background: radial-gradient(circle,#f7df1e,#e44d26); color:#0a0e1a; }
+  </style>
+</head>
+<body>
+  <div class="grid">
+    <div class="box b1">Hex<br>#264de4</div>
+    <div class="box b2">RGBA<br>Transparent</div>
+    <div class="box b3">HSL<br>Purple</div>
+    <div class="box b4">Linear<br>Gradient</div>
+    <div class="box b5">Gradient<br>2</div>
+    <div class="box b6">Radial<br>Gradient</div>
+  </div>
+</body>
+</html></textarea>
+          </div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== TEXT & FONTS ===== -->
+    <div class="tut-section fade-in" id="text">
+      <h2>Text &amp; Fonts — Typography</h2>
+      <p>CSS se text ki har cheez customize kar sakte ho — font, size, weight, spacing, decoration sab!</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>css — Text Properties</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="fn">p</span> {
+  <span class="cmt">/* Font family */</span>
+  <span class="at">font-family</span>: <span class="vl">'Roboto', Arial, sans-serif</span>;
+
+  <span class="cmt">/* Font size */</span>
+  <span class="at">font-size</span>: <span class="vl">1rem</span>;      <span class="cmt">/* 1rem = 16px */</span>
+
+  <span class="cmt">/* Font weight */</span>
+  <span class="at">font-weight</span>: <span class="vl">400</span>;     <span class="cmt">/* 100-900, ya bold/normal */</span>
+
+  <span class="cmt">/* Font style */</span>
+  <span class="at">font-style</span>: <span class="vl">italic</span>;   <span class="cmt">/* italic ya normal */</span>
+
+  <span class="cmt">/* Text color */</span>
+  <span class="at">color</span>: <span class="vl">#e2e8f0</span>;
+
+  <span class="cmt">/* Text alignment */</span>
+  <span class="at">text-align</span>: <span class="vl">center</span>;   <span class="cmt">/* left, right, center, justify */</span>
+
+  <span class="cmt">/* Line height (readability) */</span>
+  <span class="at">line-height</span>: <span class="vl">1.6</span>;
+
+  <span class="cmt">/* Letter spacing */</span>
+  <span class="at">letter-spacing</span>: <span class="vl">0.05em</span>;
+
+  <span class="cmt">/* Text decoration */</span>
+  <span class="at">text-decoration</span>: <span class="vl">underline</span>; <span class="cmt">/* none, underline, line-through */</span>
+
+  <span class="cmt">/* Text transform */</span>
+  <span class="at">text-transform</span>: <span class="vl">uppercase</span>; <span class="cmt">/* lowercase, capitalize */</span>
+
+  <span class="cmt">/* Text shadow */</span>
+  <span class="at">text-shadow</span>: <span class="vl">2px 2px 8px rgba(38,77,228,0.6)</span>;
+}
+
+<span class="cmt">/* Google Fonts import (HTML head mein dalo) */</span>
+<span class="cmt">/* &lt;link href="https://fonts.googleapis.com/css2?
+   family=Poppins:wght@400;700&display=swap" rel="stylesheet"&gt; */</span></pre>
+      </div>
+
+      <div class="try-it-box">
+        <div class="try-it-header">
+          <span><i class="fas fa-code"></i> Typography Try Karo!</span>
+          <button class="try-it-run"><i class="fas fa-play"></i> Run</button>
+        </div>
+        <div class="try-it-grid">
+          <div class="try-it-code">
+            <textarea spellcheck="false"><!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700;900&display=swap" rel="stylesheet">
+  <style>
+    body { background:#0a0e1a; padding:24px; margin:0; }
+    .t1 {
+      font-family:'Poppins',sans-serif;
+      font-size:2rem; font-weight:900;
+      color:#264de4; letter-spacing:-1px;
+    }
+    .t2 {
+      font-family:'Poppins',sans-serif;
+      font-size:1rem; font-weight:300;
+      color:#94a3b8; line-height:1.8;
+    }
+    .t3 {
+      font-family:monospace;
+      font-size:0.9rem; color:#00ff88;
+      text-transform:uppercase; letter-spacing:3px;
+    }
+    .t4 {
+      font-family:'Poppins',sans-serif;
+      font-size:1.5rem; font-weight:700;
+      color:transparent;
+      background:linear-gradient(90deg,#00d4ff,#a855f7);
+      -webkit-background-clip:text;
+      background-clip:text;
+    }
+    .t5 {
+      font-size:1.2rem; color:#f7df1e;
+      text-shadow: 0 0 20px rgba(247,223,30,0.8);
+    }
+  </style>
+</head>
+<body>
+  <p class="t1">CSS Typography Rocks!</p>
+  <p class="t2">Yeh ek paragraph hai jisme line-height aur font-weight ka demo hai. Text readable aur sundar lagta hai.</p>
+  <p class="t3">Letter Spacing • Monospace</p>
+  <p class="t4">Gradient Text Effect ✨</p>
+  <p class="t5">Glowing Text 💡</p>
+</body>
+</html></textarea>
+          </div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== BOX MODEL ===== -->
+    <div class="tut-section fade-in" id="box">
+      <h2>Box Model — CSS ka Dil</h2>
+      <p>Har HTML element ek <strong>box</strong> hai. Box model mein 4 parts hote hain: Content, Padding, Border, Margin.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>css — Box Model</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="fn">.box</span> {
+  <span class="cmt">/* Content ki width/height */</span>
+  <span class="at">width</span>: <span class="vl">200px</span>;
+  <span class="at">height</span>: <span class="vl">100px</span>;
+
+  <span class="cmt">/* Padding - content ke andar ka space */</span>
+  <span class="at">padding</span>: <span class="vl">20px</span>;           <span class="cmt">/* sab taraf */</span>
+  <span class="at">padding</span>: <span class="vl">10px 20px</span>;      <span class="cmt">/* top/bottom  left/right */</span>
+  <span class="at">padding-top</span>: <span class="vl">10px</span>;
+
+  <span class="cmt">/* Border - box ki line */</span>
+  <span class="at">border</span>: <span class="vl">2px solid #264de4</span>;
+  <span class="at">border-radius</span>: <span class="vl">8px</span>;      <span class="cmt">/* rounded corners */</span>
+
+  <span class="cmt">/* Margin - box ke bahar ka space */</span>
+  <span class="at">margin</span>: <span class="vl">20px</span>;
+  <span class="at">margin</span>: <span class="vl">0 auto</span>;           <span class="cmt">/* center karo */</span>
+
+  <span class="cmt">/* box-sizing: ek important trick! */</span>
+  <span class="at">box-sizing</span>: <span class="vl">border-box</span>;  <span class="cmt">/* padding/border width mein count ho */</span>
+}</pre>
+      </div>
+
+      <div class="try-it-box">
+        <div class="try-it-header">
+          <span><i class="fas fa-code"></i> Box Model Dekho!</span>
+          <button class="try-it-run"><i class="fas fa-play"></i> Run</button>
+        </div>
+        <div class="try-it-grid">
+          <div class="try-it-code">
+            <textarea spellcheck="false"><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      background:#0a0e1a;
+      display:flex; justify-content:center;
+      align-items:center; height:100vh; margin:0;
+    }
+    .margin-box {
+      background: rgba(168,85,247,0.15);
+      border: 2px dashed #a855f7;
+      padding: 20px;
+      border-radius: 12px;
+    }
+    .border-box {
+      background: rgba(38,77,228,0.15);
+      border: 4px solid #264de4;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    .padding-box {
+      background: rgba(0,212,255,0.15);
+      border: 2px dashed #00d4ff;
+      padding: 16px;
+      border-radius: 4px;
+    }
+    .content-box {
+      background: rgba(0,255,136,0.2);
+      color: #00ff88;
+      font-family: monospace;
+      font-size: 0.8rem;
+      text-align: center;
+      padding: 8px 16px;
+      border-radius: 4px;
+    }
+    .label {
+      font-family:monospace; font-size:0.65rem;
+      color:#94a3b8; text-align:center;
+      display:block; margin-bottom:4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="margin-box">
+    <span class="label">MARGIN (purple)</span>
+    <div class="border-box">
+      <span class="label">BORDER (blue)</span>
+      <div class="padding-box">
+        <span class="label">PADDING (cyan)</span>
+        <div class="content-box">📦 CONTENT</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html></textarea>
+          </div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== DISPLAY & POSITION ===== -->
+    <div class="tut-section fade-in" id="display">
+      <h2>Display &amp; Position</h2>
+      <p><code>display</code> property control karti hai element kaise dikhta hai. <code>position</code> batata hai element page pe kahan hoga.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>css — Display</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="cmt">/* Display Values */</span>
+<span class="fn">.block</span>    { <span class="at">display</span>: <span class="vl">block</span>; }        <span class="cmt">/* Full width leta hai (div, p, h1) */</span>
+<span class="fn">.inline</span>   { <span class="at">display</span>: <span class="vl">inline</span>; }       <span class="cmt">/* Text ke saath flow (span, a) */</span>
+<span class="fn">.iblock</span>   { <span class="at">display</span>: <span class="vl">inline-block</span>; } <span class="cmt">/* Inline + width/height set kar sako */</span>
+<span class="fn">.hidden</span>   { <span class="at">display</span>: <span class="vl">none</span>; }         <span class="cmt">/* Bilkul hide kar do */</span>
+<span class="fn">.flex-box</span> { <span class="at">display</span>: <span class="vl">flex</span>; }         <span class="cmt">/* Flexbox container */</span>
+<span class="fn">.grid-box</span> { <span class="at">display</span>: <span class="vl">grid</span>; }         <span class="cmt">/* Grid container */</span></pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>css — Position</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="cmt">/* position: static (default) - normal flow */</span>
+<span class="fn">.normal</span> { <span class="at">position</span>: <span class="vl">static</span>; }
+
+<span class="cmt">/* position: relative - apni jagah se thoda hato */</span>
+<span class="fn">.moved</span> {
+  <span class="at">position</span>: <span class="vl">relative</span>;
+  <span class="at">top</span>: <span class="vl">10px</span>;
+  <span class="at">left</span>: <span class="vl">20px</span>;
+}
+
+<span class="cmt">/* position: absolute - parent ke hisab se position */</span>
+<span class="fn">.tooltip</span> {
+  <span class="at">position</span>: <span class="vl">absolute</span>;
+  <span class="at">top</span>: <span class="vl">0</span>;
+  <span class="at">right</span>: <span class="vl">0</span>;
+}
+
+<span class="cmt">/* position: fixed - scroll karo, yeh wahi rahega */</span>
+<span class="fn">.navbar</span> {
+  <span class="at">position</span>: <span class="vl">fixed</span>;
+  <span class="at">top</span>: <span class="vl">0</span>;
+  <span class="at">width</span>: <span class="vl">100%</span>;
+  <span class="at">z-index</span>: <span class="vl">999</span>;  <span class="cmt">/* oopar dikhao */</span>
+}
+
+<span class="cmt">/* position: sticky - scroll karte karte chipak jaye */</span>
+<span class="fn">.sidebar</span> {
+  <span class="at">position</span>: <span class="vl">sticky</span>;
+  <span class="at">top</span>: <span class="vl">20px</span>;
+}</pre>
+      </div>
+
+      <div class="try-it-box">
+        <div class="try-it-header">
+          <span><i class="fas fa-code"></i> Position Demo Try Karo!</span>
+          <button class="try-it-run"><i class="fas fa-play"></i> Run</button>
+        </div>
+        <div class="try-it-grid">
+          <div class="try-it-code">
+            <textarea spellcheck="false"><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { background:#0a0e1a; color:#e2e8f0;
+           font-family:monospace; padding:20px; margin:0; }
+    .container {
+      position: relative;
+      background:#0f1526; border:1px solid #1e2d4a;
+      border-radius:10px; padding:20px;
+      height:160px; margin-bottom:16px;
+    }
+    .label { color:#94a3b8; font-size:0.75rem; margin-bottom:8px; }
+    .box-r {
+      position: relative;
+      top: 10px; left: 20px;
+      background:rgba(38,77,228,0.3);
+      border:2px solid #264de4;
+      padding:8px 12px; border-radius:6px;
+      display:inline-block; font-size:0.8rem;
+      color:#6b8fff;
+    }
+    .box-a {
+      position: absolute;
+      top: 16px; right: 16px;
+      background:rgba(168,85,247,0.3);
+      border:2px solid #a855f7;
+      padding:8px 12px; border-radius:6px;
+      font-size:0.8rem; color:#c084fc;
+    }
+    .badge {
+      position:absolute; top:-8px; right:-8px;
+      background:#00ff88; color:#0a0e1a;
+      border-radius:50%; width:18px; height:18px;
+      display:flex; align-items:center;
+      justify-content:center; font-size:0.65rem;
+      font-weight:bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="label">position: relative (top:10px, left:20px)</div>
+    <div class="box-r">🔵 Relative Box</div>
+    <div class="box-a">
+      🟣 Absolute Box
+      <div class="badge">!</div>
+    </div>
+  </div>
+</body>
+</html></textarea>
+          </div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== FLEXBOX ===== -->
+    <div class="tut-section fade-in" id="flexbox">
+      <h2>Flexbox — Layout ka Jaadu</h2>
+      <p>Flexbox se items ko row ya column mein easily arrange kar sakte ho. Modern layouts ke liye must-know!</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>css — Flexbox</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="fn">.container</span> {
+  <span class="at">display</span>: <span class="vl">flex</span>;             <span class="cmt">/* flex start */</span>
+  <span class="at">flex-direction</span>: <span class="vl">row</span>;       <span class="cmt">/* row ya column */</span>
+  <span class="at">justify-content</span>: <span class="vl">center</span>;  <span class="cmt">/* horizontal align */</span>
+  <span class="at">align-items</span>: <span class="vl">center</span>;      <span class="cmt">/* vertical align */</span>
+  <span class="at">gap</span>: <span class="vl">1rem</span>;               <span class="cmt">/* space between */</span>
+  <span class="at">flex-wrap</span>: <span class="vl">wrap</span>;         <span class="cmt">/* wrap to next line */</span>
+}
+
+<span class="fn">.item</span> {
+  <span class="at">flex</span>: <span class="vl">1</span>;                  <span class="cmt">/* equal space lega */</span>
+  <span class="at">align-self</span>: <span class="vl">flex-start</span>;  <span class="cmt">/* sirf is item ki alignment */</span>
+}
+
+<span class="cmt">/* justify-content values: */</span>
+<span class="cmt">/* flex-start | flex-end | center */</span>
+<span class="cmt">/* space-between | space-around | space-evenly */</span></pre>
+      </div>
+
+      <div class="try-it-box">
+        <div class="try-it-header">
+          <span><i class="fas fa-code"></i> Flexbox Try Karo!</span>
+          <button class="try-it-run"><i class="fas fa-play"></i> Run</button>
+        </div>
+        <div class="try-it-grid">
+          <div class="try-it-code">
+            <textarea spellcheck="false"><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { background:#0a0e1a; padding:20px; margin:0; font-family:sans-serif; }
+    label { color:#94a3b8; font-size:0.8rem; display:block; margin:12px 0 6px; }
+    .container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      background:#0f1526; border:1px solid #1e2d4a;
+      border-radius:10px; padding:16px;
+    }
+    .box {
+      width: 60px; height: 60px;
+      border-radius: 8px;
+      display: flex; align-items: center;
+      justify-content: center;
+      font-weight: bold; font-size: 1.1rem;
+    }
+    .b1 { background:rgba(0,212,255,0.2); color:#00d4ff; border:2px solid #00d4ff; }
+    .b2 { background:rgba(0,255,136,0.2); color:#00ff88; border:2px solid #00ff88; height:80px; }
+    .b3 { background:rgba(168,85,247,0.2); color:#a855f7; border:2px solid #a855f7; }
+    .b4 { background:rgba(247,223,30,0.2); color:#f7df1e; border:2px solid #f7df1e; height:40px; }
+  </style>
+</head>
+<body>
+  <label>display:flex • justify-content:space-around • align-items:center</label>
+  <div class="container">
+    <div class="box b1">1</div>
+    <div class="box b2">2<br><small style="font-size:0.55rem">tall</small></div>
+    <div class="box b3">3</div>
+    <div class="box b4">4</div>
+  </div>
+</body>
+</html></textarea>
+          </div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== CSS GRID ===== -->
+    <div class="tut-section fade-in" id="grid">
+      <h2>CSS Grid — 2D Layout Power</h2>
+      <p>CSS Grid se rows aur columns dono mein layout banate hain. Flexbox ek direction mein kaam karta hai, Grid dono mein!</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>css — CSS Grid</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="fn">.grid-container</span> {
+  <span class="at">display</span>: <span class="vl">grid</span>;
+
+  <span class="cmt">/* 3 columns define karo */</span>
+  <span class="at">grid-template-columns</span>: <span class="vl">1fr 1fr 1fr</span>;       <span class="cmt">/* 3 equal */</span>
+  <span class="at">grid-template-columns</span>: <span class="vl">200px auto 200px</span>;  <span class="cmt">/* fixed + auto */</span>
+  <span class="at">grid-template-columns</span>: <span class="fn">repeat</span>(<span class="vl">3, 1fr</span>);     <span class="cmt">/* shorthand */</span>
+
+  <span class="cmt">/* Rows define karo */</span>
+  <span class="at">grid-template-rows</span>: <span class="vl">80px auto 60px</span>;
+
+  <span class="cmt">/* Gap between cells */</span>
+  <span class="at">gap</span>: <span class="vl">16px</span>;                    <span class="cmt">/* row aur column dono */</span>
+  <span class="at">column-gap</span>: <span class="vl">20px</span>;
+  <span class="at">row-gap</span>: <span class="vl">12px</span>;
+}
+
+<span class="cmt">/* Item ko multiple columns span karo */</span>
+<span class="fn">.header</span> {
+  <span class="at">grid-column</span>: <span class="vl">1 / 4</span>;    <span class="cmt">/* column 1 se 4 tak (3 columns) */</span>
+}
+<span class="fn">.sidebar</span> {
+  <span class="at">grid-row</span>: <span class="vl">2 / 4</span>;       <span class="cmt">/* 2 rows span karo */</span>
+}
+
+<span class="cmt">/* Auto-fill - jitni fit ho utni columns */</span>
+<span class="fn">.card-grid</span> {
+  <span class="at">grid-template-columns</span>: <span class="fn">repeat</span>(<span class="vl">auto-fill, minmax(200px, 1fr)</span>);
+}</pre>
+      </div>
+
+      <div class="try-it-box">
+        <div class="try-it-header">
+          <span><i class="fas fa-code"></i> CSS Grid Try Karo!</span>
+          <button class="try-it-run"><i class="fas fa-play"></i> Run</button>
+        </div>
+        <div class="try-it-grid">
+          <div class="try-it-code">
+            <textarea spellcheck="false"><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    * { box-sizing:border-box; }
+    body { background:#0a0e1a; padding:16px; margin:0; font-family:sans-serif; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 60px 120px 60px;
+      gap: 10px;
+    }
+    .cell {
+      border-radius:8px; display:flex;
+      align-items:center; justify-content:center;
+      font-weight:bold; font-size:0.8rem; color:white;
+    }
+    .header {
+      grid-column: 1 / 4;
+      background:rgba(38,77,228,0.5);
+      border:2px solid #264de4; color:#6b8fff;
+    }
+    .sidebar { background:rgba(168,85,247,0.3); border:2px solid #a855f7; color:#c084fc; }
+    .main    {
+      grid-column: 2 / 4;
+      background:rgba(0,255,136,0.2);
+      border:2px solid #00ff88; color:#00ff88;
+    }
+    .footer  {
+      grid-column: 1 / 4;
+      background:rgba(0,212,255,0.2);
+      border:2px solid #00d4ff; color:#00d4ff;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid">
+    <div class="cell header">🔵 Header (col 1→4)</div>
+    <div class="cell sidebar">🟣 Sidebar</div>
+    <div class="cell main">🟢 Main (col 2→4)</div>
+    <div class="cell footer">🔷 Footer (col 1→4)</div>
+  </div>
+</body>
+</html></textarea>
+          </div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PSEUDO-CLASSES ===== -->
+    <div class="tut-section fade-in" id="pseudo">
+      <h2>Pseudo-classes &amp; Pseudo-elements</h2>
+      <p>Pseudo-classes kisi element ki special <em>state</em> ko target karti hain (hover, focus, etc). Pseudo-elements elements ka ek <em>part</em> style karte hain.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>css — Pseudo-classes</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="cmt">/* :hover — mouse le jao pe */</span>
+<span class="fn">button:hover</span> {
+  <span class="at">background</span>: <span class="vl">#264de4</span>;
+  <span class="at">transform</span>: <span class="vl">scale(1.05)</span>;
+}
+
+<span class="cmt">/* :focus — input pe click/tab karo */</span>
+<span class="fn">input:focus</span> {
+  <span class="at">outline</span>: <span class="vl">none</span>;
+  <span class="at">border-color</span>: <span class="vl">#264de4</span>;
+  <span class="at">box-shadow</span>: <span class="vl">0 0 0 3px rgba(38,77,228,0.3)</span>;
+}
+
+<span class="cmt">/* :active — click ho raha hai */</span>
+<span class="fn">button:active</span> { <span class="at">transform</span>: <span class="vl">scale(0.95)</span>; }
+
+<span class="cmt">/* :nth-child — kaunsa baccha */</span>
+<span class="fn">li:nth-child(odd)</span>  { <span class="at">background</span>: <span class="vl">rgba(255,255,255,0.03)</span>; }
+<span class="fn">li:nth-child(2)</span>    { <span class="at">color</span>: <span class="vl">#00d4ff</span>; }
+<span class="fn">li:first-child</span>     { <span class="at">font-weight</span>: <span class="vl">bold</span>; }
+<span class="fn">li:last-child</span>      { <span class="at">border-bottom</span>: <span class="vl">none</span>; }
+
+<span class="cmt">/* :not() — in elements ko chhod do */</span>
+<span class="fn">button:not(.primary)</span> { <span class="at">opacity</span>: <span class="vl">0.6</span>; }
+
+<span class="cmt">/* Pseudo-elements — :: double colon */</span>
+<span class="fn">p::first-line</span>  { <span class="at">font-weight</span>: <span class="vl">bold</span>; }
+<span class="fn">p::first-letter</span>{ <span class="at">font-size</span>: <span class="vl">2rem</span>; <span class="at">float</span>: <span class="vl">left</span>; }
+<span class="fn">div::before</span>    { <span class="at">content</span>: <span class="vl">"★ "</span>; <span class="at">color</span>: <span class="vl">#f7df1e</span>; }
+<span class="fn">div::after</span>     { <span class="at">content</span>: <span class="vl">" ✓"</span>; <span class="at">color</span>: <span class="vl">#00ff88</span>; }</pre>
+      </div>
+
+      <div class="try-it-box">
+        <div class="try-it-header">
+          <span><i class="fas fa-code"></i> Pseudo-classes Try Karo!</span>
+          <button class="try-it-run"><i class="fas fa-play"></i> Run</button>
+        </div>
+        <div class="try-it-grid">
+          <div class="try-it-code">
+            <textarea spellcheck="false"><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { background:#0a0e1a; color:#e2e8f0;
+           font-family:sans-serif; padding:20px; }
+    ul { list-style:none; padding:0; margin:0 0 16px; }
+    li {
+      padding:10px 14px; border:1px solid #1e2d4a;
+      transition: all 0.2s; cursor:pointer;
+    }
+    li:first-child { border-radius:8px 8px 0 0; }
+    li:last-child  { border-radius:0 0 8px 8px; border-bottom:1px solid #1e2d4a; }
+    li:nth-child(odd)  { background:#0f1526; }
+    li:nth-child(even) { background:#111829; }
+    li:hover { background:rgba(38,77,228,0.2); color:#6b8fff; padding-left:22px; }
+    li::before { content:"▸ "; color:#264de4; }
+
+    input {
+      background:#0f1526; color:#e2e8f0;
+      border:2px solid #1e2d4a; border-radius:8px;
+      padding:10px; font-size:1rem;
+      width:100%; transition:all 0.3s;
+    }
+    input:focus {
+      outline:none; border-color:#264de4;
+      box-shadow: 0 0 0 3px rgba(38,77,228,0.3);
+    }
+    .btn {
+      background:#264de4; color:white;
+      border:none; padding:10px 20px;
+      border-radius:8px; cursor:pointer;
+      font-size:0.9rem; margin-top:10px;
+      transition:all 0.2s;
+    }
+    .btn:hover  { background:#3b5bdb; transform:scale(1.05); }
+    .btn:active { transform:scale(0.95); }
+  </style>
+</head>
+<body>
+  <ul>
+    <li>Pehla item (first-child)</li>
+    <li>Doosra item (even)</li>
+    <li>Teesra item (odd)</li>
+    <li>Chautha item (last-child)</li>
+  </ul>
+  <input placeholder="Focus karo mujhpe...">
+  <br>
+  <button class="btn">Hover & Click karo!</button>
+</body>
+</html></textarea>
+          </div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== ANIMATIONS ===== -->
+    <div class="tut-section fade-in" id="animations">
+      <h2>CSS Animations</h2>
+      <p><code>@keyframes</code> se custom animations banate hain. <code>animation</code> property se element pe lagate hain.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>css — Animations</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="cmt">/* Step 1: @keyframes se animation define karo */</span>
+<span class="kw">@keyframes</span> <span class="fn">slideIn</span> {
+  <span class="vl">0%</span>   { <span class="at">transform</span>: <span class="vl">translateX(-100px)</span>; <span class="at">opacity</span>: <span class="vl">0</span>; }
+  <span class="vl">100%</span> { <span class="at">transform</span>: <span class="vl">translateX(0)</span>; <span class="at">opacity</span>: <span class="vl">1</span>; }
+}
+
+<span class="cmt">/* Step 2: Element pe lagao */</span>
+<span class="fn">.card</span> {
+  <span class="at">animation</span>: <span class="vl">slideIn 0.5s ease-out forwards</span>;
+<span class="cmt">/*            name    duration  timing  fill-mode */</span>
+}
+
+<span class="cmt">/* Animation properties alag se */</span>
+<span class="fn">.box</span> {
+  <span class="at">animation-name</span>:            <span class="vl">bounce</span>;
+  <span class="at">animation-duration</span>:        <span class="vl">1.5s</span>;
+  <span class="at">animation-timing-function</span>: <span class="vl">ease-in-out</span>;
+  <span class="at">animation-iteration-count</span>: <span class="vl">infinite</span>; <span class="cmt">/* ya koi number */</span>
+  <span class="at">animation-direction</span>:       <span class="vl">alternate</span>; <span class="cmt">/* forwards, backwards */</span>
+  <span class="at">animation-delay</span>:           <span class="vl">0.3s</span>;      <span class="cmt">/* start mein wait */</span>
+}
+
+<span class="cmt">/* Transition (hover pe smooth change) */</span>
+<span class="fn">.btn</span> {
+  <span class="at">transition</span>: <span class="vl">all 0.3s ease</span>;
+}
+<span class="fn">.btn:hover</span> {
+  <span class="at">transform</span>: <span class="vl">translateY(-3px)</span>;
+  <span class="at">box-shadow</span>: <span class="vl">0 10px 30px rgba(38,77,228,0.4)</span>;
+}</pre>
+      </div>
+
+      <div class="try-it-box">
+        <div class="try-it-header">
+          <span><i class="fas fa-code"></i> Animation Try Karo!</span>
+          <button class="try-it-run"><i class="fas fa-play"></i> Run</button>
+        </div>
+        <div class="try-it-grid">
+          <div class="try-it-code">
+            <textarea spellcheck="false"><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      background: #0a0e1a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; margin: 0; gap:30px;
+    }
+    .ball {
+      width: 60px; height: 60px;
+      background: linear-gradient(135deg, #00d4ff, #00ff88);
+      border-radius: 50%;
+      animation: bounce 1.5s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-60px); }
+    }
+    .spinner {
+      width: 50px; height: 50px;
+      border: 4px solid rgba(38,77,228,0.2);
+      border-top-color: #264de4;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .glow-box {
+      width: 80px; height: 80px;
+      background: #0f1526;
+      border: 2px solid #a855f7;
+      border-radius: 12px;
+      animation: glow 2s ease-in-out infinite;
+    }
+    @keyframes glow {
+      0%,100% { box-shadow: 0 0 10px rgba(168,85,247,0.3); }
+      50%     { box-shadow: 0 0 40px rgba(168,85,247,0.8); }
+    }
+  </style>
+</head>
+<body>
+  <div class="ball"></div>
+  <div class="spinner"></div>
+  <div class="glow-box"></div>
+</body>
+</html></textarea>
+          </div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== CSS VARIABLES ===== -->
+    <div class="tut-section fade-in" id="variables">
+      <h2>CSS Variables (Custom Properties)</h2>
+      <p>CSS Variables se ek jagah color ya value define karo aur poori site mein use karo. Theming ke liye perfect!</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>css — Variables</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="cmt">/* Variables :root mein define karo */</span>
+<span class="fn">:root</span> {
+  <span class="at">--primary</span>: <span class="vl">#264de4</span>;
+  <span class="at">--secondary</span>: <span class="vl">#00d4ff</span>;
+  <span class="at">--bg</span>: <span class="vl">#0a0e1a</span>;
+  <span class="at">--text</span>: <span class="vl">#e2e8f0</span>;
+  <span class="at">--radius</span>: <span class="vl">12px</span>;
+}
+
+<span class="cmt">/* Phir var() se use karo */</span>
+<span class="fn">.btn</span> {
+  <span class="at">background</span>: <span class="fn">var</span>(<span class="vl">--primary</span>);
+  <span class="at">color</span>: <span class="fn">var</span>(<span class="vl">--text</span>);
+  <span class="at">border-radius</span>: <span class="fn">var</span>(<span class="vl">--radius</span>);
+}
+
+<span class="cmt">/* Fallback value bhi de sakte ho */</span>
+<span class="fn">.card</span> {
+  <span class="at">background</span>: <span class="fn">var</span>(<span class="vl">--card-bg, #0f1526</span>); <span class="cmt">/* agar --card-bg nahi to #0f1526 */</span>
+}
+
+<span class="cmt">/* JS se bhi change kar sakte ho! */</span>
+<span class="cmt">// document.documentElement.style</span>
+<span class="cmt">//   .setProperty('--primary', '#a855f7');</span></pre>
+      </div>
+
+      <div class="callout callout-tip">
+        <span class="callout-icon"><i class="fas fa-lightbulb"></i></span>
+        <div><strong>Pro Tip:</strong> CSS Variables se dark/light mode bana sakte ho sirf kuch lines ke saath. JavaScript se <code>document.documentElement.style.setProperty('--bg', '#fff')</code> karke theme change karo!</div>
+      </div>
+    </div>
+
+    <!-- ===== RESPONSIVE DESIGN ===== -->
+    <div class="tut-section fade-in" id="responsive">
+      <h2>Responsive Design — Har Screen Pe Acha Dikho</h2>
+      <p>Responsive design matlab website mobile, tablet, desktop — sab pe acha dikhe. Iske liye <strong>Media Queries</strong> use karte hain.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>css — Media Queries</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="cmt">/* Mobile First Approach (recommended!) */</span>
+<span class="cmt">/* Pehle mobile ke liye likho */</span>
+<span class="fn">.container</span> {
+  <span class="at">width</span>: <span class="vl">100%</span>;
+  <span class="at">padding</span>: <span class="vl">16px</span>;
+  <span class="at">font-size</span>: <span class="vl">1rem</span>;
+}
+
+<span class="cmt">/* Tablet (768px se bada) */</span>
+<span class="kw">@media</span> (<span class="at">min-width</span>: <span class="vl">768px</span>) {
+  <span class="fn">.container</span> {
+    <span class="at">max-width</span>: <span class="vl">720px</span>;
+    <span class="at">margin</span>: <span class="vl">0 auto</span>;
+  }
+  <span class="fn">.grid</span> {
+    <span class="at">grid-template-columns</span>: <span class="vl">1fr 1fr</span>; <span class="cmt">/* 2 columns */</span>
+  }
+}
+
+<span class="cmt">/* Desktop (1024px se bada) */</span>
+<span class="kw">@media</span> (<span class="at">min-width</span>: <span class="vl">1024px</span>) {
+  <span class="fn">.container</span> { <span class="at">max-width</span>: <span class="vl">1200px</span>; }
+  <span class="fn">.grid</span>      { <span class="at">grid-template-columns</span>: <span class="vl">repeat(3, 1fr)</span>; }
+}
+
+<span class="cmt">/* Common Breakpoints */</span>
+<span class="cmt">/* xs: 480px, sm: 768px, md: 1024px, lg: 1280px, xl: 1536px */</span>
+
+<span class="cmt">/* Dark mode detect karo! */</span>
+<span class="kw">@media</span> (<span class="at">prefers-color-scheme</span>: <span class="vl">dark</span>) {
+  <span class="fn">:root</span> { <span class="at">--bg</span>: <span class="vl">#0a0e1a</span>; <span class="at">--text</span>: <span class="vl">#e2e8f0</span>; }
+}
+
+<span class="cmt">/* Fluid Typography */</span>
+<span class="fn">h1</span> { <span class="at">font-size</span>: <span class="fn">clamp</span>(<span class="vl">1.5rem, 5vw, 3rem</span>); }
+<span class="cmt">/* min 1.5rem, max 3rem, 5vw viewport width ke hisaab se */</span></pre>
+      </div>
+
+      <div class="try-it-box">
+        <div class="try-it-header">
+          <span><i class="fas fa-code"></i> Responsive Grid Try Karo!</span>
+          <button class="try-it-run"><i class="fas fa-play"></i> Run</button>
+        </div>
+        <div class="try-it-grid">
+          <div class="try-it-code">
+            <textarea spellcheck="false"><!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    * { box-sizing:border-box; }
+    body { background:#0a0e1a; padding:16px; margin:0; font-family:sans-serif; }
+    .info {
+      background:#0f1526; border:1px solid #1e2d4a;
+      border-radius:8px; padding:10px 14px;
+      color:#94a3b8; font-size:0.8rem; margin-bottom:14px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;  /* mobile: 1 column */
+      gap: 12px;
+    }
+    @media (min-width: 480px) {
+      .grid { grid-template-columns: 1fr 1fr; } /* tablet: 2 */
+    }
+    @media (min-width: 700px) {
+      .grid { grid-template-columns: repeat(3, 1fr); } /* desktop: 3 */
+    }
+    .card {
+      background:#0f1526; border:1px solid #1e2d4a;
+      border-radius:10px; padding:16px;
+      transition: transform 0.2s;
+    }
+    .card:hover { transform:translateY(-4px); border-color:#264de4; }
+    .card h3 { margin:0 0 6px; color:#6b8fff; font-size:0.9rem; }
+    .card p  { margin:0; color:#94a3b8; font-size:0.8rem; line-height:1.5; }
+    h1 { font-size: clamp(1.2rem, 4vw, 2rem); color:#e2e8f0; margin:0 0 14px; }
+  </style>
+</head>
+<body>
+  <div class="info">⚡ Resize karo iframe ko dekho grid kaise change hota hai!</div>
+  <h1>Responsive Cards</h1>
+  <div class="grid">
+    <div class="card"><h3>📱 Mobile</h3><p>1 column grid</p></div>
+    <div class="card"><h3>💻 Tablet</h3><p>2 column grid</p></div>
+    <div class="card"><h3>🖥️ Desktop</h3><p>3 column grid</p></div>
+    <div class="card"><h3>🎨 CSS Grid</h3><p>Auto responsive!</p></div>
+    <div class="card"><h3>📐 clamp()</h3><p>Fluid typography</p></div>
+    <div class="card"><h3>🌊 Fluid</h3><p>Min-width queries</p></div>
+  </div>
+</body>
+</html></textarea>
+          </div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+
+      <div class="callout callout-tip">
+        <span class="callout-icon"><i class="fas fa-lightbulb"></i></span>
+        <div><strong>Best Practice:</strong> HTML head mein <code>&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</code> zaroor likho. Bina iske mobile pe responsive design kaam nahi karega!</div>
+      </div>
+    </div>
+
+    <div class="tut-nav-btns">
+      <a href="html-tutorial.html" class="tut-nav-btn"><i class="fas fa-arrow-left"></i> HTML</a>
+      <a href="js-tutorial.html" class="tut-nav-btn next">JavaScript Seekho <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+  </main>
+</div>
+
+<script src="script.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.try-it-box').forEach(box => {
+      const ta = box.querySelector('textarea');
+      const iframe = box.querySelector('iframe');
+      if (ta && iframe) {
+        const doc = iframe.contentDocument || iframe.contentWindow.document;
+        doc.open(); doc.write(ta.value); doc.close();
+      }
+    });
+    document.querySelectorAll('.try-it-run').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const box = btn.closest('.try-it-box');
+        const ta = box.querySelector('textarea');
+        const iframe = box.querySelector('iframe');
+        if (ta && iframe) {
+          const doc = iframe.contentDocument || iframe.contentWindow.document;
+          doc.open(); doc.write(ta.value); doc.close();
+        }
+      });
+    });
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const code = btn.closest('.code-block').querySelector('pre').innerText;
+        navigator.clipboard.writeText(code).then(() => {
+          btn.textContent = 'Copied!';
+          setTimeout(() => btn.textContent = 'Copy', 2000);
+        });
+      });
+    });
+  });
+</script>
+<script>
+  // Fade-in fix — saare elements turant visible karo
+  document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+</script>
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-brand"><span class="logo-icon">&lt;/&gt;</span><span class="logo-text">CodeMaster</span></div>
+      <p>India ka #1 Hindi coding tutorial website. Noob se Pro tak ka safar yahan se shuru hota hai.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Tutorials</h4>
+      <a href="html-tutorial.html">HTML</a>
+      <a href="css-tutorial.html">CSS</a>
+      <a href="js-tutorial.html">JavaScript</a>
+      <a href="videos.html">hd Videos</a>
+    </div>
+    <div class="footer-links">
+      <h4>Levels</h4>
+      <a href="#">Beginner</a>
+      <a href="#">Intermediate</a>
+      <a href="#">Advanced</a>
+      <a href="#">Projects</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 CodeMaster. Made by Nitin Patel.</p>
+  </div>
+</footer>
+
+<!-- Code Master AI chat bubble -->
+<link rel="stylesheet" href="assets/css/code-master-ai.css">
+<script src="assets/js/code-master-ai.js"></script>
+<script>initCodeMasterAI("bubble");</script>
+</body>
+</html>

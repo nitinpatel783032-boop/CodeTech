@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HTML Tutorial - CodeMaster</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="icon" type="image/png" href="code master.png">
+</head>
+<body>
+<nav class="topnav">
+  <div class="nav-brand"><span class="logo-icon">&lt;/&gt;</span><span class="logo-text">CodeMaster</span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="html-tutorial.html" class="active">HTML</a></li>
+    <li><a href="css-tutorial.html">CSS</a></li>
+    <li><a href="js-tutorial.html">JavaScript</a></li>
+    <li><a href="videos.html" class="nav-video-btn"><i class="fas fa-play-circle"></i> hd Videos</a></li>
+    <li><a href="code-master-ai.html">🤖 Code Master AI</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a><a href="html-tutorial.html">HTML</a>
+  <a href="css-tutorial.html">CSS</a><a href="js-tutorial.html">JavaScript</a>
+  <a href="videos.html">hd Videos</a>
+  <a href="code-master-ai.html">🤖 Code Master AI</a>
+</div>
+
+<div class="tutorial-wrap">
+  <aside class="sidebar">
+    <div class="tut-progress">
+      <div class="progress-track"><div class="progress-fill" id="htmlProg" style="width:6%"></div></div>
+      <span class="progress-label" id="htmlProgLabel">Topic 1/18</span>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-heading">🌱 Beginner</div>
+      <a href="#intro"      class="sidebar-link active" data-n="1">HTML Kya Hai?</a>
+      <a href="#setup"      class="sidebar-link" data-n="2">Environment Setup</a>
+      <a href="#structure"  class="sidebar-link" data-n="3">Basic Structure</a>
+      <a href="#tags"       class="sidebar-link" data-n="4">Tags &amp; Elements</a>
+      <a href="#attributes" class="sidebar-link" data-n="5">Attributes</a>
+      <a href="#headings"   class="sidebar-link" data-n="6">Headings (h1–h6)</a>
+      <a href="#paragraphs" class="sidebar-link" data-n="7">Paragraphs &amp; Text</a>
+      <a href="#links"      class="sidebar-link" data-n="8">Links — &lt;a&gt; Tag</a>
+      <a href="#images"     class="sidebar-link" data-n="9">Images — &lt;img&gt;</a>
+      <a href="#id-class"   class="sidebar-link" data-n="10">Id and Class</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-heading">📗 Intermediate</div>
+      <a href="#lists"    class="sidebar-link" data-n="11">Lists (ul, ol, dl)</a>
+      <a href="#tables"   class="sidebar-link" data-n="12">Tables</a>
+      <a href="#forms"    class="sidebar-link" data-n="13">Forms &amp; Inputs</a>
+      <a href="#divspan"  class="sidebar-link" data-n="14">Div &amp; Span</a>
+      <a href="#semantic" class="sidebar-link" data-n="15">Semantic HTML5 <span class="badge badge-new">New</span></a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-heading">🔥 Advanced</div>
+      <a href="#meta"   class="sidebar-link" data-n="16">Meta Tags <span class="badge badge-pro">Pro</span></a>
+      <a href="#media"  class="sidebar-link" data-n="17">Audio &amp; Video <span class="badge badge-pro">Pro</span></a>
+      <a href="#canvas" class="sidebar-link" data-n="18">Canvas API <span class="badge badge-pro">Pro</span></a>
+    </div>
+  </aside>
+
+  <main class="tutorial-main">
+    <div class="tut-breadcrumb">
+      <a href="index.html">Home</a>
+      <i class="fas fa-chevron-right" style="font-size:.7rem;color:var(--text-muted)"></i>
+      <span>HTML Tutorial</span>
+    </div>
+    <h1 class="tut-title"><span style="color:var(--html-clr)"><i class="fab fa-html5"></i></span> HTML Tutorial</h1>
+    <p class="tut-subtitle">HTML (HyperText Markup Language) — web ka bunyaad. Zero se HTML Pro bano!</p>
+
+    <!-- 1 -->
+    <div class="tut-section fade-in" id="intro">
+      <h2>1. HTML Kya Hota Hai?</h2>
+      <p>HTML ek <strong>Markup Language</strong> hai jo web pages ka <em>structure</em> banati hai. Browser HTML padhta hai aur screen pe dikhata hai.</p>
+      <div class="callout callout-info">
+        <span class="callout-icon"><i class="fas fa-info-circle"></i></span>
+        <div><strong>HTML ≠ Programming Language.</strong> Isme loops/conditions nahi hote — sirf content ka structure hota hai. Logic ke liye JavaScript hai!</div>
+      </div>
+      <div class="code-block">
+        <div class="code-block-header"><span>HTML ka simple example</span><button class="copy-btn">Copy</button></div>
+        <pre><span class="tg">&lt;h1&gt;</span>Yeh ek Heading hai<span class="tg">&lt;/h1&gt;</span>
+<span class="tg">&lt;p&gt;</span>Yeh ek Paragraph hai.<span class="tg">&lt;/p&gt;</span>
+<span class="tg">&lt;a</span> <span class="at">href=</span><span class="vl">"page.html"</span><span class="tg">&gt;</span>Yeh ek Link hai<span class="tg">&lt;/a&gt;</span>
+<span class="tg">&lt;img</span> <span class="at">src=</span><span class="vl">"photo.jpg"</span> <span class="at">alt=</span><span class="vl">"Photo"</span><span class="tg">&gt;</span></pre>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="tut-section fade-in" id="setup">
+      <h2>2. Environment Setup</h2>
+      <p>HTML ke liye sirf <strong>2 cheezein</strong> chahiye:</p>
+      <div class="callout callout-tip">
+        <span class="callout-icon"><i class="fas fa-lightbulb"></i></span>
+        <div>
+          <strong>Best Setup:</strong><br>
+          ✅ <strong>VS Code</strong> — code.visualstudio.com (free)<br>
+          ✅ <strong>Google Chrome</strong> — DevTools ke saath<br>
+          ✅ VS Code Extension: <strong>Live Server</strong> — file save karo, browser auto-refresh
+        </div>
+      </div>
+      <div class="code-block">
+        <div class="code-block-header"><span>Pehla file banao — 5 steps</span><button class="copy-btn">Copy</button></div>
+        <pre><span class="cmt">Step 1: VS Code open karo</span>
+<span class="cmt">Step 2: File → New File → "index.html" naam do</span>
+<span class="cmt">Step 3: Yeh code type karo:</span>
+
+<span class="tg">&lt;!DOCTYPE html&gt;</span>
+<span class="tg">&lt;html&gt;</span>
+  <span class="tg">&lt;body&gt;</span>
+    <span class="tg">&lt;h1&gt;</span>Hello World!<span class="tg">&lt;/h1&gt;</span>
+  <span class="tg">&lt;/body&gt;</span>
+<span class="tg">&lt;/html&gt;</span>
+
+<span class="cmt">Step 4: Ctrl+S se save karo</span>
+<span class="cmt">Step 5: File ko Chrome mein open karo</span>
+<span class="cmt">→ "Hello World!" dikh jayega! 🎉</span></pre>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="tut-section fade-in" id="structure">
+      <h2>3. HTML Basic Structure</h2>
+      <p>Har HTML file ka ek <strong>standard template</strong> hota hai — yeh hamesha use karo:</p>
+      <div class="code-block">
+        <div class="code-block-header"><span>html — Complete Template</span><button class="copy-btn">Copy</button></div>
+        <pre><span class="tg">&lt;!DOCTYPE html&gt;</span>         <span class="cmt">&lt;!-- HTML5 declaration --&gt;</span>
+<span class="tg">&lt;html</span> <span class="at">lang=</span><span class="vl">"hi"</span><span class="tg">&gt;</span>          <span class="cmt">&lt;!-- Root element --&gt;</span>
+
+  <span class="tg">&lt;head&gt;</span>                  <span class="cmt">&lt;!-- Browser ke liye info (hidden) --&gt;</span>
+    <span class="tg">&lt;meta</span> <span class="at">charset=</span><span class="vl">"UTF-8"</span><span class="tg">&gt;</span>   <span class="cmt">&lt;!-- Hindi text support --&gt;</span>
+    <span class="tg">&lt;meta</span> <span class="at">name=</span><span class="vl">"viewport"</span>
+          <span class="at">content=</span><span class="vl">"width=device-width"</span><span class="tg">&gt;</span>
+    <span class="tg">&lt;title&gt;</span>Page ka Naam<span class="tg">&lt;/title&gt;</span>   <span class="cmt">&lt;!-- Browser tab title --&gt;</span>
+  <span class="tg">&lt;/head&gt;</span>
+
+  <span class="tg">&lt;body&gt;</span>                  <span class="cmt">&lt;!-- Yeh sab screen pe dikhega --&gt;</span>
+    <span class="tg">&lt;h1&gt;</span>Meri Website<span class="tg">&lt;/h1&gt;</span>
+    <span class="tg">&lt;p&gt;</span>Namaste Duniya!<span class="tg">&lt;/p&gt;</span>
+  <span class="tg">&lt;/body&gt;</span>
+
+<span class="tg">&lt;/html&gt;</span>                   <span class="cmt">&lt;!-- Root element band --&gt;</span></pre>
+      </div>
+      <div class="try-it-box">
+        <div class="try-it-header"><span><i class="fas fa-code"></i> Khud Try Karo!</span><button class="try-it-run"><i class="fas fa-play"></i> Run</button></div>
+        <div class="try-it-grid">
+          <div class="try-it-code"><textarea spellcheck="false"><!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>Meri Website</title>
+  <style>
+    body{background:#0d1117;color:#e2e8f0;
+         font-family:sans-serif;padding:20px;}
+    h1{color:#e44d26;}
+    p{color:#94a3b8;}
+  </style>
+</head>
+<body>
+  <h1>🌐 Meri Pehli Website</h1>
+  <p>Namaste! Yeh mera pehla HTML page hai.</p>
+  <p>Is text ko badal ke dekho! ✏️</p>
+</body>
+</html></textarea></div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="tut-section fade-in" id="tags">
+      <h2>4. Tags &amp; Elements</h2>
+      <p>HTML <strong>tags</strong> angle brackets mein hote hain. Ek <strong>element</strong> = opening tag + content + closing tag.</p>
+      <div class="code-block">
+        <div class="code-block-header"><span>html — Saare Important Tags</span><button class="copy-btn">Copy</button></div>
+        <pre><span class="cmt">=== REGULAR TAGS (opening + closing) ===</span>
+<span class="tg">&lt;h1&gt;</span>...<span class="tg">&lt;/h1&gt;</span>         <span class="cmt">Headings (h1 to h6)</span>
+<span class="tg">&lt;p&gt;</span>...<span class="tg">&lt;/p&gt;</span>          <span class="cmt">Paragraph</span>
+<span class="tg">&lt;div&gt;</span>...<span class="tg">&lt;/div&gt;</span>       <span class="cmt">Block container</span>
+<span class="tg">&lt;span&gt;</span>...<span class="tg">&lt;/span&gt;</span>     <span class="cmt">Inline container</span>
+<span class="tg">&lt;strong&gt;</span>...<span class="tg">&lt;/strong&gt;</span> <span class="cmt">Bold (important)</span>
+<span class="tg">&lt;em&gt;</span>...<span class="tg">&lt;/em&gt;</span>        <span class="cmt">Italic (emphasized)</span>
+<span class="tg">&lt;u&gt;</span>...<span class="tg">&lt;/u&gt;</span>          <span class="cmt">Underline</span>
+<span class="tg">&lt;del&gt;</span>...<span class="tg">&lt;/del&gt;</span>      <span class="cmt">Strikethrough</span>
+<span class="tg">&lt;mark&gt;</span>...<span class="tg">&lt;/mark&gt;</span>    <span class="cmt">Highlighted text</span>
+<span class="tg">&lt;code&gt;</span>...<span class="tg">&lt;/code&gt;</span>    <span class="cmt">Inline code</span>
+<span class="tg">&lt;pre&gt;</span>...<span class="tg">&lt;/pre&gt;</span>      <span class="cmt">Preformatted text</span>
+<span class="tg">&lt;a&gt;</span>...<span class="tg">&lt;/a&gt;</span>          <span class="cmt">Hyperlink</span>
+<span class="tg">&lt;button&gt;</span>...<span class="tg">&lt;/button&gt;</span> <span class="cmt">Clickable button</span>
+<span class="tg">&lt;ul&gt;</span>...<span class="tg">&lt;/ul&gt;</span>        <span class="cmt">Unordered list</span>
+<span class="tg">&lt;ol&gt;</span>...<span class="tg">&lt;/ol&gt;</span>        <span class="cmt">Ordered list</span>
+<span class="tg">&lt;li&gt;</span>...<span class="tg">&lt;/li&gt;</span>        <span class="cmt">List item</span>
+<span class="tg">&lt;table&gt;</span>...<span class="tg">&lt;/table&gt;</span>  <span class="cmt">Table</span>
+<span class="tg">&lt;form&gt;</span>...<span class="tg">&lt;/form&gt;</span>    <span class="cmt">Form</span>
+
+<span class="cmt">=== SELF-CLOSING TAGS (no closing tag) ===</span>
+<span class="tg">&lt;br&gt;</span>      <span class="cmt">Line break</span>
+<span class="tg">&lt;hr&gt;</span>      <span class="cmt">Horizontal line</span>
+<span class="tg">&lt;img&gt;</span>     <span class="cmt">Image</span>
+<span class="tg">&lt;input&gt;</span>   <span class="cmt">Form input</span>
+<span class="tg">&lt;meta&gt;</span>    <span class="cmt">Metadata</span>
+<span class="tg">&lt;link&gt;</span>    <span class="cmt">External resource link</span></pre>
+      </div>
+      <div class="try-it-box">
+        <div class="try-it-header"><span><i class="fas fa-code"></i> Text Formatting!</span><button class="try-it-run"><i class="fas fa-play"></i> Run</button></div>
+        <div class="try-it-grid">
+          <div class="try-it-code"><textarea spellcheck="false"><!DOCTYPE html>
+<html><head><style>
+  body{background:#0d1117;color:#e2e8f0;
+       font-family:sans-serif;padding:15px;}
+  p{margin:6px 0;}
+  mark{background:#f7df1e;color:#0d1117;
+       padding:1px 4px;border-radius:3px;}
+  code{background:#1e2d4a;color:#00d4ff;
+       padding:2px 6px;border-radius:4px;
+       font-family:monospace;}
+</style></head><body>
+  <p><strong>Bold</strong> — strong tag</p>
+  <p><em>Italic</em> — em tag</p>
+  <p><u>Underline</u> — u tag</p>
+  <p><del>Strikethrough</del> — del tag</p>
+  <p><mark>Highlighted</mark> — mark tag</p>
+  <p><code>console.log()</code> — code tag</p>
+  <p>H<sub>2</sub>O | x<sup>2</sup> = 4</p>
+  <p>Line 1<br>Line 2 (br se newline)</p>
+  <hr style="border-color:#1e2d4a">
+  <blockquote style="color:#94a3b8;
+    border-left:3px solid #e44d26;
+    padding-left:12px;">
+    "Code likhna ek kala hai."
+  </blockquote>
+</body></html></textarea></div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="tut-section fade-in" id="attributes">
+      <h2>5. Attributes</h2>
+      <p>Attributes tags ko extra information dete hain — hamesha <strong>opening tag mein</strong> <code>name="value"</code> format mein.</p>
+      <div class="code-block">
+        <div class="code-block-header"><span>html — Saare Common Attributes</span><button class="copy-btn">Copy</button></div>
+        <pre><span class="cmt">id    → unique name (JS/CSS ke liye)</span>
+<span class="tg">&lt;h1</span> <span class="at">id=</span><span class="vl">"main-title"</span><span class="tg">&gt;</span>Title<span class="tg">&lt;/h1&gt;</span>
+
+<span class="cmt">class → styling ke liye (kai elements pe)</span>
+<span class="tg">&lt;p</span> <span class="at">class=</span><span class="vl">"highlight bold"</span><span class="tg">&gt;</span>Text<span class="tg">&lt;/p&gt;</span>
+
+<span class="cmt">style → inline CSS</span>
+<span class="tg">&lt;p</span> <span class="at">style=</span><span class="vl">"color:red;font-size:20px"</span><span class="tg">&gt;</span>Red<span class="tg">&lt;/p&gt;</span>
+
+<span class="cmt">href  → links ka destination</span>
+<span class="tg">&lt;a</span> <span class="at">href=</span><span class="vl">"https://google.com"</span><span class="tg">&gt;</span>Google<span class="tg">&lt;/a&gt;</span>
+
+<span class="cmt">src   → image/script source</span>
+<span class="tg">&lt;img</span> <span class="at">src=</span><span class="vl">"photo.jpg"</span> <span class="at">alt=</span><span class="vl">"Photo"</span><span class="tg">&gt;</span>
+
+<span class="cmt">target → link kahan khule</span>
+<span class="tg">&lt;a</span> <span class="at">href=</span><span class="vl">"url"</span> <span class="at">target=</span><span class="vl">"_blank"</span><span class="tg">&gt;</span>Naye tab<span class="tg">&lt;/a&gt;</span>
+
+<span class="cmt">title → hover tooltip</span>
+<span class="tg">&lt;p</span> <span class="at">title=</span><span class="vl">"Yeh tooltip hai"</span><span class="tg">&gt;</span>Hover karo<span class="tg">&lt;/p&gt;</span>
+
+<span class="cmt">placeholder, required, disabled (forms)</span>
+<span class="tg">&lt;input</span> <span class="at">type=</span><span class="vl">"text"</span> <span class="at">placeholder=</span><span class="vl">"Naam"</span> <span class="at">required</span><span class="tg">&gt;</span>
+<span class="tg">&lt;button</span> <span class="at">disabled</span><span class="tg">&gt;</span>Kaam nahi karega<span class="tg">&lt;/button&gt;</span>
+
+<span class="cmt">width, height (images/tables)</span>
+<span class="tg">&lt;img</span> <span class="at">src=</span><span class="vl">"img.jpg"</span> <span class="at">width=</span><span class="vl">"300"</span> <span class="at">height=</span><span class="vl">"200"</span><span class="tg">&gt;</span></pre>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="tut-section fade-in" id="headings">
+      <h2>6. Headings — h1 se h6</h2>
+      <p>HTML mein 6 levels ki headings hain. <strong>h1 = page ka main title</strong> (ek page mein sirf ek!), h6 = sabse chhota.</p>
+      <div class="callout callout-warn">
+        <span class="callout-icon"><i class="fas fa-exclamation-triangle"></i></span>
+        <div><strong>SEO Rule:</strong> Ek page mein sirf <strong>ek &lt;h1&gt;</strong> hona chahiye. Google is heading ko sabse zyaada importance deta hai!</div>
+      </div>
+      <div class="try-it-box">
+        <div class="try-it-header"><span><i class="fas fa-code"></i> Headings Try Karo!</span><button class="try-it-run"><i class="fas fa-play"></i> Run</button></div>
+        <div class="try-it-grid">
+          <div class="try-it-code"><textarea spellcheck="false"><!DOCTYPE html>
+<html><head><style>
+  body{background:#0d1117;padding:15px;
+       font-family:sans-serif;}
+  h1{color:#e44d26;} h2{color:#ff6b47;}
+  h3{color:#ff9070;} h4{color:#ffa590;}
+  h5{color:#ffbdad;} h6{color:#ffd4c8;}
+  small{color:#475569;display:block;
+        font-size:0.75rem;margin-bottom:10px;}
+</style></head><body>
+  <h1>h1 — Page ka Main Title</h1>
+  <small>Ek page mein sirf ek h1!</small>
+
+  <h2>h2 — Section Heading</h2>
+  <small>Sections ke titles ke liye</small>
+
+  <h3>h3 — Sub-Section</h3>
+  <small>Sub-sections ke liye</small>
+
+  <h4>h4 — Smaller Heading</h4>
+  <h5>h5 — Even Smaller</h5>
+  <h6>h6 — Sabse Chhota</h6>
+</body></html></textarea></div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="tut-section fade-in" id="paragraphs">
+      <h2>7. Paragraphs &amp; Text Formatting</h2>
+      <p><code>&lt;p&gt;</code> tag paragraph banata hai. Browser automatically upar-neeche space add karta hai.</p>
+      <div class="try-it-box">
+        <div class="try-it-header"><span><i class="fas fa-code"></i> Text Formatting Try Karo!</span><button class="try-it-run"><i class="fas fa-play"></i> Run</button></div>
+        <div class="try-it-grid">
+          <div class="try-it-code"><textarea spellcheck="false"><!DOCTYPE html>
+<html><head><style>
+  body{background:#0d1117;color:#e2e8f0;
+       font-family:sans-serif;padding:15px;
+       line-height:1.7;}
+  p{margin-bottom:12px;}
+  pre{background:#0f1526;padding:12px;
+      border-radius:8px;color:#00ff88;
+      font-size:0.85rem;}
+</style></head><body>
+  <p>Yeh pehla paragraph hai. Multiple spaces
+  HTML ignore karta hai — sirf ek space.</p>
+
+  <p>Yeh <strong>bold</strong>, yeh <em>italic</em>,
+  yeh <u>underline</u> hai.</p>
+
+  <p>Chemistry: H<sub>2</sub>O (subscript)</p>
+  <p>Math: x<sup>2</sup> + y<sup>2</sup> (superscript)</p>
+
+  <p>Agar exact formatting chahiye to &lt;pre&gt;:</p>
+  <pre>Name    : Rahul
+Age     : 22
+City    : Delhi</pre>
+</body></html></textarea></div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="tut-section fade-in" id="links">
+      <h2>8. Links — &lt;a&gt; Tag</h2>
+      <p>Anchor tag se hyperlinks banate hain. <code>href</code> = destination.</p>
+      <div class="code-block">
+        <div class="code-block-header"><span>html — Sab Types ke Links</span><button class="copy-btn">Copy</button></div>
+        <pre><span class="cmt">&lt;!-- 1. Bahari website --&gt;</span>
+<span class="tg">&lt;a</span> <span class="at">href=</span><span class="vl">"https://google.com"</span> <span class="at">target=</span><span class="vl">"_blank"</span><span class="tg">&gt;</span>Google<span class="tg">&lt;/a&gt;</span>
+
+<span class="cmt">&lt;!-- 2. Apna dusra page --&gt;</span>
+<span class="tg">&lt;a</span> <span class="at">href=</span><span class="vl">"about.html"</span><span class="tg">&gt;</span>About Page<span class="tg">&lt;/a&gt;</span>
+
+<span class="cmt">&lt;!-- 3. Same page ka section --&gt;</span>
+<span class="tg">&lt;a</span> <span class="at">href=</span><span class="vl">"#contact"</span><span class="tg">&gt;</span>Contact Section<span class="tg">&lt;/a&gt;</span>
+<span class="tg">&lt;section</span> <span class="at">id=</span><span class="vl">"contact"</span><span class="tg">&gt;</span>...<span class="tg">&lt;/section&gt;</span>
+
+<span class="cmt">&lt;!-- 4. Email --&gt;</span>
+<span class="tg">&lt;a</span> <span class="at">href=</span><span class="vl">"mailto:hello@site.com"</span><span class="tg">&gt;</span>Email Karo<span class="tg">&lt;/a&gt;</span>
+
+<span class="cmt">&lt;!-- 5. Phone (mobile me direct call) --&gt;</span>
+<span class="tg">&lt;a</span> <span class="at">href=</span><span class="vl">"tel:+919876543210"</span><span class="tg">&gt;</span>Call Karo<span class="tg">&lt;/a&gt;</span>
+
+<span class="cmt">&lt;!-- 6. File download --&gt;</span>
+<span class="tg">&lt;a</span> <span class="at">href=</span><span class="vl">"resume.pdf"</span> <span class="at">download</span><span class="tg">&gt;</span>Resume Download<span class="tg">&lt;/a&gt;</span>
+
+<span class="cmt">&lt;!-- 7. Image as clickable link --&gt;</span>
+<span class="tg">&lt;a</span> <span class="at">href=</span><span class="vl">"home.html"</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;img</span> <span class="at">src=</span><span class="vl">"logo.png"</span> <span class="at">alt=</span><span class="vl">"Logo"</span><span class="tg">&gt;</span>
+<span class="tg">&lt;/a&gt;</span></pre>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="tut-section fade-in" id="images">
+      <h2>9. Images — &lt;img&gt; Tag</h2>
+      <p><code>&lt;img&gt;</code> self-closing tag hai. <code>src</code> = path, <code>alt</code> = description (accessibility ke liye zaruri!).</p>
+      <div class="try-it-box">
+        <div class="try-it-header"><span><i class="fas fa-code"></i> Images Try Karo!</span><button class="try-it-run"><i class="fas fa-play"></i> Run</button></div>
+        <div class="try-it-grid">
+          <div class="try-it-code"><textarea spellcheck="false"><!DOCTYPE html>
+<html><head><style>
+  body{background:#0d1117;color:#e2e8f0;
+       font-family:sans-serif;padding:15px;}
+  img{border-radius:10px;margin:8px 0;}
+  figcaption{color:#94a3b8;font-size:0.85rem;
+             margin-top:5px;}
+</style></head><body>
+  <h3>External URL se image:</h3>
+  <img
+    src="https://via.placeholder.com/250x150/0d1117/00d4ff?text=Image+1"
+    alt="Placeholder image"
+    width="250">
+
+  <h3>Responsive image:</h3>
+  <img
+    src="https://via.placeholder.com/400x120/0f1526/00ff88?text=Full+Width"
+    alt="Full width image"
+    style="width:100%;height:auto;">
+
+  <h3>Figure with caption:</h3>
+  <figure>
+    <img
+      src="https://via.placeholder.com/200x120/0d1117/a855f7?text=Caption"
+      alt="Image with caption"
+      width="200">
+    <figcaption>📷 Yeh caption hai</figcaption>
+  </figure>
+</body></html></textarea></div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 — ID & CLASS (NAYA SECTION) -->
+    <div class="tut-section fade-in" id="id-class">
+      <h2>10. Id &amp; Class — Pehchaan ka Fark</h2>
+      <p>
+        <code>id</code> aur <code>class</code> dono <strong>attributes</strong> hain jo HTML
+        elements ko CSS/JS se target karne ke liye use hote hain — lekin dono ke
+        <em>rules alag hain</em>.
+      </p>
+
+      <div class="callout callout-info">
+        <span class="callout-icon"><i class="fas fa-info-circle"></i></span>
+        <div>
+          <strong>Ek line mein yaad rakho:</strong><br>
+          <code>id</code> = <strong>unique naam</strong> (sirf ek element per page) &nbsp;|&nbsp;
+          <code>class</code> = <strong>group naam</strong> (kai elements share kar sakte hain)
+        </div>
+      </div>
+
+      <div class="code-block">
+        <div class="code-block-header"><span>html — Id vs Class Syntax</span><button class="copy-btn">Copy</button></div>
+        <pre><span class="cmt">══════════════════════════════════════════
+  ID  —  UNIQUE (ek page mein sirf EK baar)
+══════════════════════════════════════════</span>
+<span class="tg">&lt;h1</span> <span class="at">id=</span><span class="vl">"main-title"</span><span class="tg">&gt;</span>Welcome!<span class="tg">&lt;/h1&gt;</span>
+
+<span class="cmt">CSS mein  →  # (hash)</span>
+<span class="at">#main-title</span> { <span class="at">color</span>: <span class="vl">red</span>; }
+
+<span class="cmt">JS mein   →  getElementById [call karne ka tarika js part]</span>
+document.getElementById(<span class="vl">"main-title"</span>).style.color = <span class="vl">"blue"</span>;
+
+<span class="cmt">══════════════════════════════════════════
+  CLASS  —  REUSABLE (kai elements pe)
+══════════════════════════════════════════</span>
+<span class="tg">&lt;p</span> <span class="at">class=</span><span class="vl">"highlight"</span><span class="tg">&gt;</span>Para 1<span class="tg">&lt;/p&gt;</span>
+<span class="tg">&lt;p</span> <span class="at">class=</span><span class="vl">"highlight"</span><span class="tg">&gt;</span>Para 2<span class="tg">&lt;/p&gt;</span>   <span class="cmt">← same class, dono style ho gaye!</span>
+<span class="tg">&lt;span</span> <span class="at">class=</span><span class="vl">"highlight"</span><span class="tg">&gt;</span>Span<span class="tg">&lt;/span&gt;</span>
+
+<span class="cmt">CSS mein  →  . (dot)</span>
+<span class="at">.highlight</span> { <span class="at">background</span>: <span class="vl">yellow</span>; }
+
+<span class="cmt">JS mein   →  querySelectorAll</span>
+document.querySelectorAll(<span class="vl">".highlight"</span>).forEach(el =&gt; ...);
+
+<span class="cmt">══════════════════════════════════════════
+  EK ELEMENT PE MULTIPLE CLASSES
+══════════════════════════════════════════</span>
+<span class="tg">&lt;button</span> <span class="at">class=</span><span class="vl">"btn btn-primary large"</span><span class="tg">&gt;</span>Click<span class="tg">&lt;/button&gt;</span>
+<span class="cmt">                ↑              ↑      ↑
+             3 classes — space se alag karo</span>
+
+<span class="cmt">══════════════════════════════════════════
+  ID + CLASS DONO EK ELEMENT PE
+══════════════════════════════════════════</span>
+<span class="tg">&lt;div</span> <span class="at">id=</span><span class="vl">"hero"</span> <span class="at">class=</span><span class="vl">"section animated"</span><span class="tg">&gt;</span>...<span class="tg">&lt;/div&gt;</span></pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-block-header"><span>Id vs Class — Fark Ek Nazar Mein</span><button class="copy-btn">Copy</button></div>
+        <pre><span class="cmt">┌─────────────────┬──────────────────┬──────────────────────┐
+│  Feature        │    id            │    class             │
+├─────────────────┼──────────────────┼──────────────────────┤
+│  Uniqueness     │  Page mein SIRF  │  Kai elements pe     │
+│                 │  EK baar         │  use kar sako        │
+├─────────────────┼──────────────────┼──────────────────────┤
+│  CSS selector   │  #myId           │  .myClass            │
+├─────────────────┼──────────────────┼──────────────────────┤
+│  JS selector    │  getElementById  │  querySelectorAll    │
+│                 │  querySelector   │  getElementsByClass  │
+├─────────────────┼──────────────────┼──────────────────────┤
+│  Multiple?      │  Ek element pe   │  Ek element pe kai   │
+│                 │  SIRF ek id      │  classes ho sakti    │
+├─────────────────┼──────────────────┼──────────────────────┤
+│  URL anchor?    │  Haan! #section  │  Nahi                │
+│                 │  mein use hota   │                      │
+├─────────────────┼──────────────────┼──────────────────────┤
+│  Specificity    │  Zyaada powerful │  Kam powerful        │
+│  (CSS priority) │  (100 points)    │  (10 points)         │
+└─────────────────┴──────────────────┴──────────────────────┘</span></pre>
+      </div>
+
+      <div class="callout callout-warn">
+        <span class="callout-icon"><i class="fas fa-exclamation-triangle"></i></span>
+        <div>
+          <strong>Common Galti:</strong> Ek page mein same <code>id</code> do baar mat do!<br>
+          <code>&lt;div id="box"&gt;</code> aur <code>&lt;div id="box"&gt;</code> — yeh <strong>WRONG</strong> hai!<br>
+          JavaScript sirf pehle wale ko pakdega. Aise kaam ke liye <code>class</code> use karo.
+        </div>
+      </div>
+
+      <div class="try-it-box">
+        <div class="try-it-header"><span><i class="fas fa-code"></i> Id &amp; Class Live Try Karo!</span><button class="try-it-run"><i class="fas fa-play"></i> Run</button></div>
+        <div class="try-it-grid">
+          <div class="try-it-code"><textarea spellcheck="false"><!DOCTYPE html>
+<html><head><style>
+  body {
+    background: #0d1117;
+    color: #e2e8f0;
+    font-family: sans-serif;
+    padding: 15px;
+  }
+
+  /* ID selector — # se */
+  #page-title {
+    color: #e44d26;
+    font-size: 1.4rem;
+    border-left: 4px solid #e44d26;
+    padding-left: 10px;
+  }
+
+  /* CLASS selector — . se */
+  .card {
+    background: #0f1526;
+    border: 1px solid #1e2d4a;
+    border-radius: 10px;
+    padding: 12px 15px;
+    margin: 8px 0;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: bold;
+  }
+  .badge-html  { background: #e44d26; color: white; }
+  .badge-css   { background: #264de4; color: white; }
+  .badge-js    { background: #f7df1e; color: #0d1117; }
+
+  /* ID — page mein ek hi */
+  #special-card {
+    border-color: #00d4ff;
+    box-shadow: 0 0 10px rgba(0,212,255,0.2);
+  }
+</style></head><body>
+
+  <h1 id="page-title">HTML Topics 📚</h1>
+
+  <div class="card">
+    <strong>HTML</strong>
+    <span class="badge badge-html">Beginner</span>
+    <p style="color:#94a3b8;margin:5px 0 0">
+      Web ka structure banata hai.
+    </p>
+  </div>
+
+  <div class="card">
+    <strong>CSS</strong>
+    <span class="badge badge-css">Intermediate</span>
+    <p style="color:#94a3b8;margin:5px 0 0">
+      Pages ko sundar banata hai.
+    </p>
+  </div>
+
+  <div class="card" id="special-card">
+    <strong>JavaScript</strong>
+    <span class="badge badge-js">Advanced</span>
+    <p style="color:#94a3b8;margin:5px 0 0">
+      Pages ko interactive banata hai.
+    </p>
+    <small style="color:#00d4ff">
+      ↑ Yeh special-card id se highlight hai!
+    </small>
+  </div>
+
+  <hr style="border-color:#1e2d4a;margin:15px 0">
+
+  <p>
+    <button onclick="changeTitle()"
+      style="background:#e44d26;color:white;
+             border:none;padding:8px 16px;
+             border-radius:7px;cursor:pointer;
+             margin-right:8px;">
+      JS: id se title badlo
+    </button>
+    <button onclick="highlightCards()"
+      style="background:#264de4;color:white;
+             border:none;padding:8px 16px;
+             border-radius:7px;cursor:pointer">
+      JS: class se sab cards highlight karo
+    </button>
+  </p>
+
+  <script>
+    function changeTitle() {
+      const title = document.getElementById("page-title");
+      title.textContent = "Title badal gaya! ✅";
+      title.style.color = "#00ff88";
+    }
+
+    function highlightCards() {
+      const cards = document.querySelectorAll(".card");
+      cards.forEach(card => {
+        card.style.borderColor = "#a855f7";
+        card.style.boxShadow = "0 0 8px rgba(168,85,247,0.3)";
+      });
+    }
+  </script>
+</body></html></textarea></div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+
+      <div class="callout callout-tip">
+        <span class="callout-icon"><i class="fas fa-lightbulb"></i></span>
+        <div>
+          <strong>Bonus Tip — id se page scroll!</strong><br>
+          <code>id</code> ko URL anchor ki tarah use kar sakte ho:<br>
+          <code>&lt;a href="<strong>#id-class</strong>"&gt;Is section pe jao&lt;/a&gt;</code><br>
+          Is tutorial ka sidebar bhi isi trick se kaam karta hai! 👆
+        </div>
+      </div>
+    </div>
+    <!-- End Section 10 -->
+
+    <!-- 11 -->
+    <div class="tut-section fade-in" id="lists">
+      <h2>11. Lists — ul, ol, dl</h2>
+      <p>Teen types: <strong>Unordered</strong> (bullets), <strong>Ordered</strong> (numbers), <strong>Description</strong> (term+definition).</p>
+      <div class="try-it-box">
+        <div class="try-it-header"><span><i class="fas fa-code"></i> Lists Try Karo!</span><button class="try-it-run"><i class="fas fa-play"></i> Run</button></div>
+        <div class="try-it-grid">
+          <div class="try-it-code"><textarea spellcheck="false"><!DOCTYPE html>
+<html><head><style>
+  body{background:#0d1117;color:#e2e8f0;
+       font-family:sans-serif;padding:15px;}
+  h3{color:#00d4ff;margin:12px 0 6px;}
+  li{margin:4px 0;color:#94a3b8;}
+  dt{color:#00ff88;font-weight:bold;}
+  dd{color:#94a3b8;margin-left:20px;}
+  ul ul{margin-top:5px;}
+</style></head><body>
+
+  <h3>ul — Unordered (Bullets)</h3>
+  <ul>
+    <li>HTML — Structure</li>
+    <li>CSS — Styling</li>
+    <li>JavaScript — Logic</li>
+  </ul>
+
+  <h3>ol — Ordered (Numbers)</h3>
+  <ol>
+    <li>HTML seekho</li>
+    <li>CSS seekho</li>
+    <li>JS seekho</li>
+    <li>Project banao 🚀</li>
+  </ol>
+
+  <h3>Nested List</h3>
+  <ul>
+    <li>Frontend
+      <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+      </ul>
+    </li>
+    <li>Backend
+      <ul>
+        <li>Node.js</li>
+        <li>Python</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>dl — Description List</h3>
+  <dl>
+    <dt>HTML</dt>
+    <dd>HyperText Markup Language</dd>
+    <dt>CSS</dt>
+    <dd>Cascading Style Sheets</dd>
+    <dt>JS</dt>
+    <dd>JavaScript</dd>
+  </dl>
+
+</body></html></textarea></div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="tut-section fade-in" id="tables">
+      <h2>12. Tables</h2>
+      <p>Tables se data rows aur columns mein organize karte hain.</p>
+      <div class="code-block">
+        <div class="code-block-header"><span>html — Table Tags</span><button class="copy-btn">Copy</button></div>
+        <pre><span class="tg">&lt;table&gt;</span>           <span class="cmt">Table container</span>
+  <span class="tg">&lt;thead&gt;</span>         <span class="cmt">Header section</span>
+    <span class="tg">&lt;tr&gt;</span>          <span class="cmt">Table Row</span>
+      <span class="tg">&lt;th&gt;</span>Naam<span class="tg">&lt;/th&gt;</span>  <span class="cmt">Header cell (bold auto)</span>
+      <span class="tg">&lt;th&gt;</span>Age<span class="tg">&lt;/th&gt;</span>
+    <span class="tg">&lt;/tr&gt;</span>
+  <span class="tg">&lt;/thead&gt;</span>
+  <span class="tg">&lt;tbody&gt;</span>
+    <span class="tg">&lt;tr&gt;</span>
+      <span class="tg">&lt;td&gt;</span>Rahul<span class="tg">&lt;/td&gt;</span>  <span class="cmt">Data cell</span>
+      <span class="tg">&lt;td&gt;</span>22<span class="tg">&lt;/td&gt;</span>
+    <span class="tg">&lt;/tr&gt;</span>
+  <span class="tg">&lt;/tbody&gt;</span>
+  <span class="tg">&lt;tfoot&gt;</span>         <span class="cmt">Footer section</span>
+    <span class="tg">&lt;tr&gt;</span>
+      <span class="tg">&lt;td</span> <span class="at">colspan=</span><span class="vl">"2"</span><span class="tg">&gt;</span>Total<span class="tg">&lt;/td&gt;</span> <span class="cmt">colspan merges columns</span>
+    <span class="tg">&lt;/tr&gt;</span>
+  <span class="tg">&lt;/tfoot&gt;</span>
+<span class="tg">&lt;/table&gt;</span></pre>
+      </div>
+      <div class="try-it-box">
+        <div class="try-it-header"><span><i class="fas fa-code"></i> Table Try Karo!</span><button class="try-it-run"><i class="fas fa-play"></i> Run</button></div>
+        <div class="try-it-grid">
+          <div class="try-it-code"><textarea spellcheck="false"><!DOCTYPE html>
+<html><head><style>
+  body{background:#0d1117;color:#e2e8f0;
+       font-family:sans-serif;padding:15px;}
+  table{width:100%;border-collapse:collapse;}
+  th,td{padding:10px 14px;border:1px solid #1e2d4a;
+        text-align:left;}
+  th{background:#1a2540;color:#00d4ff;}
+  tr:nth-child(even){background:#0f1526;}
+  tr:hover td{background:#162035;}
+  tfoot td{color:#f7df1e;font-weight:bold;}
+</style></head><body>
+  <table>
+    <thead>
+      <tr><th>Naam</th><th>Subject</th>
+          <th>Marks</th><th>Grade</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Rahul</td><td>HTML</td>
+          <td>95</td><td>A+</td></tr>
+      <tr><td>Priya</td><td>CSS</td>
+          <td>88</td><td>A</td></tr>
+      <tr><td>Amit</td><td>JS</td>
+          <td>72</td><td>B</td></tr>
+      <tr><td>Neha</td><td>React</td>
+          <td>91</td><td>A+</td></tr>
+    </tbody>
+    <tfoot>
+      <tr><td colspan="2">Average</td>
+          <td>86.5</td><td>A</td></tr>
+    </tfoot>
+  </table>
+</body></html></textarea></div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13 -->
+    <div class="tut-section fade-in" id="forms">
+      <h2>13. Forms &amp; Inputs</h2>
+      <p>Forms se user se data lete hain. Login, contact, search — sab forms se!</p>
+      <div class="try-it-box">
+        <div class="try-it-header"><span><i class="fas fa-code"></i> Complete Form Try Karo!</span><button class="try-it-run"><i class="fas fa-play"></i> Run</button></div>
+        <div class="try-it-grid">
+          <div class="try-it-code"><textarea spellcheck="false"><!DOCTYPE html>
+<html><head><style>
+  body{background:#0d1117;color:#e2e8f0;
+       font-family:sans-serif;padding:15px;}
+  h2{color:#e44d26;margin-bottom:15px;}
+  label{display:block;color:#94a3b8;
+        font-size:0.83rem;margin:10px 0 3px;}
+  input,select,textarea{display:block;width:100%;
+    background:#0f1526;color:#e2e8f0;
+    border:1px solid #1e2d4a;
+    border-radius:7px;padding:8px 11px;
+    font-size:0.88rem;}
+  input[type=checkbox],input[type=radio]{
+    width:auto;display:inline;margin-right:6px;}
+  .row{display:flex;gap:8px;margin:6px 0;}
+  button{background:#e44d26;color:white;
+    border:none;padding:10px;border-radius:8px;
+    font-size:0.95rem;font-weight:bold;
+    cursor:pointer;width:100%;margin-top:10px;}
+  input[type=range]{padding:0;margin-top:6px;}
+</style></head><body>
+  <h2>📋 Registration Form</h2>
+  <form>
+    <label>Naam (text):</label>
+    <input type="text" placeholder="Rahul Kumar">
+
+    <label>Email:</label>
+    <input type="email" placeholder="email@example.com">
+
+    <label>Password:</label>
+    <input type="password" placeholder="••••••••">
+
+    <label>Age (number, 1-100):</label>
+    <input type="number" min="1" max="100" value="20">
+
+    <label>Date of Birth:</label>
+    <input type="date">
+
+    <label>Favourite Color:</label>
+    <input type="color" value="#e44d26">
+
+    <label>Skill Level (range):</label>
+    <input type="range" min="0" max="100" value="60">
+
+    <label>Profile Photo (file):</label>
+    <input type="file" accept="image/*">
+
+    <label>Language:</label>
+    <select>
+      <option value="">Chuno...</option>
+      <option value="html">HTML</option>
+      <option value="css">CSS</option>
+      <option value="js">JavaScript</option>
+    </select>
+
+    <label>Gender:</label>
+    <div class="row">
+      <span><input type="radio" name="g">Male</span>
+      <span><input type="radio" name="g">Female</span>
+      <span><input type="radio" name="g">Other</span>
+    </div>
+
+    <label>Skills:</label>
+    <div class="row">
+      <span><input type="checkbox"> HTML</span>
+      <span><input type="checkbox"> CSS</span>
+      <span><input type="checkbox"> JS</span>
+    </div>
+
+    <label>About:</label>
+    <textarea rows="3"
+      placeholder="Apne bare mein likho..."></textarea>
+
+    <button type="submit">Register 🚀</button>
+  </form>
+</body></html></textarea></div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 14 -->
+    <div class="tut-section fade-in" id="divspan">
+      <h2>14. Div &amp; Span</h2>
+      <p><code>&lt;div&gt;</code> = <strong>block container</strong> (poori line, layout ke liye). <code>&lt;span&gt;</code> = <strong>inline container</strong> (text ke andar).</p>
+      <div class="try-it-box">
+        <div class="try-it-header"><span><i class="fas fa-code"></i> Div vs Span Try Karo!</span><button class="try-it-run"><i class="fas fa-play"></i> Run</button></div>
+        <div class="try-it-grid">
+          <div class="try-it-code"><textarea spellcheck="false"><!DOCTYPE html>
+<html><head><style>
+  body{background:#0d1117;color:#e2e8f0;
+       font-family:sans-serif;padding:15px;}
+  .card{background:#0f1526;border:1px solid
+    #1e2d4a;border-radius:10px;padding:15px;
+    margin:10px 0;}
+  .card h3{color:#00d4ff;margin:0 0 8px;}
+  .card p{color:#94a3b8;margin:0;}
+  .container{display:flex;gap:10px;}
+  .box{flex:1;background:#0f1526;
+    border:1px solid #1e2d4a;
+    border-radius:8px;padding:12px;
+    text-align:center;}
+  .highlight{color:#f7df1e;font-weight:bold;}
+  .price{color:#00ff88;font-size:1.2rem;
+         font-weight:bold;}
+  .tag{background:#e44d26;color:white;
+    padding:2px 8px;border-radius:999px;
+    font-size:0.75rem;}
+</style></head><body>
+
+  <p>DIV — Block level (poora row leta hai):</p>
+  <div class="card">
+    <h3>HTML Tutorial 📖</h3>
+    <p>HTML seekhna shuru karo aaj se!</p>
+  </div>
+
+  <div class="container">
+    <div class="box">Box 1</div>
+    <div class="box">Box 2</div>
+    <div class="box">Box 3</div>
+  </div>
+
+  <p style="margin-top:15px">
+    SPAN — Inline (text ke andar):
+  </p>
+  <p>
+    Mujhe <span class="highlight">JavaScript</span>
+    bahut pasand hai!
+  </p>
+  <p>
+    Price: <span class="price">₹999</span>
+    <span class="tag">HOT</span>
+  </p>
+  <p>
+    Status:
+    <span style="color:#00ff88">● Online</span>
+  </p>
+
+</body></html></textarea></div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 15 -->
+    <div class="tut-section fade-in" id="semantic">
+      <h2>15. Semantic HTML5</h2>
+      <p>Semantic tags content ka <em>meaning</em> batate hain. <code>&lt;div&gt;</code> ke bajaye meaningful tags use karo — SEO aur accessibility dono improve hote hain!</p>
+      <div class="code-block">
+        <div class="code-block-header"><span>html — Complete Semantic Structure</span><button class="copy-btn">Copy</button></div>
+        <pre><span class="tg">&lt;header&gt;</span>        <span class="cmt">Site/page ka top section</span>
+  <span class="tg">&lt;nav&gt;</span>Navigation Menu<span class="tg">&lt;/nav&gt;</span>
+<span class="tg">&lt;/header&gt;</span>
+
+<span class="tg">&lt;main&gt;</span>           <span class="cmt">Page ka main content (ek hi hoga)</span>
+
+  <span class="tg">&lt;section&gt;</span>      <span class="cmt">Related content group</span>
+    <span class="tg">&lt;h2&gt;</span>Products<span class="tg">&lt;/h2&gt;</span>
+
+    <span class="tg">&lt;article&gt;</span>     <span class="cmt">Self-contained content (blog post)</span>
+      <span class="tg">&lt;h3&gt;</span>Product Title<span class="tg">&lt;/h3&gt;</span>
+      <span class="tg">&lt;p&gt;</span>Description<span class="tg">&lt;/p&gt;</span>
+    <span class="tg">&lt;/article&gt;</span>
+
+  <span class="tg">&lt;/section&gt;</span>
+
+  <span class="tg">&lt;aside&gt;</span>         <span class="cmt">Sidebar (related but secondary content)</span>
+    <span class="tg">&lt;h3&gt;</span>Related Links<span class="tg">&lt;/h3&gt;</span>
+  <span class="tg">&lt;/aside&gt;</span>
+
+<span class="tg">&lt;/main&gt;</span>
+
+<span class="tg">&lt;footer&gt;</span>         <span class="cmt">Page ka bottom</span>
+  <span class="tg">&lt;p&gt;</span>&amp;copy; 2024 CodeMaster<span class="tg">&lt;/p&gt;</span>
+<span class="tg">&lt;/footer&gt;</span>
+
+<span class="cmt">--- Extra Semantic Tags ---</span>
+<span class="tg">&lt;details&gt;</span>
+  <span class="tg">&lt;summary&gt;</span>Click karke dekho<span class="tg">&lt;/summary&gt;</span>
+  <span class="tg">&lt;p&gt;</span>Hidden content! 🎉<span class="tg">&lt;/p&gt;</span>
+<span class="tg">&lt;/details&gt;</span>
+
+<span class="tg">&lt;time</span> <span class="at">datetime=</span><span class="vl">"2024-01-15"</span><span class="tg">&gt;</span>15 January 2024<span class="tg">&lt;/time&gt;</span>
+
+<span class="tg">&lt;figure&gt;</span>
+  <span class="tg">&lt;img</span> <span class="at">src=</span><span class="vl">"chart.png"</span> <span class="at">alt=</span><span class="vl">"Sales chart"</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;figcaption&gt;</span>2024 Sales Data<span class="tg">&lt;/figcaption&gt;</span>
+<span class="tg">&lt;/figure&gt;</span>
+
+<span class="tg">&lt;address&gt;</span>
+  123 MG Road, Delhi, India
+<span class="tg">&lt;/address&gt;</span></pre>
+      </div>
+    </div>
+
+    <!-- 16 -->
+    <div class="tut-section fade-in" id="meta">
+      <h2>16. Meta Tags</h2>
+      <p>Meta tags <code>&lt;head&gt;</code> mein hote hain — browser aur search engines ke liye info. Users ko nahi dikhte!</p>
+      <div class="code-block">
+        <div class="code-block-header"><span>html — Saare Important Meta Tags</span><button class="copy-btn">Copy</button></div>
+        <pre><span class="tg">&lt;head&gt;</span>
+  <span class="cmt">&lt;!-- Zaruri (hamesha rakho) --&gt;</span>
+  <span class="tg">&lt;meta</span> <span class="at">charset=</span><span class="vl">"UTF-8"</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;meta</span> <span class="at">name=</span><span class="vl">"viewport"</span>
+        <span class="at">content=</span><span class="vl">"width=device-width, initial-scale=1.0"</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;title&gt;</span>Page Title — Site Name<span class="tg">&lt;/title&gt;</span>
+
+  <span class="cmt">&lt;!-- SEO ke liye --&gt;</span>
+  <span class="tg">&lt;meta</span> <span class="at">name=</span><span class="vl">"description"</span>
+        <span class="at">content=</span><span class="vl">"HTML CSS JS seekhne ki website"</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;meta</span> <span class="at">name=</span><span class="vl">"keywords"</span>
+        <span class="at">content=</span><span class="vl">"HTML, CSS, JavaScript"</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;meta</span> <span class="at">name=</span><span class="vl">"author"</span> <span class="at">content=</span><span class="vl">"CodeMaster"</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;meta</span> <span class="at">name=</span><span class="vl">"robots"</span> <span class="at">content=</span><span class="vl">"index, follow"</span><span class="tg">&gt;</span>
+
+  <span class="cmt">&lt;!-- Open Graph (WhatsApp/Facebook share) --&gt;</span>
+  <span class="tg">&lt;meta</span> <span class="at">property=</span><span class="vl">"og:title"</span>   <span class="at">content=</span><span class="vl">"CodeMaster"</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;meta</span> <span class="at">property=</span><span class="vl">"og:description"</span> <span class="at">content=</span><span class="vl">"..."</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;meta</span> <span class="at">property=</span><span class="vl">"og:image"</span>   <span class="at">content=</span><span class="vl">"thumbnail.jpg"</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;meta</span> <span class="at">property=</span><span class="vl">"og:url"</span>     <span class="at">content=</span><span class="vl">"https://site.com"</span><span class="tg">&gt;</span>
+
+  <span class="cmt">&lt;!-- Twitter Card --&gt;</span>
+  <span class="tg">&lt;meta</span> <span class="at">name=</span><span class="vl">"twitter:card"</span>    <span class="at">content=</span><span class="vl">"summary_large_image"</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;meta</span> <span class="at">name=</span><span class="vl">"twitter:title"</span>   <span class="at">content=</span><span class="vl">"CodeMaster"</span><span class="tg">&gt;</span>
+
+  <span class="cmt">&lt;!-- Favicon (browser tab icon) --&gt;</span>
+  <span class="tg">&lt;link</span> <span class="at">rel=</span><span class="vl">"icon"</span> <span class="at">href=</span><span class="vl">"favicon.ico"</span><span class="tg">&gt;</span>
+
+  <span class="cmt">&lt;!-- CSS file --&gt;</span>
+  <span class="tg">&lt;link</span> <span class="at">rel=</span><span class="vl">"stylesheet"</span> <span class="at">href=</span><span class="vl">"style.css"</span><span class="tg">&gt;</span>
+
+  <span class="cmt">&lt;!-- Auto redirect (5 sec baad) --&gt;</span>
+  <span class="tg">&lt;meta</span> <span class="at">http-equiv=</span><span class="vl">"refresh"</span> <span class="at">content=</span><span class="vl">"5;url=new-page.html"</span><span class="tg">&gt;</span>
+
+  <span class="cmt">&lt;!-- Theme color (mobile browser) --&gt;</span>
+  <span class="tg">&lt;meta</span> <span class="at">name=</span><span class="vl">"theme-color"</span> <span class="at">content=</span><span class="vl">"#0a0e1a"</span><span class="tg">&gt;</span>
+<span class="tg">&lt;/head&gt;</span></pre>
+      </div>
+    </div>
+
+    <!-- 17 -->
+    <div class="tut-section fade-in" id="media">
+      <h2>17. Audio &amp; Video</h2>
+      <p>HTML5 mein native audio/video support hai — koi Flash nahi chahiye!</p>
+      <div class="code-block">
+        <div class="code-block-header"><span>html — Audio, Video, iframe</span><button class="copy-btn">Copy</button></div>
+        <pre><span class="cmt">&lt;!-- VIDEO ELEMENT --&gt;</span>
+<span class="tg">&lt;video</span>
+  <span class="at">width=</span><span class="vl">"640"</span> <span class="at">height=</span><span class="vl">"360"</span>
+  <span class="at">controls</span>             <span class="cmt">play/pause/volume buttons</span>
+  <span class="at">autoplay</span>             <span class="cmt">automatically start</span>
+  <span class="at">muted</span>                <span class="cmt">autoplay ke liye zaruri</span>
+  <span class="at">loop</span>                 <span class="cmt">baar baar chalao</span>
+  <span class="at">poster=</span><span class="vl">"thumb.jpg"</span>   <span class="cmt">thumbnail image</span>
+  <span class="at">preload=</span><span class="vl">"auto"</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;source</span> <span class="at">src=</span><span class="vl">"video.mp4"</span>  <span class="at">type=</span><span class="vl">"video/mp4"</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;source</span> <span class="at">src=</span><span class="vl">"video.webm"</span> <span class="at">type=</span><span class="vl">"video/webm"</span><span class="tg">&gt;</span>
+  Browser video support nahi karta.
+<span class="tg">&lt;/video&gt;</span>
+
+<span class="cmt">&lt;!-- AUDIO ELEMENT --&gt;</span>
+<span class="tg">&lt;audio</span> <span class="at">controls</span> <span class="at">loop</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;source</span> <span class="at">src=</span><span class="vl">"song.mp3"</span> <span class="at">type=</span><span class="vl">"audio/mpeg"</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;source</span> <span class="at">src=</span><span class="vl">"song.ogg"</span> <span class="at">type=</span><span class="vl">"audio/ogg"</span><span class="tg">&gt;</span>
+<span class="tg">&lt;/audio&gt;</span>
+
+<span class="cmt">&lt;!-- YOUTUBE embed (iframe) --&gt;</span>
+<span class="tg">&lt;iframe</span>
+  <span class="at">src=</span><span class="vl">"https://www.youtube.com/embed/VIDEOID"</span>
+  <span class="at">width=</span><span class="vl">"560"</span> <span class="at">height=</span><span class="vl">"315"</span>
+  <span class="at">frameborder=</span><span class="vl">"0"</span>
+  <span class="at">allowfullscreen</span><span class="tg">&gt;</span>
+<span class="tg">&lt;/iframe&gt;</span>
+
+<span class="cmt">&lt;!-- Google Maps embed --&gt;</span>
+<span class="tg">&lt;iframe</span>
+  <span class="at">src=</span><span class="vl">"https://maps.google.com/maps?q=Delhi&amp;output=embed"</span>
+  <span class="at">width=</span><span class="vl">"400"</span> <span class="at">height=</span><span class="vl">"300"</span><span class="tg">&gt;</span>
+<span class="tg">&lt;/iframe&gt;</span></pre>
+      </div>
+    </div>
+
+    <!-- 18 -->
+    <div class="tut-section fade-in" id="canvas">
+      <h2>18. Canvas API</h2>
+      <p>Canvas ek HTML element hai jis par JavaScript se shapes, images, animations draw karte hain. Games, charts sab canvas se!</p>
+      <div class="try-it-box">
+        <div class="try-it-header"><span><i class="fas fa-code"></i> Canvas Drawing Try Karo!</span><button class="try-it-run"><i class="fas fa-play"></i> Run</button></div>
+        <div class="try-it-grid">
+          <div class="try-it-code"><textarea spellcheck="false"><!DOCTYPE html>
+<html><head><style>
+  body{background:#0d1117;display:flex;
+       flex-direction:column;align-items:center;
+       padding:12px;font-family:sans-serif;}
+  canvas{border:1px solid #1e2d4a;border-radius:8px;}
+  .btns{display:flex;flex-wrap:wrap;
+        gap:6px;margin-top:8px;justify-content:center;}
+  button{background:#1a2540;color:#e2e8f0;
+    border:1px solid #1e2d4a;padding:6px 14px;
+    border-radius:6px;cursor:pointer;font-size:0.8rem;}
+  button:hover{border-color:#00d4ff;color:#00d4ff;}
+</style></head><body>
+  <canvas id="c" width="280" height="160"></canvas>
+  <div class="btns">
+    <button onclick="draw('rect')">🟦 Rect</button>
+    <button onclick="draw('circle')">⭕ Circle</button>
+    <button onclick="draw('text')">📝 Text</button>
+    <button onclick="draw('gradient')">🌈 Gradient</button>
+    <button onclick="draw('lines')">〰️ Lines</button>
+    <button onclick="clearC()">🗑️ Clear</button>
+  </div>
+
+  <script>
+  const c = document.getElementById('c');
+  const ctx = c.getContext('2d');
+
+  function clearC(){
+    ctx.clearRect(0,0,c.width,c.height);
+  }
+
+  function draw(type){
+    clearC();
+    if(type==='rect'){
+      ctx.fillStyle = '#264de4';
+      ctx.fillRect(20,20,100,70);
+      ctx.strokeStyle='#00d4ff';ctx.lineWidth=3;
+      ctx.strokeRect(150,20,100,70);
+      ctx.fillStyle='#e2e8f0';ctx.font='12px sans-serif';
+      ctx.fillText('fillRect',30,110);
+      ctx.fillText('strokeRect',150,110);
+    }
+    else if(type==='circle'){
+      ctx.beginPath();
+      ctx.arc(80,80,55,0,Math.PI*2);
+      ctx.fillStyle='rgba(0,212,255,0.2)';
+      ctx.fill();ctx.strokeStyle='#00d4ff';
+      ctx.lineWidth=2;ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(200,80,45,0,Math.PI);
+      ctx.strokeStyle='#00ff88';ctx.lineWidth=3;ctx.stroke();
+    }
+    else if(type==='text'){
+      ctx.font='bold 22px sans-serif';
+      ctx.fillStyle='#e44d26';
+      ctx.fillText('Hello Canvas!',30,50);
+      ctx.font='16px monospace';
+      ctx.fillStyle='#00d4ff';
+      ctx.fillText('CodeMaster 🚀',30,90);
+      ctx.font='13px sans-serif';
+      ctx.fillStyle='#94a3b8';
+      ctx.fillText('ctx.fillText() se text likho',30,130);
+    }
+    else if(type==='gradient'){
+      let g=ctx.createLinearGradient(0,0,c.width,0);
+      g.addColorStop(0,'#e44d26');
+      g.addColorStop(0.5,'#a855f7');
+      g.addColorStop(1,'#00d4ff');
+      ctx.fillStyle=g;
+      ctx.fillRect(0,0,c.width,c.height);
+      ctx.fillStyle='white';
+      ctx.font='bold 20px sans-serif';
+      ctx.textAlign='center';
+      ctx.fillText('Linear Gradient!',c.width/2,c.height/2+8);
+      ctx.textAlign='left';
+    }
+    else if(type==='lines'){
+      const cols=['#e44d26','#f7df1e','#00d4ff','#00ff88','#a855f7'];
+      for(let i=0;i<5;i++){
+        ctx.beginPath();
+        ctx.moveTo(10,20+i*30);
+        ctx.lineTo(270,20+i*30);
+        ctx.strokeStyle=cols[i];
+        ctx.lineWidth=i+2;
+        ctx.stroke();
+      }
+    }
+  }
+
+  draw('gradient');
+  </script>
+</body></html></textarea></div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tut-nav-btns">
+      <a href="index.html" class="tut-nav-btn"><i class="fas fa-arrow-left"></i> Home</a>
+      <a href="css-tutorial.html" class="tut-nav-btn next">CSS Seekho <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </main>
+</div>
+
+<script src="script.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    // Auto-run all try-it boxes
+    document.querySelectorAll('.try-it-box').forEach(box => {
+      const ta = box.querySelector('textarea');
+      const fr = box.querySelector('iframe');
+      if(ta && fr){ const d=fr.contentDocument||fr.contentWindow.document; d.open();d.write(ta.value);d.close(); }
+    });
+    // Progress + scroll spy
+    const links = document.querySelectorAll('.sidebar-link[data-n]');
+    const total = 18;
+    function setActive(n) {
+      links.forEach(l=>l.classList.remove('active'));
+      links.forEach(l=>{ if(l.dataset.n==n) l.classList.add('active'); });
+      const pct=Math.round((n/total)*100);
+      document.getElementById('htmlProg').style.width=pct+'%';
+      document.getElementById('htmlProgLabel').textContent='Topic '+n+'/'+total;
+    }
+    links.forEach(l=>l.addEventListener('click',()=>setActive(l.dataset.n)));
+    const secs=document.querySelectorAll('.tut-section[id]');
+    window.addEventListener('scroll',()=>{
+      let cur=''; secs.forEach(s=>{ if(window.scrollY>=s.offsetTop-120) cur=s.id; });
+      links.forEach(l=>{ l.classList.remove('active'); if(l.getAttribute('href')==='#'+cur) l.classList.add('active'); });
+    });
+  });
+</script>
+<script>
+  // Fade-in fix — saare elements turant visible karo
+  document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+</script>
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-brand"><span class="logo-icon">&lt;/&gt;</span><span class="logo-text">CodeMaster</span></div>
+      <p>India ka #1 Hindi coding tutorial website. Noob se Pro tak ka safar yahan se shuru hota hai.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Tutorials</h4>
+      <a href="html-tutorial.html">HTML</a>
+      <a href="css-tutorial.html">CSS</a>
+      <a href="js-tutorial.html">JavaScript</a>
+      <a href="videos.html">hd Videos</a>
+    </div>
+    <div class="footer-links">
+      <h4>Levels</h4>
+      <a href="#">Beginner</a>
+      <a href="#">Intermediate</a>
+      <a href="#">Advanced</a>
+      <a href="#">Projects</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 CodeMaster. Made by Nitin Patel.</p>
+  </div>
+</footer>
+
+<!-- Code Master AI chat bubble -->
+<link rel="stylesheet" href="assets/css/code-master-ai.css">
+<script src="assets/js/code-master-ai.js"></script>
+<script>initCodeMasterAI("bubble");</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Code Master AI - CodeMaster</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="assets/css/code-master-ai.css" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="icon" type="image/png" href="code master.png">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-brand">
+    <span class="logo-icon">&lt;/&gt;</span>
+    <span class="logo-text">CodeMaster</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="html-tutorial.html">HTML</a></li>
+    <li><a href="css-tutorial.html">CSS</a></li>
+    <li><a href="js-tutorial.html">JavaScript</a></li>
+    <li><a href="videos.html" class="nav-video-btn"><i class="fas fa-play-circle"></i> hd Videos</a></li>
+    <li><a href="code-master-ai.html" class="active">🤖 Code Master AI</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="html-tutorial.html">HTML</a>
+  <a href="css-tutorial.html">CSS</a>
+  <a href="js-tutorial.html">JavaScript</a>
+  <a href="videos.html">hd Videos</a>
+  <a href="code-master-ai.html">🤖 Code Master AI</a>
+</div>
+
+<div style="margin-top: 64px; padding: 3rem 1.5rem 1rem; text-align: center;">
+  <div class="vp-badge" style="margin: 0 auto 1rem; display:inline-flex"><i class="fas fa-robot"></i>&nbsp; AI Coding Buddy</div>
+  <h1 style="font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; margin-bottom: 0.6rem;">
+    🤖 Code Master <span class="gradient-text">AI</span>
+  </h1>
+  <p style="color: var(--text-dim); font-size: 1rem;">Tumhara personal coding buddy — HTML, CSS, JS, React aur bahut kuch pucho!</p>
+</div>
+
+<div id="cma-fullpage-container" style="padding: 0 1.5rem 3rem;"></div>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-brand"><span class="logo-icon">&lt;/&gt;</span><span class="logo-text">CodeMaster</span></div>
+      <p>India ka #1 Hindi coding tutorial website. Noob se Pro tak ka safar yahan se shuru hota hai.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Tutorials</h4>
+      <a href="html-tutorial.html">HTML</a>
+      <a href="css-tutorial.html">CSS</a>
+      <a href="js-tutorial.html">JavaScript</a>
+      <a href="videos.html">hd Videos</a>
+    </div>
+    <div class="footer-links">
+      <h4>Levels</h4>
+      <a href="#">Beginner</a>
+      <a href="#">Intermediate</a>
+      <a href="#">Advanced</a>
+      <a href="#">Projects</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 CodeMaster. Made by Nitin Patel.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script src="assets/js/code-master-ai.js"></script>
+<script>
+  initCodeMasterAI("fullpage", "#cma-fullpage-container");
+</script>
+</body>
+</html>

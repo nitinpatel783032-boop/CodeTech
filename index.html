@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeMaster - Learn HTML CSS JS</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="icon" type="image/png" href="code master.png">
+  <!-- ✅ Google Identity Services — Apna Client ID script.js mein daalo -->
+  <script src="https://accounts.google.com/gsi/client" async></script>
+</head>
+<body>
+
+<!-- ============================================
+     ONBOARDING OVERLAY — Pehla screen
+     ============================================ -->
+<div id="obOverlay" class="ob-overlay" style="display:none;">
+  <div class="ob-bg-glow"></div>
+  <div class="ob-container">
+
+    <!-- Progress dots -->
+    <div class="ob-dots" id="obDots">
+      <span class="ob-dot active"></span>
+      <span class="ob-dot"></span>
+      <span class="ob-dot"></span>
+    </div>
+
+    <!-- ── STEP 1 : Naam / Gmail ── -->
+    <div class="ob-step active" id="obStep1">
+      <div class="ob-logo-wrap">
+        <span class="ob-logo-icon">&lt;/&gt;</span>
+        <span class="ob-logo-txt">CodeMaster</span>
+      </div>
+      <div class="ob-step-emoji">👋</div>
+      <h2 class="ob-step-title">Pehle ek chota sa parichay! Not Compulsary</h2>
+      <p class="ob-step-desc">Apna naam batao — personalized experience ke liye</p>
+
+      <div class="ob-name-wrap">
+        <i class="fas fa-user ob-input-icon"></i>
+        <input type="text" id="obNameInput" class="ob-name-input"
+               placeholder="Aapka naam likhein..." maxlength="30" />
+      </div>
+
+      <div class="ob-divider"><span>ya</span></div>
+
+      <!-- <button class="ob-google-btn" id="obGoogleBtn">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
+          <path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z" fill="#34A853"/>
+          <path d="M3.964 10.71c-.18-.54-.282-1.117-.282-1.71s.102-1.17.282-1.71V4.958H.957C.347 6.173 0 7.548 0 9s.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/>
+          <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.958L3.964 6.29C4.672 4.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
+        </svg>
+        Gmail se Continue karo
+      </button> -->
+
+      <button class="ob-main-btn" onclick="obGoStep2()">
+        Aage Badho <i class="fas fa-arrow-right"></i>
+      </button>
+
+      <button class="ob-skip-btn" onclick="obSkipAll()">
+        Skip karo, seedha shuru karo →
+      </button>
+    </div>
+
+    <!-- ── STEP 2 : Kyu seekhna hai? ── -->
+    <div class="ob-step" id="obStep2">
+      <div class="ob-step-num">Sawaal 1 / 2</div>
+      <div class="ob-step-emoji">🎯</div>
+      <h2 class="ob-step-title">Web development kyu sikhna chahte hain?</h2>
+      <p class="ob-step-desc">Ek ya zyada options choose karo</p>
+
+      <div class="ob-options-grid" id="obWhyOptions">
+        <div class="ob-option" data-group="why" onclick="selectObOption(this)">
+          <span class="ob-opt-icon">💼</span>
+          <span>Naukri / Career ke liye</span>
+        </div>
+        <div class="ob-option" data-group="why" onclick="selectObOption(this)">
+          <span class="ob-opt-icon">🎓</span>
+          <span>Student hoon, seekhna hai</span>
+        </div>
+        <div class="ob-option" data-group="why" onclick="selectObOption(this)">
+          <span class="ob-opt-icon">🎨</span>
+          <span>Hobby / Interest ke liye</span>
+        </div>
+        <div class="ob-option" data-group="why" onclick="selectObOption(this)">
+          <span class="ob-opt-icon">💰</span>
+          <span>Freelancing karni hai</span>
+        </div>
+        <div class="ob-option" data-group="why" onclick="selectObOption(this)">
+          <span class="ob-opt-icon">🚀</span>
+          <span>Apna Project / Startup</span>
+        </div>
+        <div class="ob-option" data-group="why" onclick="selectObOption(this)">
+          <span class="ob-opt-icon">🤔</span>
+          <span>Bas explore kar raha hoon</span>
+        </div>
+      </div>
+
+      <div class="ob-nav-btns">
+        <button class="ob-back-btn" onclick="obGoStep1(true)">
+          <i class="fas fa-arrow-left"></i> Wapas
+        </button>
+        <button class="ob-main-btn" onclick="obGoStep3()">
+          Aage <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── STEP 3 : PC / Laptop? ── -->
+    <div class="ob-step" id="obStep3">
+      <div class="ob-step-num">Sawaal 2 / 2</div>
+      <div class="ob-step-emoji">💻</div>
+      <h2 class="ob-step-title">Kya aapke paas PC ya Laptop available hai?</h2>
+      <p class="ob-step-desc">Isse hum aapko sahi guidance de sakte hain</p>
+
+      <div class="ob-options-grid" id="obPcOptions">
+        <div class="ob-option" data-group="pc" onclick="selectObOption(this)">
+          <span class="ob-opt-icon">🖥️</span>
+          <span>Haan, PC hai</span>
+        </div>
+        <div class="ob-option" data-group="pc" onclick="selectObOption(this)">
+          <span class="ob-opt-icon">💻</span>
+          <span>Haan, Laptop hai</span>
+        </div>
+        <div class="ob-option" data-group="pc" onclick="selectObOption(this)">
+          <span class="ob-opt-icon">🖥️💻</span>
+          <span>Dono hain!</span>
+        </div>
+        <div class="ob-option" data-group="pc" onclick="selectObOption(this)">
+          <span class="ob-opt-icon">📱</span>
+          <span>Abhi sirf Mobile hai</span>
+        </div>
+      </div>
+
+      <div class="ob-nav-btns">
+        <button class="ob-back-btn" onclick="obGoStep2(true)">
+          <i class="fas fa-arrow-left"></i> Wapas
+        </button>
+        <button class="ob-main-btn ob-finish-btn" onclick="obFinish()">
+          Shuru Karo! 🚀
+        </button>
+      </div>
+    </div>
+
+    <!-- ── WELCOME ── -->
+    <div class="ob-step" id="obWelcome">
+      <div class="ob-confetti-wrap" id="obConfettiWrap"></div>
+      <div class="ob-welcome-emoji" id="obWelcomeEmoji">🎉</div>
+      <h2 class="ob-welcome-title">
+        Welcome,&nbsp;<span id="obWelcomeName" class="ob-name-highlight">Friend</span>!
+      </h2>
+      <p class="ob-welcome-msg" id="obWelcomeMsg">Aapka coding journey ab shuru hota hai!</p>
+      <div class="ob-welcome-tags" id="obWelcomeTags"></div>
+      <div class="ob-loader-bar">
+        <div class="ob-loader-fill" id="obLoaderFill"></div>
+      </div>
+      <p class="ob-loader-txt">Ready ho rahe hain...</p>
+      <button class="ob-main-btn ob-launch-btn" onclick="obClose()">
+        Chalte Hain! <i class="fas fa-rocket"></i>
+      </button>
+    </div>
+
+  </div><!-- /ob-container -->
+</div><!-- /obOverlay -->
+
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <div class="nav-brand">
+    <span class="logo-icon"></span>
+    <span class="logo-text">&lt;/&gt;CodeMaster</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="html-tutorial.html">HTML</a></li>
+    <li><a href="css-tutorial.html">CSS</a></li>
+    <li><a href="js-tutorial.html">JavaScript</a></li>
+    <li><a href="videos.html" class="nav-video-btn"><i class="fas fa-play-circle"></i> hd Videos</a></li>
+    <li><a href="code-master-ai.html">🤖 Code Master AI</a></li>
+  </ul>
+
+  <!-- ✅ THEME TOGGLE BUTTON -->
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Theme badlo">
+    <i class="fas fa-moon" id="themeIcon"></i>
+    <span id="themeLabel">Night</span>
+  </button>
+
+  <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="html-tutorial.html">HTML</a>
+  <a href="css-tutorial.html">CSS</a>
+  <a href="js-tutorial.html">JavaScript</a>
+  <a href="videos.html">hd Videos</a>
+  <a href="code-master-ai.html">🤖 Code Master AI</a>
+</div>
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="floating-code" id="floatingCode"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">🚀 Noob se Pro tak</div>
+    <h1 class="hero-title">
+      Web Development<br/>
+      <span class="gradient-text">Seekho Aasaan Tarike Se</span>
+    </h1>
+    <p class="hero-sub">HTML, CSS, aur JavaScript — bilkul basics se lekar advanced tak. Interactive examples, hd Videos, aur hands-on coding ke saath.</p>
+    <div class="hero-btns">
+      <a href="html-tutorial.html" class="btn-primary">Shuru Karo <i class="fas fa-arrow-right"></i></a>
+      <a href="videos.html" class="btn-ghost"><i class="fas fa-play"></i> hd Videos Dekho</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span>50+</span><small>Topics</small></div>
+      <div class="stat"><span>100+</span><small>Examples</small></div>
+      <div class="stat"><span>hd</span><small>Videos</small></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="code-window">
+      <div class="code-titlebar">
+        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+        <span class="file-name">index.html</span>
+      </div>
+      <div class="code-body" id="typingCode"></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRACK CARDS -->
+<section class="tracks" id="tracks">
+  <div class="section-header">
+    <h2>Apna Track Chuno</h2>
+    <p>Teen powerful languages seekho — ek saath ya ek-ek karke</p>
+  </div>
+  <div class="track-grid">
+
+    <div class="track-card html-card" onclick="location.href='html-tutorial.html'">
+      <div class="track-icon">
+        <i class="fab fa-html5"></i>
+      </div>
+      <h3>HTML</h3>
+      <p>Web pages ka dhaacha. Tags, elements, forms, tables — sab kuch basics se sikhein.</p>
+      <ul class="track-topics">
+        <li><i class="fas fa-check"></i> Kya hota hai HTML?</li>
+        <li><i class="fas fa-check"></i> Tags aur Elements</li>
+        <li><i class="fas fa-check"></i> Forms & Tables</li>
+        <li><i class="fas fa-check"></i> Semantic HTML5</li>
+        <li><i class="fas fa-lock"></i> Advanced Meta Tags</li>
+      </ul>
+      <div class="track-level">
+        <span class="lvl active">Beginner</span>
+        <span class="lvl active">Intermediate</span>
+        <span class="lvl">Pro</span>
+      </div>
+      <button class="track-btn html-btn">HTML Seekho <i class="fas fa-chevron-right"></i></button>
+    </div>
+
+    <div class="track-card css-card" onclick="location.href='css-tutorial.html'">
+      <div class="track-icon">
+        <i class="fab fa-css3-alt"></i>
+      </div>
+      <h3>CSS</h3>
+      <p>Websites ko sundar banao. Colors, layouts, animations — sab kuch CSS se.</p>
+      <ul class="track-topics">
+        <li><i class="fas fa-check"></i> Selectors & Properties</li>
+        <li><i class="fas fa-check"></i> Box Model</li>
+        <li><i class="fas fa-check"></i> Flexbox & Grid</li>
+        <li><i class="fas fa-check"></i> Animations</li>
+        <li><i class="fas fa-lock"></i> CSS Variables & Themes</li>
+      </ul>
+      <div class="track-level">
+        <span class="lvl active">Beginner</span>
+        <span class="lvl active">Intermediate</span>
+        <span class="lvl">Pro</span>
+      </div>
+      <button class="track-btn css-btn">CSS Seekho <i class="fas fa-chevron-right"></i></button>
+    </div>
+
+    <div class="track-card js-card" onclick="location.href='js-tutorial.html'">
+      <div class="track-icon">
+        <i class="fab fa-js-square"></i>
+      </div>
+      <h3>JavaScript</h3>
+      <p>Pages ko interactive banao. Logic, DOM, events, APIs — sab kuch JS se.</p>
+      <ul class="track-topics">
+        <li><i class="fas fa-check"></i> Variables & Data Types</li>
+        <li><i class="fas fa-check"></i> Functions & Loops</li>
+        <li><i class="fas fa-check"></i> DOM Manipulation</li>
+        <li><i class="fas fa-check"></i> Events & APIs</li>
+        <li><i class="fas fa-lock"></i> ES6+ & Async/Await</li>
+      </ul>
+      <div class="track-level">
+        <span class="lvl active">Beginner</span>
+        <span class="lvl active">Intermediate</span>
+        <span class="lvl">Pro</span>
+      </div>
+      <button class="track-btn js-btn">JS Seekho <i class="fas fa-chevron-right"></i></button>
+    </div>
+
+  </div>
+</section>
+
+<!-- hd VIDEO PROMO -->
+<section class="video-promo">
+  <div class="vp-left">
+    <div class="vp-badge"><i class="fas fa-cube"></i> hd Videos</div>
+    <h2>hd Videos se Seekho</h2>
+    <p>Sirf text nahi — dekhkar samjho! hd videos se concepts crystal clear ho jaate hain. Har topic ka ek visual video hai.</p>
+    <ul class="vp-list">
+      <li><i class="fas fa-play-circle"></i> HTML Structure hd Tour</li>
+      <li><i class="fas fa-play-circle"></i> CSS Box Model Animation</li>
+      <li><i class="fas fa-play-circle"></i> JS Event Loop Visual</li>
+      <li><i class="fas fa-play-circle"></i> Flexbox hd Demo</li>
+    <li><i></i> Is video mai jo Topics thode Compleceted hai <br> use aage Website par hai usse <br>dekhne ke liye <br> <u><i><b>Sare Videos Dekho</b></i></u> <br> button par click karo. </li>
+    </ul>
+    
+    <a href="videos.html" class="btn-primary">Sare Videos Dekho <i class="fas fa-arrow-right"></i></a>
+  </div>
+  <div class="vp-right">
+    <div class="video-card-hd">
+      <div class="vchd-screen">
+       <div class="cube-anim" onclick="openVideo('Intro')">
+  <div class="cube">
+    <div class="face front"><span>div</span></div>
+    <div class="face back"><span>CSS</span></div>
+    <div class="face left"><span>JS</span></div>
+    <div class="face right"><span>HTML</span></div>
+    <div class="face top"><span>Web</span></div>
+    <div class="face bottom"><span>Dev</span></div>
+  </div>
+
+  <!-- ✅ Hover overlay -->
+  <div class="cube-hover-overlay">
+    <div class="cube-play-btn">
+      <i class="fas fa-play"></i>
+    </div>
+    <span class="cube-play-txt">Play Karo</span>
+  </div>
+
+</div>
+        </div>
+      </div>
+      <div class="vchd-info">
+        <span><i class="fas fa-play"></i>HTML ka pora course. [for play video click the <u>CUBE</u>.] or is video mai cut ka button nahi hai to agar aap website par kahibhi click karte hai to ye video cut ho jayega.</span>
+        <span class="vchd-dur">3:11:12</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK EXAMPLES -->
+<section class="quick-ex">
+  <div class="section-header">
+    <h2>Live Code Try Karo</h2>
+    <p>[Jis bhi file ka code run karna ho uss ka naam press karo pehle.]</p>
+    <p>Seedha yahan code likho aur result dekho</p>
+    <p>{<u>Note</u>; Is file mai css and js aap change kar sakte hai ye manual hai.}</p>
+  </div>
+  <div class="ex-tabs">
+    <button class="ex-tab active" onclick="showEx('html')">HTML</button>
+    <button class="ex-tab" onclick="showEx('css')">CSS</button>
+    <button class="ex-tab" onclick="showEx('js')">JavaScript</button>
+  </div>
+  <div class="ex-container">
+    <div class="ex-editor">
+      <div class="editor-bar">
+        <span id="exLabel">HTML Code</span>
+        <button onclick="runCode()" class="run-btn"><i class="fas fa-play"></i> Run</button>
+      </div>
+      <textarea id="codeInput" spellcheck="false"></textarea>
+    </div>
+    <div class="ex-output">
+      <div class="editor-bar"><span>Output</span></div>
+      <iframe id="outputFrame"></iframe>
+    </div>
+  </div>
+</section>
+<!-- VIDEO MODAL -->
+<div id="videoModal" class="video-modal" style="display:none;">
+  <div class="vm-overlay" onclick="closeVideo()"></div>
+  <div class="vm-box">
+    <button class="vm-close" onclick="closeVideo()"><i class="fas fa-times"></i></button>
+    <div class="vm-header">
+      <span class="vm-tag tag-html">HTML</span>
+      <h3 class="vm-title">Web Development Full Course — Hindi</h3>
+      <div class="vm-meta">
+        <span><i class="fas fa-clock"></i> 11:30:00</span>
+        <span><i class="fas fa-signal"></i> Beginner → Advanced</span>
+        <span><i class="fas fa-eye"></i> 2.1M views</span>
+      </div>
+    </div>
+    <div class="vm-iframe-wrap">
+      <iframe id="modalIframe" src="" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+    <p class="vm-desc">HTML, CSS aur JavaScript — ek hi video mein complete web development course. Code With Harry ke saath step-by-step seekho.</p>
+    <p>All the video codes shown in this website are with Harry Key so that users can understand it better and this website is made only for education purpose, it does not support any YouTube channel.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-brand"><span class="logo-icon">&lt;/&gt;</span><span class="logo-text">CodeMaster</span></div>
+      <p>India ka #1 Hindi coding tutorial website. Noob se Pro tak ka safar yahan se shuru hota hai.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Tutorials</h4>
+      <a href="html-tutorial.html">HTML</a>
+      <a href="css-tutorial.html">CSS</a>
+      <a href="js-tutorial.html">JavaScript</a>
+      <a href="videos.html">hd Videos</a>
+    </div>
+    <div class="footer-links">
+      <h4>Levels</h4>
+      <a href="#">Beginner</a>
+      <a href="#">Intermediate</a>
+      <a href="#">Advanced</a>
+      <a href="#">Projects</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 CodeMaster. Made by Nitin Patel.</p>
+  </div>
+</footer>
+
+
+<script src="script.js" defer></script>
+
+<!-- Code Master AI chat bubble -->
+<link rel="stylesheet" href="assets/css/code-master-ai.css">
+<script src="assets/js/code-master-ai.js"></script>
+<script>initCodeMasterAI("bubble");</script>
+</body>
+</html>

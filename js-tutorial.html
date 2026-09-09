@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Tutorial - CodeMaster</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="icon" type="image/png" href="code master.png">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-brand">
+    <span class="logo-icon">&lt;/&gt;</span>
+    <span class="logo-text">CodeMaster</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="html-tutorial.html">HTML</a></li>
+    <li><a href="css-tutorial.html">CSS</a></li>
+    <li><a href="js-tutorial.html" class="active">JavaScript</a></li>
+    <li><a href="videos.html" class="nav-video-btn"><i class="fas fa-play-circle"></i> hd Videos</a></li>
+    <li><a href="code-master-ai.html">🤖 Code Master AI</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="html-tutorial.html">HTML</a>
+  <a href="css-tutorial.html">CSS</a>
+  <a href="js-tutorial.html">JavaScript</a>
+  <a href="videos.html">hd Videos</a>
+  <a href="code-master-ai.html">🤖 Code Master AI</a>
+</div>
+
+<div class="tutorial-wrap">
+
+  <aside class="sidebar">
+    <div class="tut-progress">
+      <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
+      <span class="progress-label">100% Complete</span>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">🌱 Beginner</div>
+      <a href="#intro" class="sidebar-link active">JS Kya Hai?</a>
+      <a href="#variables" class="sidebar-link">Variables</a>
+      <a href="#datatypes" class="sidebar-link">Data Types</a>
+      <a href="#operators" class="sidebar-link">Operators</a>
+      <a href="#conditions" class="sidebar-link">If/Else</a>
+      <a href="#loops" class="sidebar-link">Loops</a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">📗 Intermediate</div>
+      <a href="#functions" class="sidebar-link">Functions</a>
+      <a href="#arrays" class="sidebar-link">Arrays</a>
+      <a href="#objects" class="sidebar-link">Objects</a>
+      <a href="#dom" class="sidebar-link">DOM Manipulation <span class="badge badge-new">Hot</span></a>
+      <a href="#events" class="sidebar-link">Events</a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">🔥 Advanced</div>
+      <a href="#es6" class="sidebar-link">ES6+ Features <span class="badge badge-pro">Pro</span></a>
+      <a href="#async" class="sidebar-link">Async/Await <span class="badge badge-pro">Pro</span></a>
+      <a href="#apis" class="sidebar-link">Fetch API <span class="badge badge-pro">Pro</span></a>
+    </div>
+  </aside>
+
+  <main class="tutorial-main">
+
+    <div class="tut-breadcrumb">
+      <a href="index.html">Home</a>
+      <i class="fas fa-chevron-right" style="font-size:0.7rem; color:var(--text-muted)"></i>
+      <span>JavaScript Tutorial</span>
+    </div>
+
+    <h1 class="tut-title" id="intro">
+      <span style="color:#f7df1e"><i class="fab fa-js-square"></i></span>
+      JavaScript Tutorial
+    </h1>
+    <p class="tut-subtitle">JavaScript se web pages interactive bante hain — buttons, animations, forms, sab JS se life mein aate hain!</p>
+
+    <!-- ===== JS KYA HAI ===== -->
+    <div class="tut-section fade-in">
+      <h2>JavaScript Kya Hota Hai?</h2>
+      <p>HTML structure deta hai, CSS design deta hai, aur <strong>JavaScript behaviour deta hai</strong>. Click pe kuch ho, form validate ho, data fetch ho — sab JS karta hai.</p>
+
+      <div class="callout callout-info">
+        <span class="callout-icon"><i class="fas fa-info-circle"></i></span>
+        <div>JS browser mein directly run hoti hai — koi server ki zarurat nahi. <code>console.log()</code> se output dekho browser ke DevTools mein (F12).</div>
+      </div>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>javascript — Hello World</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="cmt">// Yeh ek JavaScript comment hai</span>
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"Hello, World!"</span>);
+
+<span class="cmt">// Alert box dikhao</span>
+<span class="fn">alert</span>(<span class="str">"Namaste, CodeMaster!"</span>);
+
+<span class="cmt">// HTML mein text badlo</span>
+<span class="kw">document</span>.<span class="fn">getElementById</span>(<span class="str">"title"</span>).<span class="at">innerHTML</span> = <span class="str">"JS Magic! ✨"</span>;</pre>
+      </div>
+    </div>
+
+    <!-- ===== VARIABLES ===== -->
+    <div class="tut-section fade-in" id="variables">
+      <h2>Variables — Data Store Karo</h2>
+      <p>Variables mein data store karte hain. JS mein teen keywords hain: <code>var</code>, <code>let</code>, <code>let</code>.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>javascript — Variables</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="cmt">// let - change ho sakta hai</span>
+<span class="kw">let</span> naam = <span class="str">"Rahul"</span>;
+naam = <span class="str">"Priya"</span>;  <span class="cmt">// OK ✅</span>
+
+<span class="cmt">// let - change nahi hoga</span>
+<span class="kw">let</span> PI = <span class="num">3.14159</span>;
+<span class="cmt">// PI = 3; → Error! ❌</span>
+
+<span class="cmt">// var - purana tarika (use mat karo)</span>
+<span class="kw">var</span> age = <span class="num">20</span>;
+
+<span class="cmt">// Different data types</span>
+<span class="kw">let</span> number  = <span class="num">42</span>;           <span class="cmt">// Number</span>
+<span class="kw">let</span> text    = <span class="str">"Hello"</span>;      <span class="cmt">// String</span>
+<span class="kw">let</span> isTrue  = <span class="kw">true</span>;         <span class="cmt">// Boolean</span>
+<span class="kw">let</span> nothing = <span class="kw">null</span>;         <span class="cmt">// Null</span>
+<span class="kw">let</span> arr     = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>];   <span class="cmt">// Array</span></pre>
+      </div>
+
+      <div class="callout callout-warn">
+        <span class="callout-icon"><i class="fas fa-exclamation-triangle"></i></span>
+        <div><strong>Note:</strong> Aaj ke time mein <code>var</code> use karna avoid karo. Hamesha <code>let</code> ya <code>let</code> use karo — ye more predictable hain.</div>
+      </div>
+    </div>
+
+    <!-- ===== DATA TYPES ===== -->
+    <div class="tut-section fade-in" id="datatypes">
+      <h2>Data Types — Kitne Tarah Ka Data?</h2>
+      <p>JavaScript mein 8 data types hain — <strong>7 Primitive</strong> aur <strong>1 Object</strong>. <code>typeof</code> operator se type pata karte hain.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>javascript — Data Types</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="cmt">// 1. Number — integers aur decimals dono</span>
+<span class="kw">let</span> age  = <span class="num">25</span>;
+<span class="kw">let</span> price = <span class="num">99.99</span>;
+<span class="kw">let</span> inf  = <span class="kw">Infinity</span>;
+<span class="kw">let</span> nan  = <span class="kw">NaN</span>;         <span class="cmt">// Not a Number</span>
+
+<span class="cmt">// 2. String — text, quotes mein</span>
+<span class="kw">let</span> name  = <span class="str">"Rahul"</span>;
+<span class="kw">let</span> city  = <span class="str">'Delhi'</span>;
+<span class="kw">let</span> msg   = <span class="str">`Hello ${name}!`</span>; <span class="cmt">// Template literal</span>
+<span class="fn">console</span>.<span class="fn">log</span>(name.<span class="at">length</span>);    <span class="cmt">// 5</span>
+<span class="fn">console</span>.<span class="fn">log</span>(name.<span class="fn">toUpperCase</span>()); <span class="cmt">// RAHUL</span>
+
+<span class="cmt">// 3. Boolean — sirf true ya false</span>
+<span class="kw">let</span> isLoggedIn = <span class="kw">true</span>;
+<span class="kw">let</span> hasError   = <span class="kw">false</span>;
+
+<span class="cmt">// 4. Undefined — variable define, value nahi</span>
+<span class="kw">let</span> x;
+<span class="fn">console</span>.<span class="fn">log</span>(x); <span class="cmt">// undefined</span>
+
+<span class="cmt">// 5. Null — intentionally khali</span>
+<span class="kw">let</span> user = <span class="kw">null</span>;
+
+<span class="cmt">// 6. Symbol — unique identifier</span>
+<span class="kw">let</span> id = <span class="fn">Symbol</span>(<span class="str">"id"</span>);
+
+<span class="cmt">// 7. BigInt — bahut bade numbers</span>
+<span class="kw">let</span> big = <span class="num">9007199254740991n</span>;
+
+<span class="cmt">// 8. Object — key-value pairs</span>
+<span class="kw">let</span> person = { naam: <span class="str">"Priya"</span>, age: <span class="num">22</span> };
+
+<span class="cmt">// typeof se type check karo</span>
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="kw">typeof</span> age);      <span class="cmt">// "number"</span>
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="kw">typeof</span> name);     <span class="cmt">// "string"</span>
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="kw">typeof</span> isLoggedIn); <span class="cmt">// "boolean"</span>
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="kw">typeof</span> <span class="kw">null</span>);     <span class="cmt">// "object" ← JS ka ek purana bug!</span>
+
+<span class="cmt">// Type Conversion</span>
+<span class="fn">Number</span>(<span class="str">"42"</span>)    <span class="cmt">// → 42</span>
+<span class="fn">String</span>(<span class="num">100</span>)    <span class="cmt">// → "100"</span>
+<span class="fn">Boolean</span>(<span class="num">0</span>)    <span class="cmt">// → false (0, "", null, undefined = falsy)</span>
+<span class="fn">Boolean</span>(<span class="num">1</span>)    <span class="cmt">// → true</span>
+<span class="fn">parseInt</span>(<span class="str">"3.9"</span>)  <span class="cmt">// → 3</span>
+<span class="fn">parseFloat</span>(<span class="str">"3.9"</span>) <span class="cmt">// → 3.9</span></pre>
+      </div>
+
+      <div class="try-it-box">
+        <div class="try-it-header">
+          <span><i class="fas fa-code"></i> Data Types Try Karo!</span>
+          <button class="try-it-run"><i class="fas fa-play"></i> Run</button>
+        </div>
+        <div class="try-it-grid">
+          <div class="try-it-code">
+            <textarea spellcheck="false"><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { background:#0a0e1a; color:#e2e8f0;
+           font-family:monospace; padding:20px; margin:0; }
+    .row { display:flex; gap:10px; margin:6px 0; align-items:center; }
+    .type {
+      background:#264de4; color:white;
+      padding:3px 10px; border-radius:20px;
+      font-size:0.75rem; min-width:80px;
+      text-align:center;
+    }
+    .val { color:#00d4ff; }
+    .note { color:#94a3b8; font-size:0.8rem; }
+  </style>
+</head>
+<body>
+  <div id="output"></div>
+  <script>
+    let data = [
+      { val: 42,             note: "Integer" },
+      { val: 3.14,           note: "Decimal" },
+      { val: "Hello JS!",    note: "String" },
+      { val: true,           note: "Boolean" },
+      { val: undefined,      note: "Undefined" },
+      { val: null,           note: "Null" },
+      { val: {a:1},          note: "Object" },
+      { val: [1,2,3],        note: "Array (Object)" },
+    ];
+    let out = document.getElementById('output');
+    data.forEach(({val, note}) => {
+      let t = typeof val;
+      out.innerHTML += `
+        <div class="row">
+          <span class="type">${t}</span>
+          <span class="val">${JSON.stringify(val)}</span>
+          <span class="note">// ${note}</span>
+        </div>`;
+    });
+  </script>
+</body>
+</html></textarea>
+          </div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== OPERATORS ===== -->
+    <div class="tut-section fade-in" id="operators">
+      <h2>Operators — Operations Karo</h2>
+      <p>Operators se calculations, comparisons aur logic karte hain.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>javascript — Operators</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="cmt">// ===== Arithmetic Operators =====</span>
+<span class="kw">let</span> a = <span class="num">10</span>, b = <span class="num">3</span>;
+<span class="fn">console</span>.<span class="fn">log</span>(a + b);  <span class="cmt">// 13 (addition)</span>
+<span class="fn">console</span>.<span class="fn">log</span>(a - b);  <span class="cmt">// 7  (subtraction)</span>
+<span class="fn">console</span>.<span class="fn">log</span>(a * b);  <span class="cmt">// 30 (multiplication)</span>
+<span class="fn">console</span>.<span class="fn">log</span>(a / b);  <span class="cmt">// 3.33 (division)</span>
+<span class="fn">console</span>.<span class="fn">log</span>(a % b);  <span class="cmt">// 1  (remainder/modulo)</span>
+<span class="fn">console</span>.<span class="fn">log</span>(a ** b); <span class="cmt">// 1000 (power: 10^3)</span>
+a++;  <span class="cmt">// a = 11 (increment)</span>
+b--;  <span class="cmt">// b = 2  (decrement)</span>
+
+<span class="cmt">// ===== Assignment Operators =====</span>
+<span class="kw">let</span> x = <span class="num">10</span>;
+x += <span class="num">5</span>;   <span class="cmt">// x = x + 5 = 15</span>
+x -= <span class="num">3</span>;   <span class="cmt">// x = x - 3 = 12</span>
+x *= <span class="num">2</span>;   <span class="cmt">// x = x * 2 = 24</span>
+x /= <span class="num">4</span>;   <span class="cmt">// x = x / 4 = 6</span>
+x **= <span class="num">2</span>;  <span class="cmt">// x = x ** 2 = 36</span>
+
+<span class="cmt">// ===== Comparison Operators =====</span>
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="num">5</span> == <span class="str">"5"</span>);   <span class="cmt">// true  (loose, type ignore)</span>
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="num">5</span> === <span class="str">"5"</span>);  <span class="cmt">// false (strict, type check) ← HAMESHA YEH USE KARO</span>
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="num">5</span> !== <span class="num">3</span>);   <span class="cmt">// true</span>
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="num">10</span> > <span class="num">5</span>);    <span class="cmt">// true</span>
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="num">10</span> <= <span class="num">10</span>);  <span class="cmt">// true</span>
+
+<span class="cmt">// ===== Logical Operators =====</span>
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="kw">true</span> && <span class="kw">false</span>); <span class="cmt">// false (AND - dono true ho)</span>
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="kw">true</span> || <span class="kw">false</span>); <span class="cmt">// true  (OR - koi ek true ho)</span>
+<span class="fn">console</span>.<span class="fn">log</span>(!<span class="kw">true</span>);         <span class="cmt">// false (NOT)</span>
+
+<span class="cmt">// ===== Ternary Operator =====</span>
+<span class="kw">let</span> score = <span class="num">75</span>;
+<span class="kw">let</span> result = score >= <span class="num">50</span> ? <span class="str">"Pass ✅"</span> : <span class="str">"Fail ❌"</span>;
+<span class="cmt">// condition ? agar true : agar false</span>
+
+<span class="cmt">// ===== Nullish Coalescing (??) =====</span>
+<span class="kw">let</span> name = <span class="kw">null</span>;
+<span class="fn">console</span>.<span class="fn">log</span>(name ?? <span class="str">"Guest"</span>); <span class="cmt">// "Guest" (null/undefined ho to default)</span>
+
+<span class="cmt">// ===== String Concatenation =====</span>
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"Hello"</span> + <span class="str">" "</span> + <span class="str">"World"</span>); <span class="cmt">// "Hello World"</span>
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"Age: "</span> + <span class="num">25</span>);             <span class="cmt">// "Age: 25"</span></pre>
+      </div>
+    </div>
+
+    <!-- ===== CONDITIONS ===== -->
+    <div class="tut-section fade-in" id="conditions">
+      <h2>If/Else — Decisions Lena</h2>
+      <p>Condition check karke alag-alag code run karte hain.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>javascript — If/Else & Switch</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="cmt">// If / else if / else</span>
+<span class="kw">let</span> marks = <span class="num">85</span>;
+
+<span class="kw">if</span> (marks >= <span class="num">90</span>) {
+  <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"A+ Grade 🏆"</span>);
+} <span class="kw">else if</span> (marks >= <span class="num">75</span>) {
+  <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"A Grade ✅"</span>);
+} <span class="kw">else if</span> (marks >= <span class="num">60</span>) {
+  <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"B Grade 👍"</span>);
+} <span class="kw">else</span> {
+  <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"Fail ❌"</span>);
+}
+<span class="cmt">// Output: A Grade ✅</span>
+
+<span class="cmt">// Switch Statement — ek value, kai cases</span>
+<span class="kw">let</span> day = <span class="str">"Monday"</span>;
+<span class="kw">switch</span>(day) {
+  <span class="kw">case</span> <span class="str">"Monday"</span>:
+    <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"Sapte ka pehla din 😴"</span>);
+    <span class="kw">break</span>;
+  <span class="kw">case</span> <span class="str">"Friday"</span>:
+    <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"Weekend aane wala hai! 🎉"</span>);
+    <span class="kw">break</span>;
+  <span class="kw">default</span>:
+    <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"Normal din 📅"</span>);
+}</pre>
+      </div>
+
+      <div class="try-it-box">
+        <div class="try-it-header">
+          <span><i class="fas fa-code"></i> If/Else Try Karo!</span>
+          <button class="try-it-run"><i class="fas fa-play"></i> Run</button>
+        </div>
+        <div class="try-it-grid">
+          <div class="try-it-code">
+            <textarea spellcheck="false"><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { background:#0a0e1a; color:#e2e8f0;
+           font-family:sans-serif; padding:20px; }
+    #result {
+      background:#0f1526; border:1px solid #1e2d4a;
+      border-radius:10px; padding:15px; margin:10px 0;
+      font-size:1.1rem;
+    }
+    button {
+      background:#f7df1e; color:#0a0e1a;
+      border:none; padding:10px 20px;
+      border-radius:8px; cursor:pointer;
+      font-weight:bold; margin:5px;
+    }
+    input {
+      background:#0f1526; color:#e2e8f0;
+      border:1px solid #1e2d4a;
+      border-radius:8px; padding:10px;
+      font-size:1rem; width:100%; margin:8px 0;
+    }
+  </style>
+</head>
+<body>
+  <h3>🎯 Age Checker</h3>
+  <input type="number" id="ageInput" placeholder="Apni age dalo">
+  <button onclick="checkAge()">Check Karo!</button>
+  <div id="result">Result yahan aayega...</div>
+
+  <script>
+    function checkAge() {
+      let age = parseInt(document.getElementById('ageInput').value);
+      let result = document.getElementById('result');
+
+      if (isNaN(age)) {
+        result.innerHTML = "⚠️ Please ek number dalo!";
+        result.style.color = "#f7df1e";
+      } else if (age < 0) {
+        result.innerHTML = "❌ Age negative nahi ho sakti!";
+        result.style.color = "#ff5f56";
+      } else if (age < 18) {
+        result.innerHTML = "🧒 Tum " + age + " saal ke ho — Minor!";
+        result.style.color = "#00d4ff";
+      } else if (age < 60) {
+        result.innerHTML = "✅ Tum " + age + " saal ke ho — Adult!";
+        result.style.color = "#00ff88";
+      } else {
+        result.innerHTML = "👴 Tum " + age + " saal ke ho — Senior!";
+        result.style.color = "#a855f7";
+      }
+    }
+  </script>
+</body>
+</html></textarea>
+          </div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== LOOPS ===== -->
+    <div class="tut-section fade-in" id="loops">
+      <h2>Loops — Baar Baar Karo</h2>
+      <p>Loops se ek kaam baar baar karte hain bina code repeat kiye.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>javascript — Loops</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="cmt">// For loop - fixed times</span>
+<span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i &lt; <span class="num">5</span>; i++) {
+  <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"Count: "</span> + i);
+}
+<span class="cmt">// Output: 0, 1, 2, 3, 4</span>
+
+<span class="cmt">// While loop - jab tak condition true</span>
+<span class="kw">let</span> count = <span class="num">0</span>;
+<span class="kw">while</span> (count &lt; <span class="num">3</span>) {
+  <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"Hello #"</span> + count);
+  count++;
+}
+
+<span class="cmt">// Do...While - ek baar toh chalega hi</span>
+<span class="kw">let</span> num = <span class="num">10</span>;
+<span class="kw">do</span> {
+  <span class="fn">console</span>.<span class="fn">log</span>(num);  <span class="cmt">// 10 print hoga, phir condition check</span>
+  num++;
+} <span class="kw">while</span> (num &lt; <span class="num">10</span>);
+
+<span class="cmt">// Array ke sath loops</span>
+<span class="kw">let</span> fruits = [<span class="str">"Apple"</span>, <span class="str">"Mango"</span>, <span class="str">"Banana"</span>];
+
+<span class="cmt">// forEach - har item pe function chalao</span>
+fruits.<span class="fn">forEach</span>((fruit, index) => {
+  <span class="fn">console</span>.<span class="fn">log</span>(index, fruit);
+});
+
+<span class="cmt">// for...of - clean syntax</span>
+<span class="kw">for</span> (<span class="kw">let</span> fruit <span class="kw">of</span> fruits) {
+  <span class="fn">console</span>.<span class="fn">log</span>(fruit);
+}
+
+<span class="cmt">// for...in - object keys ke liye</span>
+<span class="kw">let</span> user = { name: <span class="str">"Rahul"</span>, age: <span class="num">25</span> };
+<span class="kw">for</span> (<span class="kw">let</span> key <span class="kw">in</span> user) {
+  <span class="fn">console</span>.<span class="fn">log</span>(key + <span class="str">": "</span> + user[key]);
+}
+
+<span class="cmt">// break - loop se baahar niklo</span>
+<span class="cmt">// continue - is iteration skip karo</span>
+<span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i &lt; <span class="num">10</span>; i++) {
+  <span class="kw">if</span> (i === <span class="num">5</span>) <span class="kw">break</span>;      <span class="cmt">// 5 pe rok do</span>
+  <span class="kw">if</span> (i % <span class="num">2</span> === <span class="num">0</span>) <span class="kw">continue</span>; <span class="cmt">// even skip</span>
+  <span class="fn">console</span>.<span class="fn">log</span>(i);           <span class="cmt">// 1, 3</span>
+}</pre>
+      </div>
+    </div>
+
+    <!-- ===== FUNCTIONS ===== -->
+    <div class="tut-section fade-in" id="functions">
+      <h2>Functions — Reusable Code Blocks</h2>
+      <p>Functions ek kaam ko baar baar karne ka tarika hai — ek baar likho, hazaar baar use karo!</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>javascript — Functions</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="cmt">// 1. Function Declaration</span>
+<span class="kw">function</span> <span class="fn">greet</span>(naam) {
+  <span class="kw">return</span> <span class="str">`Namaste, ${naam}! 👋`</span>;
+}
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="fn">greet</span>(<span class="str">"Rahul"</span>)); <span class="cmt">// Namaste, Rahul! 👋</span>
+
+<span class="cmt">// 2. Function Expression</span>
+<span class="kw">let</span> add = <span class="kw">function</span>(a, b) {
+  <span class="kw">return</span> a + b;
+};
+
+<span class="cmt">// 3. Arrow Function (ES6) — modern & short</span>
+<span class="kw">let</span> multiply = (a, b) => a * b;  <span class="cmt">// one-liner</span>
+<span class="kw">let</span> square   = n => n * n;        <span class="cmt">// ek param, bracket optional</span>
+<span class="kw">let</span> sayHi    = () => <span class="str">"Hi! 👋"</span>;   <span class="cmt">// koi param nahi</span>
+
+<span class="cmt">// 4. Default Parameters</span>
+<span class="kw">function</span> <span class="fn">power</span>(base, exp = <span class="num">2</span>) {
+  <span class="kw">return</span> base ** exp;
+}
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="fn">power</span>(<span class="num">3</span>));    <span class="cmt">// 9 (exp=2 default)</span>
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="fn">power</span>(<span class="num">3</span>, <span class="num">3</span>)); <span class="cmt">// 27</span>
+
+<span class="cmt">// 5. Rest Parameters (...args)</span>
+<span class="kw">function</span> <span class="fn">sum</span>(...nums) {
+  <span class="kw">return</span> nums.<span class="fn">reduce</span>((total, n) => total + n, <span class="num">0</span>);
+}
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="fn">sum</span>(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>)); <span class="cmt">// 10</span>
+
+<span class="cmt">// 6. Higher Order Functions</span>
+<span class="kw">let</span> nums = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>];
+<span class="kw">let</span> doubled  = nums.<span class="fn">map</span>(n => n * <span class="num">2</span>);      <span class="cmt">// [2,4,6,8,10]</span>
+<span class="kw">let</span> evens    = nums.<span class="fn">filter</span>(n => n % <span class="num">2</span> === <span class="num">0</span>); <span class="cmt">// [2,4]</span>
+<span class="kw">let</span> total    = nums.<span class="fn">reduce</span>((s, n) => s + n, <span class="num">0</span>); <span class="cmt">// 15</span>
+
+<span class="cmt">// 7. Closure — function ke andar function</span>
+<span class="kw">function</span> <span class="fn">counter</span>() {
+  <span class="kw">let</span> count = <span class="num">0</span>;
+  <span class="kw">return</span> () => ++count;  <span class="cmt">// inner function count access kar sakti hai</span>
+}
+<span class="kw">let</span> inc = <span class="fn">counter</span>();
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="fn">inc</span>()); <span class="cmt">// 1</span>
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="fn">inc</span>()); <span class="cmt">// 2</span></pre>
+      </div>
+
+      <div class="try-it-box">
+        <div class="try-it-header">
+          <span><i class="fas fa-code"></i> Functions Try Karo!</span>
+          <button class="try-it-run"><i class="fas fa-play"></i> Run</button>
+        </div>
+        <div class="try-it-grid">
+          <div class="try-it-code">
+            <textarea spellcheck="false"><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { background:#0a0e1a; color:#e2e8f0; font-family:sans-serif; padding:16px; }
+    .row { display:flex; gap:8px; margin:8px 0; align-items:center; flex-wrap:wrap; }
+    input {
+      background:#0f1526; color:#e2e8f0;
+      border:1px solid #264de4; border-radius:6px;
+      padding:8px; font-size:0.9rem; width:70px;
+    }
+    button {
+      background:#264de4; color:white; border:none;
+      padding:8px 14px; border-radius:6px;
+      cursor:pointer; font-size:0.85rem;
+    }
+    button:hover { background:#3b5bdb; }
+    .result {
+      background:#0f1526; border:1px solid #1e2d4a;
+      border-radius:8px; padding:10px 14px;
+      font-family:monospace; font-size:0.85rem;
+      color:#00ff88; margin-top:10px; min-height:36px;
+    }
+  </style>
+</head>
+<body>
+  <h4 style="color:#f7df1e; margin:0 0 12px">🔧 Function Calculator</h4>
+  <div class="row">
+    <input type="number" id="n1" value="5" />
+    <input type="number" id="n2" value="3" />
+    <button onclick="calc('add')">Add</button>
+    <button onclick="calc('mul')">Multiply</button>
+    <button onclick="calc('pow')">Power</button>
+  </div>
+  <div class="row">
+    <input type="number" id="sqn" value="9" />
+    <button onclick="showSquare()">Square</button>
+    <button onclick="showMap()">Map ×2</button>
+    <button onclick="showFilter()">Filter Even</button>
+  </div>
+  <div class="result" id="result">Oopar koi button click karo...</div>
+
+  <script>
+    let add = (a, b) => a + b;
+    let multiply = (a, b) => a * b;
+    let power = (base, exp = 2) => base ** exp;
+    let square = n => n * n;
+
+    function calc(op) {
+      let a = +document.getElementById('n1').value;
+      let b = +document.getElementById('n2').value;
+      let r = op==='add' ? add(a,b) : op==='mul' ? multiply(a,b) : power(a,b);
+      document.getElementById('result').textContent =
+        `${op}(${a}, ${b}) = ${r}`;
+    }
+    function showSquare() {
+      let n = +document.getElementById('sqn').value;
+      document.getElementById('result').textContent = `square(${n}) = ${square(n)}`;
+    }
+    function showMap() {
+      let arr = [1,2,3,4,5];
+      let r = arr.map(n => n*2);
+      document.getElementById('result').textContent = `[${arr}].map(×2) = [${r}]`;
+    }
+    function showFilter() {
+      let arr = [1,2,3,4,5,6,7,8];
+      let r = arr.filter(n => n%2===0);
+      document.getElementById('result').textContent = `[${arr}].filter(even) = [${r}]`;
+    }
+  </script>
+</body>
+</html></textarea>
+          </div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== ARRAYS ===== -->
+    <div class="tut-section fade-in" id="arrays">
+      <h2>Arrays — Data ki List</h2>
+      <p>Array ordered list hoti hai. Square brackets <code>[]</code> mein values hoti hain. Index 0 se shuru hota hai.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>javascript — Arrays</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="cmt">// Array banana</span>
+<span class="kw">let</span> fruits = [<span class="str">"Mango"</span>, <span class="str">"Apple"</span>, <span class="str">"Banana"</span>];
+
+<span class="cmt">// Access karo (index 0 se shuru)</span>
+<span class="fn">console</span>.<span class="fn">log</span>(fruits[<span class="num">0</span>]);     <span class="cmt">// "Mango"</span>
+<span class="fn">console</span>.<span class="fn">log</span>(fruits.<span class="at">length</span>); <span class="cmt">// 3</span>
+
+<span class="cmt">// CRUD Operations</span>
+fruits.<span class="fn">push</span>(<span class="str">"Orange"</span>);      <span class="cmt">// End mein add karo   → [Mango,Apple,Banana,Orange]</span>
+fruits.<span class="fn">pop</span>();               <span class="cmt">// End se hatao       → [Mango,Apple,Banana]</span>
+fruits.<span class="fn">unshift</span>(<span class="str">"Grapes"</span>);  <span class="cmt">// Start mein add     → [Grapes,Mango,Apple,Banana]</span>
+fruits.<span class="fn">shift</span>();             <span class="cmt">// Start se hatao     → [Mango,Apple,Banana]</span>
+
+<span class="cmt">// Kya hai andar?</span>
+<span class="fn">console</span>.<span class="fn">log</span>(fruits.<span class="fn">includes</span>(<span class="str">"Mango"</span>));  <span class="cmt">// true</span>
+<span class="fn">console</span>.<span class="fn">log</span>(fruits.<span class="fn">indexOf</span>(<span class="str">"Apple"</span>));   <span class="cmt">// 1</span>
+
+<span class="cmt">// Useful Array Methods</span>
+<span class="kw">let</span> nums = [<span class="num">3</span>, <span class="num">1</span>, <span class="num">4</span>, <span class="num">1</span>, <span class="num">5</span>, <span class="num">9</span>, <span class="num">2</span>];
+nums.<span class="fn">sort</span>((a, b) => a - b);          <span class="cmt">// [1,1,2,3,4,5,9]</span>
+nums.<span class="fn">reverse</span>();                       <span class="cmt">// ulta</span>
+<span class="kw">let</span> sliced = nums.<span class="fn">slice</span>(<span class="num">1</span>, <span class="num">4</span>);      <span class="cmt">// index 1 to 3 copy</span>
+<span class="kw">let</span> joined = fruits.<span class="fn">join</span>(<span class="str">" | "</span>);    <span class="cmt">// "Mango | Apple | Banana"</span>
+
+<span class="cmt">// Functional Methods</span>
+<span class="kw">let</span> doubled = nums.<span class="fn">map</span>(n => n * <span class="num">2</span>);
+<span class="kw">let</span> big     = nums.<span class="fn">filter</span>(n => n > <span class="num">3</span>);
+<span class="kw">let</span> sum     = nums.<span class="fn">reduce</span>((acc, n) => acc + n, <span class="num">0</span>);
+<span class="kw">let</span> found   = nums.<span class="fn">find</span>(n => n > <span class="num">4</span>);  <span class="cmt">// pehla match</span>
+<span class="kw">let</span> allBig  = nums.<span class="fn">every</span>(n => n > <span class="num">0</span>); <span class="cmt">// sab true?</span>
+<span class="kw">let</span> anyBig  = nums.<span class="fn">some</span>(n => n > <span class="num">8</span>);  <span class="cmt">// koi ek true?</span>
+
+<span class="cmt">// Spread — array copy/merge</span>
+<span class="kw">let</span> a = [<span class="num">1</span>, <span class="num">2</span>], b = [<span class="num">3</span>, <span class="num">4</span>];
+<span class="kw">let</span> merged = [...a, ...b]; <span class="cmt">// [1,2,3,4]</span></pre>
+      </div>
+
+      <div class="try-it-box">
+        <div class="try-it-header">
+          <span><i class="fas fa-code"></i> Arrays Try Karo!</span>
+          <button class="try-it-run"><i class="fas fa-play"></i> Run</button>
+        </div>
+        <div class="try-it-grid">
+          <div class="try-it-code">
+            <textarea spellcheck="false"><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { background:#0a0e1a; color:#e2e8f0;
+           font-family:sans-serif; padding:16px; }
+    .btns { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; }
+    button {
+      border:none; padding:7px 12px; border-radius:6px;
+      cursor:pointer; font-size:0.8rem; font-weight:bold;
+    }
+    .list {
+      display:flex; flex-wrap:wrap; gap:8px;
+      padding:12px; background:#0f1526;
+      border:1px solid #1e2d4a; border-radius:8px;
+      min-height:40px;
+    }
+    .item {
+      background:rgba(38,77,228,0.25); border:1px solid #264de4;
+      color:#6b8fff; padding:5px 12px; border-radius:20px;
+      font-size:0.85rem;
+    }
+    .log {
+      margin-top:10px; color:#94a3b8;
+      font-family:monospace; font-size:0.8rem;
+    }
+    input {
+      background:#0f1526; color:#e2e8f0; border:1px solid #264de4;
+      border-radius:6px; padding:7px 10px; font-size:0.85rem; width:120px;
+    }
+  </style>
+</head>
+<body>
+  <div class="btns">
+    <input id="inp" placeholder="koi naam..." />
+    <button onclick="pushItem()" style="background:#00ff88;color:#0a0e1a">Push</button>
+    <button onclick="popItem()"  style="background:#ff5f56;color:white">Pop</button>
+    <button onclick="sortArr()"  style="background:#a855f7;color:white">Sort</button>
+    <button onclick="filterLong()" style="background:#f7df1e;color:#0a0e1a">Filter (>4 chars)</button>
+    <button onclick="mapUpper()" style="background:#00d4ff;color:#0a0e1a">Map UPPER</button>
+  </div>
+  <div class="list" id="list"></div>
+  <div class="log" id="log"></div>
+
+  <script>
+    let arr = ["Mango","Apple","Banana","Kiwi","Fig"];
+    function render(msg='') {
+      document.getElementById('list').innerHTML =
+        arr.map(x=>`<span class="item">${x}</span>`).join('');
+      document.getElementById('log').textContent =
+        `length: ${arr.length}${msg ? ' | '+msg : ''}`;
+    }
+    function pushItem() {
+      let v = document.getElementById('inp').value.trim();
+      if(v) { arr.push(v); render(`pushed "${v}"`); }
+    }
+    function popItem()  { let r=arr.pop(); render(`popped "${r}"`); }
+    function sortArr()  { arr.sort(); render('sorted'); }
+    function filterLong(){ arr=arr.filter(x=>x.length>4); render('filtered (>4 chars)'); }
+    function mapUpper() { arr=arr.map(x=>x.toUpperCase()); render('mapped to uppercase'); }
+    render();
+  </script>
+</body>
+</html></textarea>
+          </div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== OBJECTS ===== -->
+    <div class="tut-section fade-in" id="objects">
+      <h2>Objects — Real-World Data Model</h2>
+      <p>Object mein related data ek jagah store karte hain — key-value pairs ke roop mein. JS mein almost sab kuch object hai!</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>javascript — Objects</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="cmt">// Object banana</span>
+<span class="kw">let</span> person = {
+  naam:    <span class="str">"Rahul"</span>,
+  age:     <span class="num">25</span>,
+  city:    <span class="str">"Delhi"</span>,
+  isActive: <span class="kw">true</span>,
+  skills:  [<span class="str">"HTML"</span>, <span class="str">"CSS"</span>, <span class="str">"JS"</span>],  <span class="cmt">// array andar bhi</span>
+
+  <span class="cmt">// Method — object ke andar function</span>
+  <span class="fn">greet</span>() {
+    <span class="kw">return</span> <span class="str">`Hi, main ${this.naam} hoon!`</span>;
+  }
+};
+
+<span class="cmt">// Access karna — 2 tarike</span>
+<span class="fn">console</span>.<span class="fn">log</span>(person.naam);         <span class="cmt">// Dot notation</span>
+<span class="fn">console</span>.<span class="fn">log</span>(person[<span class="str">"age"</span>]);       <span class="cmt">// Bracket notation</span>
+<span class="fn">console</span>.<span class="fn">log</span>(person.<span class="fn">greet</span>());      <span class="cmt">// Method call</span>
+<span class="fn">console</span>.<span class="fn">log</span>(person.skills[<span class="num">0</span>]);   <span class="cmt">// "HTML"</span>
+
+<span class="cmt">// Add / Update / Delete</span>
+person.email  = <span class="str">"rahul@email.com"</span>;  <span class="cmt">// add new key</span>
+person.age    = <span class="num">26</span>;                   <span class="cmt">// update</span>
+<span class="kw">delete</span> person.isActive;               <span class="cmt">// delete key</span>
+
+<span class="cmt">// Object Methods</span>
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="fn">Object</span>.<span class="fn">keys</span>(person));   <span class="cmt">// ["naam","age","city",...]</span>
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="fn">Object</span>.<span class="fn">values</span>(person)); <span class="cmt">// ["Rahul",26,"Delhi",...]</span>
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="fn">Object</span>.<span class="fn">entries</span>(person));<span class="cmt">// [["naam","Rahul"],...]</span>
+
+<span class="cmt">// Destructuring</span>
+<span class="kw">let</span> { naam, age, city = <span class="str">"Mumbai"</span> } = person;
+
+<span class="cmt">// Object Spread — copy/merge</span>
+<span class="kw">let</span> updated = { ...person, age: <span class="num">27</span>, country: <span class="str">"India"</span> };
+
+<span class="cmt">// Array of Objects (common pattern)</span>
+<span class="kw">let</span> users = [
+  { id: <span class="num">1</span>, naam: <span class="str">"Rahul"</span>, role: <span class="str">"admin"</span> },
+  { id: <span class="num">2</span>, naam: <span class="str">"Priya"</span>, role: <span class="str">"user"</span>  },
+];
+<span class="kw">let</span> admins = users.<span class="fn">filter</span>(u => u.role === <span class="str">"admin"</span>);</pre>
+      </div>
+
+      <div class="try-it-box">
+        <div class="try-it-header">
+          <span><i class="fas fa-code"></i> Objects Try Karo!</span>
+          <button class="try-it-run"><i class="fas fa-play"></i> Run</button>
+        </div>
+        <div class="try-it-grid">
+          <div class="try-it-code">
+            <textarea spellcheck="false"><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { background:#0a0e1a; color:#e2e8f0;
+           font-family:sans-serif; padding:16px; margin:0; }
+    .card {
+      background:#0f1526; border:1px solid #1e2d4a;
+      border-radius:12px; padding:16px; margin-bottom:12px;
+    }
+    .card h3 { margin:0 0 10px; color:#6b8fff; font-size:0.9rem; }
+    .row { display:flex; justify-content:space-between;
+           padding:5px 0; border-bottom:1px solid #1e2d4a;
+           font-size:0.85rem; }
+    .row:last-child { border:none; }
+    .key { color:#94a3b8; }
+    .val { color:#00d4ff; font-family:monospace; }
+    .badge {
+      display:inline-block; background:rgba(38,77,228,0.3);
+      color:#6b8fff; padding:2px 8px; border-radius:20px;
+      font-size:0.75rem; margin:2px;
+    }
+    button {
+      background:#264de4; color:white; border:none;
+      padding:8px 14px; border-radius:6px;
+      cursor:pointer; margin:4px; font-size:0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <div id="output"></div>
+  <button onclick="showKeys()">Keys</button>
+  <button onclick="showVals()">Values</button>
+  <button onclick="addProp()">Email Add</button>
+  <div id="extra" style="margin-top:8px;font-family:monospace;font-size:0.8rem;color:#00ff88;"></div>
+
+  <script>
+    let person = {
+      naam: "Rahul Sharma",
+      age: 25,
+      city: "Delhi",
+      skills: ["HTML","CSS","JavaScript"],
+      greet() { return `Hi, main ${this.naam} hoon!`; }
+    };
+
+    function render(obj) {
+      let skip = ['greet'];
+      let html = `<div class="card">
+        <h3>👤 ${obj.greet ? obj.greet() : 'Person Object'}</h3>`;
+      for(let [k,v] of Object.entries(obj)) {
+        if(skip.includes(k)) continue;
+        let display = Array.isArray(v)
+          ? v.map(x=>`<span class="badge">${x}</span>`).join('')
+          : `<span class="val">${JSON.stringify(v)}</span>`;
+        html += `<div class="row"><span class="key">${k}</span><span>${display}</span></div>`;
+      }
+      html += '</div>';
+      document.getElementById('output').innerHTML = html;
+    }
+
+    function showKeys() {
+      document.getElementById('extra').textContent =
+        'Keys: ' + Object.keys(person).join(', ');
+    }
+    function showVals() {
+      document.getElementById('extra').textContent =
+        'Values count: ' + Object.values(person).length;
+    }
+    function addProp() {
+      person.email = "rahul@codemaster.in";
+      render(person);
+      document.getElementById('extra').textContent = 'email property add ki!';
+    }
+
+    render(person);
+  </script>
+</body>
+</html></textarea>
+          </div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== DOM ===== -->
+    <div class="tut-section fade-in" id="dom">
+      <h2>DOM Manipulation — HTML Badlo JS Se</h2>
+      <p>DOM (Document Object Model) se JS HTML elements ko read, change, add, remove kar sakti hai.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>javascript — DOM Methods</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="cmt">// Element select karo</span>
+<span class="kw">let</span> el  = <span class="kw">document</span>.<span class="fn">getElementById</span>(<span class="str">"myId"</span>);
+<span class="kw">let</span> el2 = <span class="kw">document</span>.<span class="fn">querySelector</span>(<span class="str">".myClass"</span>);    <span class="cmt">// pehla match</span>
+<span class="kw">let</span> all = <span class="kw">document</span>.<span class="fn">querySelectorAll</span>(<span class="str">"p"</span>);       <span class="cmt">// sare &lt;p&gt;</span>
+
+<span class="cmt">// Content change karo</span>
+el.<span class="at">innerHTML</span>   = <span class="str">"&lt;strong&gt;Bold Text&lt;/strong&gt;"</span>;  <span class="cmt">// HTML parse karega</span>
+el.<span class="at">textContent</span> = <span class="str">"Plain text"</span>;                  <span class="cmt">// sirf text (safer)</span>
+
+<span class="cmt">// Style change karo</span>
+el.<span class="at">style</span>.<span class="at">color</span>      = <span class="str">"#264de4"</span>;
+el.<span class="at">style</span>.<span class="at">background</span> = <span class="str">"#0f1526"</span>;
+
+<span class="cmt">// Class manage karo</span>
+el.<span class="at">classList</span>.<span class="fn">add</span>(<span class="str">"active"</span>);
+el.<span class="at">classList</span>.<span class="fn">remove</span>(<span class="str">"hidden"</span>);
+el.<span class="at">classList</span>.<span class="fn">toggle</span>(<span class="str">"dark"</span>);       <span class="cmt">// add/remove alternate</span>
+el.<span class="at">classList</span>.<span class="fn">contains</span>(<span class="str">"active"</span>);   <span class="cmt">// true/false</span>
+
+<span class="cmt">// Attributes</span>
+el.<span class="fn">setAttribute</span>(<span class="str">"href"</span>, <span class="str">"#new"</span>);
+el.<span class="fn">getAttribute</span>(<span class="str">"class"</span>);
+el.<span class="fn">removeAttribute</span>(<span class="str">"disabled"</span>);
+
+<span class="cmt">// Naya element banao</span>
+<span class="kw">let</span> div = <span class="kw">document</span>.<span class="fn">createElement</span>(<span class="str">"div"</span>);
+div.<span class="at">textContent</span> = <span class="str">"Naya element!"</span>;
+div.<span class="at">classList</span>.<span class="fn">add</span>(<span class="str">"card"</span>);
+<span class="kw">document</span>.<span class="at">body</span>.<span class="fn">appendChild</span>(div);   <span class="cmt">// DOM mein add karo</span>
+el.<span class="fn">remove</span>();                        <span class="cmt">// DOM se hatao</span></pre>
+      </div>
+
+      <div class="try-it-box">
+        <div class="try-it-header">
+          <span><i class="fas fa-code"></i> DOM Try Karo!</span>
+          <button class="try-it-run"><i class="fas fa-play"></i> Run</button>
+        </div>
+        <div class="try-it-grid">
+          <div class="try-it-code">
+            <textarea spellcheck="false"><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { background:#0a0e1a; color:#e2e8f0;
+           font-family:sans-serif; padding:20px; }
+    #box {
+      width:100px; height:100px;
+      background:#264de4;
+      border-radius:8px;
+      margin:20px auto;
+      transition: all 0.3s;
+    }
+    button {
+      display:block; margin:8px auto;
+      padding:10px 20px;
+      border:none; border-radius:8px;
+      cursor:pointer; font-weight:bold;
+    }
+    #counter { text-align:center; font-size:2rem; color:#f7df1e; }
+  </style>
+</head>
+<body>
+  <div id="counter">0</div>
+  <div id="box"></div>
+  <button onclick="changeColor()"
+    style="background:#00d4ff; color:#0a0e1a">
+    🎨 Color Badlo
+  </button>
+  <button onclick="addCount()"
+    style="background:#00ff88; color:#0a0e1a">
+    ➕ Count Badhao
+  </button>
+  <button onclick="changeSize()"
+    style="background:#a855f7; color:white">
+    📏 Size Badlo
+  </button>
+
+  <script>
+    let count = 0;
+    // ✅ SAHI — 'color' → 'colors' karo
+let color = ['#264de4','#00d4ff','#00ff88','#a855f7','#f7df1e','#e44d26'];
+    // let colorIdx = 0, big = false;
+
+    function addCount() {
+      count++;
+      document.getElementById('counter').textContent = count;
+    }
+
+    function changeSize() {
+      let box = document.getElementById('box');
+      big = !big;
+      box.style.width = big ? '160px' : '100px';
+      box.style.height = big ? '160px' : '100px';
+    }
+  </script>
+</body>
+</html></textarea>
+          </div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== EVENTS ===== -->
+    <div class="tut-section fade-in" id="events">
+      <h2>Events — User Actions Handle Karo</h2>
+      <p>Events tab fire hote hain jab user kuch karta hai — click, keypress, scroll, form submit, etc. <code>addEventListener</code> se handle karte hain.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>javascript — Events</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="cmt">// addEventListener — recommended tarika</span>
+<span class="kw">let</span> btn = <span class="kw">document</span>.<span class="fn">getElementById</span>(<span class="str">"myBtn"</span>);
+btn.<span class="fn">addEventListener</span>(<span class="str">"click"</span>, (event) => {
+  <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"Button click hua!"</span>, event);
+});
+
+<span class="cmt">// Common Event Types</span>
+el.<span class="fn">addEventListener</span>(<span class="str">"click"</span>,      handler); <span class="cmt">// click</span>
+el.<span class="fn">addEventListener</span>(<span class="str">"dblclick"</span>,   handler); <span class="cmt">// double click</span>
+el.<span class="fn">addEventListener</span>(<span class="str">"mouseover"</span>,  handler); <span class="cmt">// hover start</span>
+el.<span class="fn">addEventListener</span>(<span class="str">"mouseout"</span>,   handler); <span class="cmt">// hover end</span>
+el.<span class="fn">addEventListener</span>(<span class="str">"keydown"</span>,    handler); <span class="cmt">// key dabao</span>
+el.<span class="fn">addEventListener</span>(<span class="str">"keyup"</span>,      handler); <span class="cmt">// key choro</span>
+el.<span class="fn">addEventListener</span>(<span class="str">"input"</span>,      handler); <span class="cmt">// input change</span>
+el.<span class="fn">addEventListener</span>(<span class="str">"submit"</span>,     handler); <span class="cmt">// form submit</span>
+el.<span class="fn">addEventListener</span>(<span class="str">"scroll"</span>,     handler); <span class="cmt">// scroll</span>
+el.<span class="fn">addEventListener</span>(<span class="str">"load"</span>,       handler); <span class="cmt">// page load</span>
+
+<span class="cmt">// Event Object properties</span>
+el.<span class="fn">addEventListener</span>(<span class="str">"click"</span>, (e) => {
+  <span class="fn">console</span>.<span class="fn">log</span>(e.<span class="at">target</span>);      <span class="cmt">// kaunsa element click hua</span>
+  <span class="fn">console</span>.<span class="fn">log</span>(e.<span class="at">clientX</span>, e.<span class="at">clientY</span>); <span class="cmt">// mouse position</span>
+  e.<span class="fn">preventDefault</span>();          <span class="cmt">// default action rok do (form reload, etc)</span>
+  e.<span class="fn">stopPropagation</span>();          <span class="cmt">// bubble mat karo</span>
+});
+
+<span class="cmt">// Keyboard events</span>
+<span class="kw">document</span>.<span class="fn">addEventListener</span>(<span class="str">"keydown"</span>, (e) => {
+  <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"Key:"</span>, e.<span class="at">key</span>, <span class="str">"Code:"</span>, e.<span class="at">code</span>);
+  <span class="kw">if</span> (e.<span class="at">key</span> === <span class="str">"Enter"</span>) <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"Enter dabaya!"</span>);
+});
+
+<span class="cmt">// Event Delegation — ek parent pe sab children handle karo</span>
+<span class="kw">document</span>.<span class="fn">getElementById</span>(<span class="str">"list"</span>).<span class="fn">addEventListener</span>(<span class="str">"click"</span>, (e) => {
+  <span class="kw">if</span> (e.<span class="at">target</span>.<span class="at">tagName</span> === <span class="str">"LI"</span>) {
+    e.<span class="at">target</span>.<span class="at">classList</span>.<span class="fn">toggle</span>(<span class="str">"selected"</span>);
+  }
+});</pre>
+      </div>
+
+      <div class="try-it-box">
+        <div class="try-it-header">
+          <span><i class="fas fa-code"></i> Events Try Karo!</span>
+          <button class="try-it-run"><i class="fas fa-play"></i> Run</button>
+        </div>
+        <div class="try-it-grid">
+          <div class="try-it-code">
+            <textarea spellcheck="false"><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { background:#0a0e1a; color:#e2e8f0;
+           font-family:sans-serif; padding:16px; }
+    #canvas-area {
+      width:100%; height:120px;
+      background:#0f1526; border:2px dashed #264de4;
+      border-radius:10px; display:flex;
+      align-items:center; justify-content:center;
+      color:#94a3b8; font-size:0.85rem; cursor:crosshair;
+      position:relative; overflow:hidden;
+    }
+    .dot {
+      position:absolute; width:12px; height:12px;
+      border-radius:50%; transform:translate(-50%,-50%);
+      pointer-events:none; animation: pop 0.3s ease;
+    }
+    @keyframes pop { from{transform:translate(-50%,-50%) scale(0)} to{transform:translate(-50%,-50%) scale(1)} }
+    #key-log {
+      background:#0f1526; border:1px solid #1e2d4a;
+      border-radius:8px; padding:10px; min-height:36px;
+      font-family:monospace; font-size:0.85rem;
+      color:#f7df1e; margin-top:10px;
+    }
+    input {
+      background:#0f1526; color:#e2e8f0;
+      border:1px solid #264de4; border-radius:6px;
+      padding:8px; font-size:0.9rem; width:100%;
+      margin-top:8px;
+    }
+  </style>
+</head>
+<body>
+  <p style="color:#94a3b8;font-size:0.8rem;margin:0 0 8px">🖱️ Neeche click karo — dots aayenge!</p>
+  <div id="canvas-area">Click karo yahan!</div>
+
+  <input id="kinput" placeholder="⌨️ Kuch type karo — key log dekhna...">
+  <div id="key-log">Key log yahan aayega...</div>
+
+  <script>
+    let colors = ['#264de4','#00d4ff','#00ff88','#a855f7','#f7df1e','#e44d26'];
+    let ci = 0;
+    let area = document.getElementById('canvas-area');
+    area.addEventListener('click', e => {
+      let rect = area.getBoundingClientRect();
+      let dot = document.createElement('div');
+      dot.className = 'dot';
+      dot.style.background = colors[ci++ % colors.length];
+      dot.style.left = (e.clientX - rect.left) + 'px';
+      dot.style.top  = (e.clientY - rect.top) + 'px';
+      area.querySelector('span,p') && (area.textContent='');
+      area.appendChild(dot);
+    });
+
+    document.getElementById('kinput').addEventListener('keydown', e => {
+      document.getElementById('key-log').textContent =
+        `key: "${e.key}"  code: "${e.code}"  shift: ${e.shiftKey}`;
+    });
+  </script>
+</body>
+</html></textarea>
+          </div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== ES6+ ===== -->
+    <div class="tut-section fade-in" id="es6">
+      <h2>ES6+ Features — Modern JavaScript</h2>
+      <p>ES6 (2015) ke baad JS mein bahut saari cool features aayi hain. Inhe zaroor seekho!</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>javascript — ES6+ Features</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="cmt">// 1. Arrow Functions</span>
+<span class="kw">let</span> add = (a, b) => a + b;
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="fn">add</span>(<span class="num">5</span>, <span class="num">3</span>));  <span class="cmt">// 8</span>
+
+<span class="cmt">// 2. Template Literals</span>
+<span class="kw">let</span> name = <span class="str">"Rahul"</span>;
+<span class="kw">let</span> msg = <span class="str">`Hello, ${name}! Aaj ${new Date().getFullYear()} hai.`</span>;
+
+<span class="cmt">// 3. Destructuring</span>
+<span class="kw">let</span> [first, second, ...rest] = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>];
+<span class="kw">let</span> { naam: n, age: a } = { naam: <span class="str">"Priya"</span>, age: <span class="num">22</span> };
+
+<span class="cmt">// 4. Spread Operator</span>
+<span class="kw">let</span> arr1 = [<span class="num">1</span>, <span class="num">2</span>];
+<span class="kw">let</span> arr2 = [<span class="num">3</span>, <span class="num">4</span>];
+<span class="kw">let</span> combined = [...arr1, ...arr2];  <span class="cmt">// [1,2,3,4]</span>
+
+<span class="cmt">// 5. Optional Chaining</span>
+<span class="kw">let</span> user = { profile: { avatar: <span class="str">"pic.jpg"</span> } };
+<span class="kw">let</span> avatar = user?.profile?.avatar;  <span class="cmt">// Safe access</span>
+
+<span class="cmt">// 6. Nullish Coalescing</span>
+<span class="kw">let</span> displayName = user?.name ?? <span class="str">"Guest"</span>;
+
+<span class="cmt">// 7. Classes</span>
+<span class="kw">class</span> <span class="fn">Animal</span> {
+  <span class="fn">letructor</span>(name) {
+    <span class="kw">this</span>.name = name;
+  }
+  <span class="fn">speak</span>() {
+    <span class="kw">return</span> <span class="str">`${this.name} bolata hai!`</span>;
+  }
+}
+<span class="kw">class</span> <span class="fn">Dog</span> <span class="kw">extends</span> <span class="fn">Animal</span> {
+  <span class="fn">speak</span>() { <span class="kw">return</span> <span class="str">`${this.name}: Woof! 🐕`</span>; }
+}
+<span class="kw">let</span> dog = <span class="kw">new</span> <span class="fn">Dog</span>(<span class="str">"Tommy"</span>);
+<span class="fn">console</span>.<span class="fn">log</span>(dog.<span class="fn">speak</span>());  <span class="cmt">// Tommy: Woof! 🐕</span>
+
+<span class="cmt">// 8. Modules (import/export)</span>
+<span class="cmt">// math.js: export let pi = 3.14;</span>
+<span class="cmt">// main.js: import { pi } from './math.js';</span>
+
+<span class="cmt">// 9. Promise</span>
+<span class="kw">let</span> promise = <span class="kw">new</span> <span class="fn">Promise</span>((resolve, reject) => {
+  setTimeout(() => resolve(<span class="str">"Data aaya! ✅"</span>), <span class="num">1000</span>);
+});
+promise.<span class="fn">then</span>(data => <span class="fn">console</span>.<span class="fn">log</span>(data));</pre>
+      </div>
+    </div>
+
+    <!-- ===== ASYNC/AWAIT ===== -->
+    <div class="tut-section fade-in" id="async">
+      <h2>Async/Await — Asynchronous Code</h2>
+      <p>JavaScript single-threaded hai lekin async code se network requests, timers, etc. ko non-blocking tarike se handle karta hai.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>javascript — Async/Await</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="cmt">// Async function - await ke liye zaruri</span>
+<span class="kw">async function</span> <span class="fn">getData</span>() {
+  <span class="kw">try</span> {
+    <span class="cmt">// await lagaao — result aane tak ruko</span>
+    <span class="kw">let</span> response = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">'https://api.example.com/data'</span>);
+
+    <span class="cmt">// Response ko JSON mein convert karo</span>
+    <span class="kw">let</span> data = <span class="kw">await</span> response.<span class="fn">json</span>();
+
+    <span class="fn">console</span>.<span class="fn">log</span>(data);
+
+  } <span class="kw">catch</span> (error) {
+    <span class="fn">console</span>.<span class="fn">error</span>(<span class="str">'Error:'</span>, error);
+  } <span class="kw">finally</span> {
+    <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">'Done!'</span>); <span class="cmt">// hamesha chalega</span>
+  }
+}
+<span class="fn">getData</span>();
+
+<span class="cmt">// setTimeout — delay ke baad kaam karo</span>
+<span class="fn">setTimeout</span>(() => {
+  <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"2 second baad!"</span>);
+}, <span class="num">2000</span>);
+
+<span class="cmt">// setInterval — baar baar karo</span>
+<span class="kw">let</span> timer = <span class="fn">setInterval</span>(() => {
+  <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"Har second!"</span>);
+}, <span class="num">1000</span>);
+<span class="fn">clearInterval</span>(timer); <span class="cmt">// rok do</span>
+
+<span class="cmt">// Promise.all — kaafi requests ek saath</span>
+<span class="kw">async function</span> <span class="fn">fetchAll</span>() {
+  <span class="kw">let</span> [users, posts] = <span class="kw">await</span> <span class="fn">Promise</span>.<span class="fn">all</span>([
+    <span class="fn">fetch</span>(<span class="str">'https://jsonplaceholder.typicode.com/users'</span>).<span class="fn">then</span>(r => r.<span class="fn">json</span>()),
+    <span class="fn">fetch</span>(<span class="str">'https://jsonplaceholder.typicode.com/posts'</span>).<span class="fn">then</span>(r => r.<span class="fn">json</span>()),
+  ]);
+  <span class="fn">console</span>.<span class="fn">log</span>(users.<span class="at">length</span>, posts.<span class="at">length</span>);
+}</pre>
+      </div>
+
+      <div class="callout callout-tip">
+        <span class="callout-icon"><i class="fas fa-lightbulb"></i></span>
+        <div><strong>Pro Tip:</strong> Hamesha <code>try/catch</code> use karo async functions ke saath — network errors silently fail ho sakte hain warna!</div>
+      </div>
+    </div>
+
+    <!-- ===== FETCH API ===== -->
+    <div class="tut-section fade-in" id="apis">
+      <h2>Fetch API — Real Data Laao</h2>
+      <p><code>fetch()</code> se real APIs se live data la sakte ho. JSONPlaceholder ek free practice API hai.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>javascript — Fetch API Complete</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><span class="cmt">// GET Request — data laao</span>
+<span class="kw">async function</span> <span class="fn">getUsers</span>() {
+  <span class="kw">let</span> res  = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">'https://jsonplaceholder.typicode.com/users'</span>);
+  <span class="kw">let</span> data = <span class="kw">await</span> res.<span class="fn">json</span>();
+  <span class="kw">return</span> data;
+}
+
+<span class="cmt">// POST Request — data bhejo</span>
+<span class="kw">async function</span> <span class="fn">createPost</span>(postData) {
+  <span class="kw">let</span> res = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">'https://jsonplaceholder.typicode.com/posts'</span>, {
+    method:  <span class="str">'POST'</span>,
+    headers: { <span class="str">'Content-Type'</span>: <span class="str">'application/json'</span> },
+    body:    <span class="fn">JSON</span>.<span class="fn">stringify</span>(postData)
+  });
+  <span class="kw">return</span> <span class="kw">await</span> res.<span class="fn">json</span>();
+}
+
+<span class="cmt">// Response status check</span>
+<span class="kw">let</span> res = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">'...'</span>);
+<span class="kw">if</span> (!res.<span class="at">ok</span>) <span class="kw">throw new</span> <span class="fn">Error</span>(<span class="str">`HTTP Error: ${res.status}`</span>);</pre>
+      </div>
+
+      <div class="try-it-box">
+        <div class="try-it-header">
+          <span><i class="fas fa-code"></i> Fetch API Try Karo! (Live Data)</span>
+          <button class="try-it-run"><i class="fas fa-play"></i> Run</button>
+        </div>
+        <div class="try-it-grid">
+          <div class="try-it-code">
+            <textarea spellcheck="false"><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { background:#0a0e1a; color:#e2e8f0;
+           font-family:sans-serif; padding:16px; margin:0; }
+    button {
+      background:#264de4; color:white; border:none;
+      padding:10px 18px; border-radius:8px;
+      cursor:pointer; font-size:0.9rem; margin:4px;
+    }
+    button:hover { background:#3b5bdb; }
+    #status { color:#94a3b8; font-size:0.8rem; margin:10px 0; }
+    .card {
+      background:#0f1526; border:1px solid #1e2d4a;
+      border-radius:10px; padding:12px 16px;
+      margin:8px 0; font-size:0.85rem;
+    }
+    .card strong { color:#6b8fff; display:block; margin-bottom:4px; }
+    .card span   { color:#94a3b8; }
+    .tag {
+      display:inline-block; background:rgba(0,212,255,0.1);
+      color:#00d4ff; border:1px solid #00d4ff;
+      padding:2px 8px; border-radius:20px;
+      font-size:0.7rem; margin:2px;
+    }
+  </style>
+</head>
+<body>
+  <button onclick="fetchUsers()">👤 Users Laao</button>
+  <button onclick="fetchPost()">📝 Post Laao</button>
+  <div id="status">Ready...</div>
+  <div id="output"></div>
+
+  <script>
+    async function fetchUsers() {
+      let s = document.getElementById('status');
+      let o = document.getElementById('output');
+      s.textContent = '⏳ Fetch ho raha hai...';
+      o.innerHTML = '';
+      try {
+        let res  = await fetch('https://jsonplaceholder.typicode.com/users?_limit=4');
+        let data = await res.json();
+        s.textContent = `✅ ${data.length} users mile (jsonplaceholder.typicode.com)`;
+        data.forEach(u => {
+          o.innerHTML += `<div class="card">
+            <strong>👤 ${u.name}</strong>
+            <span>${u.email}</span><br>
+            <span class="tag">${u.address.city}</span>
+            <span class="tag">${u.company.name}</span>
+          </div>`;
+        });
+      } catch(e) {
+        s.textContent = '❌ Error: ' + e.message;
+      }
+    }
+
+    async function fetchPost() {
+      let s = document.getElementById('status');
+      let o = document.getElementById('output');
+      let id = Math.floor(Math.random()*10)+1;
+      s.textContent = `⏳ Post #${id} fetch ho raha hai...`;
+      o.innerHTML = '';
+      try {
+        let res  = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+        let post = await res.json();
+        s.textContent = '✅ Post mila!';
+        o.innerHTML = `<div class="card">
+          <strong>📝 ${post.title}</strong>
+          <span>${post.body}</span>
+        </div>`;
+      } catch(e) {
+        s.textContent = '❌ Error: ' + e.message;
+      }
+    }
+  </script>
+</body>
+</html></textarea>
+          </div>
+          <div class="try-it-output"><iframe></iframe></div>
+        </div>
+      </div>
+
+      <div class="callout callout-tip">
+        <span class="callout-icon"><i class="fas fa-lightbulb"></i></span>
+        <div><strong>Practice APIs:</strong> JSONPlaceholder (<code>jsonplaceholder.typicode.com</code>) — free fake REST API. OpenWeatherMap, CoinGecko, NewsAPI — real data ke liye perfect hain beginners ke liye!</div>
+      </div>
+    </div>
+
+    <div class="tut-nav-btns">
+      <a href="css-tutorial.html" class="tut-nav-btn"><i class="fas fa-arrow-left"></i> CSS</a>
+      <a href="videos.html" class="tut-nav-btn next">hd Videos Dekho <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+  </main>
+</div>
+
+<script src="script.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.try-it-box').forEach(box => {
+      let ta = box.querySelector('textarea');
+      let iframe = box.querySelector('iframe');
+      if (ta && iframe) {
+        let doc = iframe.contentDocument || iframe.contentWindow.document;
+        doc.open(); doc.write(ta.value); doc.close();
+      }
+    });
+    document.querySelectorAll('.try-it-run').forEach(btn => {
+      btn.addEventListener('click', () => {
+        let box = btn.closest('.try-it-box');
+        let ta = box.querySelector('textarea');
+        let iframe = box.querySelector('iframe');
+        if (ta && iframe) {
+          let doc = iframe.contentDocument || iframe.contentWindow.document;
+          doc.open(); doc.write(ta.value); doc.close();
+        }
+      });
+    });
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        let code = btn.closest('.code-block').querySelector('pre').innerText;
+        navigator.clipboard.writeText(code).then(() => {
+          btn.textContent = 'Copied!';
+          setTimeout(() => btn.textContent = 'Copy', 2000);
+        });
+      });
+    });
+  });
+</script>
+<script>
+  // Fade-in fix — saare elements turant visible karo
+  document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+</script>
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-brand"><span class="logo-icon">&lt;/&gt;</span><span class="logo-text">CodeMaster</span></div>
+      <p>India ka #1 Hindi coding tutorial website. Noob se Pro tak ka safar yahan se shuru hota hai.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Tutorials</h4>
+      <a href="html-tutorial.html">HTML</a>
+      <a href="css-tutorial.html">CSS</a>
+      <a href="js-tutorial.html">JavaScript</a>
+      <a href="videos.html">hd Videos</a>
+    </div>
+    <div class="footer-links">
+      <h4>Levels</h4>
+      <a href="#">Beginner</a>
+      <a href="#">Intermediate</a>
+      <a href="#">Advanced</a>
+      <a href="#">Projects</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 CodeMaster. Made by Nitin Patel.</p>
+  </div>
+</footer>
+
+<!-- Code Master AI chat bubble -->
+<link rel="stylesheet" href="assets/css/code-master-ai.css">
+<script src="assets/js/code-master-ai.js"></script>
+<script>initCodeMasterAI("bubble");</script>
+</body>
+</html>
