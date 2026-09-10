@@ -1,7 +1,7 @@
 # ============================================
 # Code Master AI - Backend (Flask)
 # Runs on YOUR server (Render/Railway/etc), NOT in the browser.
-# The Anthropic API key stays hidden here - never exposed to users.
+# The Gemini API key stays hidden here - never exposed to users.
 # ============================================
 
 import os
@@ -12,8 +12,9 @@ import requests
 app = Flask(__name__)
 CORS(app)  # allows the CodeMaster frontend to call this backend
 
-ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY")
-ANTHROPIC_URL = "https://api.anthropic.com/v1/messages"
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+GEMINI_MODEL = "gemini-3.5-flash"  # fast + cheap, good for a coding-help chatbot
+GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent?key={GEMINI_API_KEY}"
 
 SYSTEM_PROMPT = """You are Code Master AI — a friendly, supportive coding buddy inside the "CodeMaster" web development learning platform (a Hindi/Hinglish coding tutorial site).
 
@@ -32,6 +33,23 @@ If the user asks about something unrelated to web development or programming, po
 Never break character. Never claim to be a general-purpose AI."""
 
 
+def to_gemini_contents(messages):
+    """
+    Convert the frontend's Anthropic-style messages
+    [{"role": "user"/"assistant", "content": "..."}]
+    into Gemini's format:
+    [{"role": "user"/"model", "parts": [{"text": "..."}]}]
+    """
+    contents = []
+    for msg in messages:
+        role = "model" if msg.get("role") == "assistant" else "user"
+        contents.append({
+            "role": role,
+            "parts": [{"text": msg.get("content", "")}]
+        })
+    return contents
+
+
 @app.route("/api/chat", methods=["POST"])
 def chat():
     data = request.get_json(silent=True) or {}
@@ -42,29 +60,30 @@ def chat():
 
     try:
         response = requests.post(
-            ANTHROPIC_URL,
-            headers={
-                "Content-Type": "application/json",
-                "x-api-key": ANTHROPIC_API_KEY,  # set as an env var, never hardcoded
-                "anthropic-version": "2023-06-01",
-            },
+            GEMINI_URL,
+            headers={"Content-Type": "application/json"},
             json={
-                "model": "claude-sonnet-5",  # good balance of quality + cost. Use 'claude-haiku-4-5-20251001' for cheaper/faster replies.
-                "max_tokens": 1024,
-                "system": SYSTEM_PROMPT,
-                "messages": messages,  # e.g. [{"role": "user", "content": "..."}]
+                "system_instruction": {
+                    "parts": [{"text": SYSTEM_PROMPT}]
+                },
+                "contents": to_gemini_contents(messages),
+                "generationConfig": {
+                    "maxOutputTokens": 1024
+                }
             },
             timeout=30,
         )
         resp_json = response.json()
 
         if "error" in resp_json:
-            return jsonify({"error": resp_json["error"].get("message", "Anthropic API error")}), 500
+            return jsonify({"error": resp_json["error"].get("message", "Gemini API error")}), 500
 
         reply_text = "Sorry bro, samajh nahi aaya. Phir se try karo?"
-        content = resp_json.get("content")
-        if content and isinstance(content, list) and len(content) > 0:
-            reply_text = content[0].get("text", reply_text)
+        candidates = resp_json.get("candidates")
+        if candidates and isinstance(candidates, list) and len(candidates) > 0:
+            parts = candidates[0].get("content", {}).get("parts", [])
+            if parts and "text" in parts[0]:
+                reply_text = parts[0]["text"]
 
         return jsonify({"reply": reply_text})
 
