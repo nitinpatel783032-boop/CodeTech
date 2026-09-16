@@ -117,6 +117,9 @@ def chat():
                 "generationConfig": {"maxOutputTokens": 1200},
             },
             timeout=60,  # image analysis can take a little longer than plain text
+                    if "error" in resp_json:
+            print(f"GEMINI API ERROR: {resp_json['error']}")   # 👈 sirf ye naya line ADD
+            return jsonify({"error": resp_json["error"].get("message", "Gemini API error")}), 500
         )
         resp_json = response.json()
 
@@ -132,11 +135,12 @@ def chat():
 
         return jsonify({"reply": reply_text})
 
-    except requests.exceptions.RequestException:
+       except requests.exceptions.RequestException as e:
+        print(f"REQUEST ERROR: {e}")
         return jsonify({"error": "AI service tak nahi pahunch paya. Phir se try karo."}), 500
-    except Exception:
+    except Exception as e:
+        print(f"UNEXPECTED ERROR: {e}")
         return jsonify({"error": "Server mein kuch gadbad ho gayi."}), 500
-
 
 @app.route("/", methods=["GET"])
 def health_check():
