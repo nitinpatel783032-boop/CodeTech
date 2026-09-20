@@ -162,7 +162,7 @@ function initCodeMasterAI(mode = "bubble", mountSelector = null) {
       bubble.innerHTML = formatMessage(text);
     } else {
       bubble.textContent = text;
-    }assist
+    }
     row.appendChild(bubble);
 
     // Assistant messages get a small "play voice" button so the user
