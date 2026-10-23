@@ -260,7 +260,7 @@
   <div class="footer-grid">
     <div class="footer-brand">
       <div class="nav-brand"><span class="logo-icon">&lt;/&gt;</span><span class="logo-text">CodeMaster</span></div>
-      <p>India ka #1 Hindi coding tutorial website.</p>
+      <p>India's best coding tutorial website.</p>
     </div>
     <div class="footer-links">
       <h4>Tutorials</h4>
@@ -280,8 +280,10 @@
   </div>
 </footer>
 <script>
-window.onload = function() {
-  alert("The videos on this website are from a YouTube creator named Code with Harry because the language is very simple and easy for students to understand. This website does not promote any content creators; it is for educational purposes only." + " इस वेबसाइट पर वीडियो एक YouTube क्रिएटर Code with Harry से हैं क्योंकि उनकी भाषा बहुत सरल और छात्रों के लिए समझने में आसान है। यह वेबसाइट किसी भी कंटेंट क्रिएटर को प्रमोट नहीं करती है; यह केवल शैक्षिक उद्देश्यों के लिए है।");
+window.onload = function () {
+  var en = "The videos on this website are from a YouTube creator named Code with Harry because the language is very simple and easy for students to understand. This website does not promote any content creators; it is for educational purposes only.";
+  var hi = "इस वेबसाइट पर वीडियो एक YouTube क्रिएटर Code with Harry से हैं क्योंकि उनकी भाषा बहुत सरल और छात्रों के लिए समझने में आसान है। यह वेबसाइट किसी भी कंटेंट क्रिएटर को प्रमोट नहीं करती है; यह केवल शैक्षिक उद्देश्यों के लिए है।";
+  alert(window.CMLang && CMLang.get() === "en" ? en : en + " " + hi);
 };
 </script>
 
@@ -292,5 +294,7 @@ window.onload = function() {
 <link rel="stylesheet" href="assets/css/code-master-ai.css">
 <script src="assets/js/code-master-ai.js"></script>
 <script>initCodeMasterAI("bubble");</script>
+<script src="i18n.js"></script>
+<script src="settings-link.js"></script>
 </body>
 </html>

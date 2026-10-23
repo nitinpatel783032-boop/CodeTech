@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="hi-Latn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings - CodeMaster</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .st-wrap{max-width:780px;margin:0 auto;padding:96px 16px 60px}
+    .st-title{font-size:clamp(1.6rem,4vw,2.2rem);margin:0 0 6px}
+    .st-sub{opacity:.7;margin:0 0 22px}
+    .st-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:20px;margin-bottom:18px}
+    .st-card h2{margin:0 0 6px;font-size:1.1rem}
+    .st-card h3{margin:16px 0 8px;font-size:.95rem;opacity:.85}
+    .st-hint{margin:0 0 14px;opacity:.65;font-size:.88rem}
+    .st-label{display:block;font-size:.85rem;opacity:.75;margin:10px 0 4px}
+    .st-card input[type=text],.st-card input[type=email],.st-card select{width:100%;background:rgba(0,0,0,.25);color:inherit;border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:10px 12px;font-size:.95rem;font-family:inherit}
+    .st-card option{color:#000}
+    .st-line{display:flex;align-items:center;gap:12px}
+    .st-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
+    .st-check{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;cursor:pointer;font-size:.9rem}
+    .st-check input{accent-color:#00d4ff}
+    .st-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+    .st-btn{background:#264de4;color:#fff;border:none;border-radius:8px;padding:10px 16px;font-size:.9rem;cursor:pointer}
+    .st-btn.ghost{background:rgba(255,255,255,.12)}
+    .st-btn.danger{background:#dc2626}
+    .st-ok{color:#00ff88;font-weight:700;font-size:1rem}
+  </style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-brand">
+    <span class="logo-icon">&lt;/&gt;</span>
+    <span class="logo-text">CodeMaster</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="html-tutorial.html">HTML</a></li>
+    <li><a href="css-tutorial.html">CSS</a></li>
+    <li><a href="js-tutorial.html">JavaScript</a></li>
+    <li><a href="videos.html" class="nav-video-btn"><i class="fas fa-play-circle"></i> hd Videos</a></li>
+    <li><a href="code-master-ai.html">🤖 Code Master AI</a></li>
+    <li><a href="settings.html" class="active">⚙️ Settings</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="html-tutorial.html">HTML</a>
+  <a href="css-tutorial.html">CSS</a>
+  <a href="js-tutorial.html">JavaScript</a>
+  <a href="videos.html">hd Videos</a>
+  <a href="code-master-ai.html">🤖 Code Master AI</a>
+  <a href="settings.html">⚙️ Settings</a>
+</div>
+
+<main class="st-wrap">
+  <h1 class="st-title">⚙️ Settings</h1>
+  <p class="st-sub">Apni language, profile aur seekhne ki jaankari yahan badlo</p>
+
+  <!-- LANGUAGE -->
+  <section class="st-card">
+    <h2>Bhasha (Language)</h2>
+    <p class="st-hint">Poori website aur Code Master AI isi bhasha mein chalenge</p>
+    <div class="st-line">
+      <select id="stLang"></select>
+      <span class="st-ok" id="okLang"></span>
+    </div>
+  </section>
+
+  <!-- PROFILE -->
+  <section class="st-card">
+    <h2>Mera Profile</h2>
+    <label class="st-label" for="stName">Naam</label>
+    <input type="text" id="stName" maxlength="30" />
+    <div id="stEmailRow" style="display:none">
+      <label class="st-label" for="stEmail">Email</label>
+      <input type="email" id="stEmail" />
+    </div>
+    <div class="st-row">
+      <button class="st-btn" id="stSaveProfile">Save karo</button>
+      <span class="st-ok" id="okProfile"></span>
+    </div>
+  </section>
+
+  <!-- LEARNING DETAILS -->
+  <section class="st-card">
+    <h2>Meri Seekhne ki Jaankari</h2>
+    <h3>Web development kyu sikhna chahte hain?</h3>
+    <div class="st-grid" id="stWhy"></div>
+    <h3>Kya aapke paas PC ya Laptop available hai?</h3>
+    <div class="st-grid" id="stPc"></div>
+    <div class="st-row"><span class="st-ok" id="okLearn"></span></div>
+  </section>
+
+  <!-- THEME -->
+  <section class="st-card">
+    <h2>Theme</h2>
+    <p class="st-hint">Night mode mein aankhon par kam zor padta hai</p>
+    <div class="st-line">
+      <select id="stTheme">
+        <option value="dark">Dark</option>
+        <option value="night">Night</option>
+      </select>
+      <span class="st-ok" id="okTheme"></span>
+    </div>
+  </section>
+
+  <!-- ONBOARDING -->
+  <section class="st-card">
+    <h2>Shuruaati Sawaal</h2>
+    <p class="st-hint">Naam aur seekhne ke sawaal dobara bharna ho to ye dabao</p>
+    <button class="st-btn ghost" id="stRestart">Onboarding dobara shuru karo</button>
+  </section>
+
+  <!-- DATA -->
+  <section class="st-card">
+    <h2>Mera Data</h2>
+    <p class="st-hint">Ye sara data sirf is browser mein save hota hai. Tum use download kar sakte ho ya hata sakte ho. Hatane ke baad welcome sawaal dobara dikhenge</p>
+    <div class="st-row">
+      <button class="st-btn ghost" id="stDownload">Download my data</button>
+      <button class="st-btn danger" id="stClear">Sara data hatao</button>
+    </div>
+  </section>
+</main>
+
+<script src="script.js"></script>
+<script src="i18n.js"></script>
+<script>
+(function () {
+  var K = { name: 'cm_user_name', email: 'cm_user_email', theme: 'cm_theme', why: 'cm_user_why', pc: 'cm_user_pc' };
+
+  // [key, emoji, text]  — key wahi hai jo script.js mein save hoti hai
+  var WHY = [
+    ['career',    '💼', 'Naukri / Career ke liye'],
+    ['student',   '🎓', 'Student hoon, seekhna hai'],
+    ['hobby',     '🎨', 'Hobby / Interest ke liye'],
+    ['freelance', '💰', 'Freelancing karni hai'],
+    ['startup',   '🚀', 'Apna Project / Startup'],
+    ['explore',   '🤔', 'Bas explore kar raha hoon']
+  ];
+  var PC = [
+    ['pc',     '🖥️',   'Haan, PC hai'],
+    ['laptop', '💻',   'Haan, Laptop hai'],
+    ['both',   '🖥️💻', 'Dono hain!'],
+    ['mobile', '📱',   'Abhi sirf Mobile hai']
+  ];
+
+  var CONFIRM = {
+    hinglish: 'Pakka? Code Master ka sara saved data hat jayega.',
+    en: 'Are you sure? All saved Code Master data will be deleted.'
+  };
+
+  var KNOWN = [K.name, K.email, K.theme, K.why, K.pc, 'cm_ai_language', 'obCompleted', 'cm_onboarded'];
+
+  function $(id) { return document.getElementById(id); }
+  function get(k) { return localStorage.getItem(k); }
+  function readList(k) {
+    try { var v = JSON.parse(get(k)); return Array.isArray(v) ? v : []; } catch (e) { return []; }
+  }
+  function flash(id) {
+    var el = $(id);
+    if (!el) return;
+    el.textContent = '✓';
+    clearTimeout(el._t);
+    el._t = setTimeout(function () { el.textContent = ''; }, 1500);
+  }
+  function mine() {
+    return Object.keys(localStorage).filter(function (k) {
+      return KNOWN.indexOf(k) !== -1 || /^(cm[_-]|cma|codemaster)/i.test(k);
+    });
+  }
+
+  // ---- Language ----
+  var langSel = $('stLang');
+  CMLang.LANGS.forEach(function (l) {
+    var o = document.createElement('option');
+    o.value = l.value;
+    o.textContent = l.label;
+    langSel.appendChild(o);
+  });
+  langSel.addEventListener('change', function () {
+    CMLang.set(langSel.value);
+    flash('okLang');
+  });
+
+  // ---- Profile ----
+  var nameIn = $('stName'), emailRow = $('stEmailRow'), emailIn = $('stEmail');
+  $('stSaveProfile').addEventListener('click', function () {
+    localStorage.setItem(K.name, nameIn.value.trim() || 'Friend');
+    if (emailRow.style.display !== 'none') localStorage.setItem(K.email, emailIn.value.trim());
+    flash('okProfile');
+  });
+
+  // ---- Checkbox groups ----
+  function buildGroup(boxId, options, storageKey) {
+    var box = $(boxId);
+    box.textContent = '';
+    var chosen = readList(storageKey);
+    options.forEach(function (o) {
+      var label = document.createElement('label');
+      label.className = 'st-check';
+      var cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.value = o[0];
+      cb.checked = chosen.indexOf(o[0]) !== -1;
+      var ico = document.createElement('span');
+      ico.textContent = o[1];
+      var txt = document.createElement('span');
+      txt.textContent = o[2];
+      label.appendChild(cb);
+      label.appendChild(ico);
+      label.appendChild(txt);
+      box.appendChild(label);
+    });
+    box.onchange = function () {
+      var vals = [];
+      box.querySelectorAll('input:checked').forEach(function (c) { vals.push(c.value); });
+      localStorage.setItem(storageKey, JSON.stringify(vals));
+      flash('okLearn');
+    };
+  }
+
+  // ---- Theme ----
+  var themeSel = $('stTheme');
+  themeSel.addEventListener('change', function () {
+    localStorage.setItem(K.theme, themeSel.value);
+    document.body.classList.toggle('night-mode', themeSel.value === 'night');
+    flash('okTheme');
+  });
+
+  // ---- Onboarding dobara ----
+  $('stRestart').addEventListener('click', function () {
+    localStorage.removeItem('obCompleted');
+    localStorage.removeItem('cm_onboarded');
+    location.href = 'index.html';
+  });
+
+  // ---- Download / Clear ----
+  $('stDownload').addEventListener('click', function () {
+    var data = {};
+    mine().forEach(function (k) { data[k] = localStorage.getItem(k); });
+    var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'codemaster-my-data.json';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+
+  $('stClear').addEventListener('click', function () {
+    if (!confirm(CONFIRM[CMLang.get()] || CONFIRM.en)) return;
+    mine().forEach(function (k) { localStorage.removeItem(k); });
+    document.body.classList.remove('night-mode');
+    renderAll();
+  });
+
+  // ---- Sab kuch dobara dikhao ----
+  function renderAll() {
+    langSel.value = CMLang.get();
+    nameIn.value = get(K.name) || '';
+    var em = get(K.email);
+    emailRow.style.display = em ? '' : 'none';
+    emailIn.value = em || '';
+    buildGroup('stWhy', WHY, K.why);
+    buildGroup('stPc', PC, K.pc);
+    themeSel.value = get(K.theme) === 'night' ? 'night' : 'dark';
+    CMLang.apply();
+  }
+
+  renderAll();
+})();
+</script>
+</body>
+</html>

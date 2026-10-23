@@ -150,17 +150,19 @@ function _showWelcome(skipped) {
   const displayName = obUserName.trim() || 'Friend';
   if (nameEl) nameEl.textContent = displayName;
 
-  // Personalised message
+  // Personalised message (ab keys se check hota hai, language ka asar nahi)
+  const why = obAnswers.why || [];
+  const pc  = obAnswers.pc  || [];
   let msg = 'Aapka coding journey ab shuru hota hai!';
   if (skipped) {
     msg = 'Seedha action mein aaye ho — respect! 🔥';
-  } else if (obAnswers.why.some(function(a){ return a.includes('Freelancing'); })) {
+  } else if (why.indexOf('freelance') !== -1) {
     msg = 'Freelancing se apni zindagi control karo — sahi raah hai! 💪';
-  } else if (obAnswers.why.some(function(a){ return a.includes('Startup') || a.includes('Project'); })) {
+  } else if (why.indexOf('startup') !== -1) {
     msg = 'Apna startup banana hai? Coding tumhari superpower hai! 🦸';
-  } else if (obAnswers.why.some(function(a){ return a.includes('Career') || a.includes('Naukri'); })) {
+  } else if (why.indexOf('career') !== -1) {
     msg = 'Career mein coding ek game-changer hai — bilkul sahi decision! 🎯';
-  } else if (obAnswers.why.some(function(a){ return a.includes('Student'); })) {
+  } else if (why.indexOf('student') !== -1) {
     msg = 'Students ke liye coding — ek best skill ever. Jalte raho! 🔥';
   }
   if (msgEl) msgEl.textContent = msg;
@@ -168,14 +170,14 @@ function _showWelcome(skipped) {
   // Tags
   if (tagsEl) {
     var tags = [];
-    if (obAnswers.pc.some(function(a){ return a.includes('PC'); }))     tags.push('🖥️ Desktop Ready');
-    if (obAnswers.pc.some(function(a){ return a.includes('Laptop'); })) tags.push('💻 Laptop Ready');
-    if (obAnswers.pc.some(function(a){ return a.includes('Dono'); }))   tags.push('🖥️💻 Power User');
-    if (obAnswers.pc.some(function(a){ return a.includes('Mobile'); })) tags.push('📱 Mobile Learner');
-    if (obAnswers.why.length > 0 && !skipped) tags.push('🎯 Goal Focused');
+    if (pc.indexOf('pc') !== -1)     tags.push('🖥️ Desktop Ready');
+    if (pc.indexOf('laptop') !== -1) tags.push('💻 Laptop Ready');
+    if (pc.indexOf('both') !== -1)   tags.push('🖥️💻 Power User');
+    if (pc.indexOf('mobile') !== -1) tags.push('📱 Mobile Learner');
+    if (why.length > 0 && !skipped)  tags.push('🎯 Goal Focused');
     tags.push('🚀 Journey Started');
 
-    tagsEl.innerHTML = tags.map(function(t) {
+    tagsEl.innerHTML = tags.map(function (t) {
       return '<span class="ob-welcome-tag">' + t + '</span>';
     }).join('');
   }
@@ -193,7 +195,7 @@ function _showWelcome(skipped) {
   }, 120);
 
   // All dots fill
-  document.querySelectorAll('.ob-dot').forEach(function(d){ d.classList.add('active'); });
+  document.querySelectorAll('.ob-dot').forEach(function (d) { d.classList.add('active'); });
 
   // Auto-close after 4 seconds
   obAutoClose = setTimeout(obClose, 4000);
@@ -205,9 +207,12 @@ function obClose() {
   if (!overlay) return;
 
   overlay.classList.add('ob-closing');
-  localStorage.setItem('cm_user_name',  obUserName || 'Friend');
+  localStorage.setItem('cm_user_name', obUserName || 'Friend');
   if (obUserEmail) localStorage.setItem('cm_user_email', obUserEmail);
+  localStorage.setItem('cm_user_why', JSON.stringify(obAnswers.why || []));
+  localStorage.setItem('cm_user_pc',  JSON.stringify(obAnswers.pc  || []));
   localStorage.setItem('cm_onboarded', '1');
+  localStorage.setItem('obCompleted', 'true');
 
   setTimeout(function () {
     overlay.style.display = 'none';
@@ -215,20 +220,25 @@ function obClose() {
 }
 
 // ── Option multi-select ─────────────────────────────────────
+var OB_WHY_KEYS = ['career', 'student', 'hobby', 'freelance', 'startup', 'explore'];
+var OB_PC_KEYS  = ['pc', 'laptop', 'both', 'mobile'];
+
 function selectObOption(el) {
   var group = el.dataset.group;
   el.classList.toggle('selected');
 
-  var text = (el.querySelector('span:last-child') || el).textContent.trim();
+  var keys  = group === 'why' ? OB_WHY_KEYS : OB_PC_KEYS;
+  var index = Array.prototype.indexOf.call(el.parentElement.children, el);
+  var key   = keys[index];
+  if (!key) return;
   if (!obAnswers[group]) obAnswers[group] = [];
 
   if (el.classList.contains('selected')) {
-    if (obAnswers[group].indexOf(text) === -1) obAnswers[group].push(text);
+    if (obAnswers[group].indexOf(key) === -1) obAnswers[group].push(key);
   } else {
-    obAnswers[group] = obAnswers[group].filter(function(a){ return a !== text; });
+    obAnswers[group] = obAnswers[group].filter(function (a) { return a !== key; });
   }
 }
-
 // ── Confetti ────────────────────────────────────────────────
 function _makeConfetti() {
   var wrap = document.getElementById('obConfettiWrap');
@@ -382,7 +392,7 @@ if (typingCode) {
     if (lineIdx >= codeLines.length) return;
 
     let line = codeLines[lineIdx];
-    let text = line.text;
+       let text = (window.CMLang ? CMLang.tr(line.text) : line.text);
 
     if (charIdx <= text.length) {
       displayedLines[lineIdx] = { type: line.type, text: text.slice(0, charIdx) };
@@ -558,7 +568,7 @@ function showEx(type) {
   let label = document.getElementById('exLabel');
   let tabs = document.querySelectorAll('.ex-tab');
   if (!input) return;
-  input.value = data.code;
+  input.value = (window.CMLang ? CMLang.tr(data.code) : data.code);
   if (label) label.textContent = data.label;
   tabs.forEach(t => t.classList.remove('active'));
   let idx = ['html','css','js'].indexOf(type);
@@ -694,3 +704,11 @@ function closeVideo() {
 // Cube overlay ke andar click block na kare
 document.querySelector('.cube-hover-overlay')
   ?.addEventListener('click', () => openVideo('Intro'));
+
+  let colors = ['#264de4','#00d4ff','#00ff88','#a855f7','#f7df1e','#e44d26'];
+let colorIdx = 0, big = false;
+
+function changeColor() {
+  colorIdx = (colorIdx + 1) % colors.length;
+  document.getElementById('box').style.background = colors[colorIdx];
+}

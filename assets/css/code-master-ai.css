@@ -1,6 +1,7 @@
 /* ============================================
-   Code Master AI - Chat Widget Styles
-   Matches CodeMaster's dark IDE theme
+   Code Master AI - Chat Widget Styles (v2)
+   Now with: voice input/output, image upload,
+   clear-chat menu, plus menu, auto-grow input
    ============================================ */
 
 .cma-bubble-btn {
@@ -28,10 +29,10 @@
   position: fixed;
   bottom: 96px;
   right: 24px;
-  width: 380px;
+  width: 400px;
   max-width: 92vw;
-  height: 520px;
-  max-height: 75vh;
+  height: 580px;
+  max-height: 78vh;
   background: #0f1526;
   border: 1px solid #1e2d4a;
   border-radius: 20px;
@@ -49,39 +50,61 @@
   bottom: auto;
   right: auto;
   width: 100%;
-  max-width: 820px;
-  height: 72vh;
+  max-width: 860px;
+  height: 78vh;
   margin: 40px auto;
   display: flex;
 }
 
+/* ---------- Header ---------- */
 .cma-header {
   background: linear-gradient(135deg, #00d4ff, #a855f7);
   color: #0a0e1a;
-  padding: 16px 18px;
+  padding: 14px 16px;
   font-weight: 800;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 0.95rem;
+  position: relative;
 }
-.cma-close-btn {
-  background: none;
+.cma-title { display: flex; align-items: center; gap: 6px; }
+.cma-header-actions { display: flex; align-items: center; gap: 4px; }
+
+.cma-icon-btn {
+  background: rgba(10,14,26,0.12);
   border: none;
   color: #0a0e1a;
-  font-size: 22px;
+  font-size: 15px;
   cursor: pointer;
-  line-height: 1;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
 }
+.cma-icon-btn:hover { background: rgba(10,14,26,0.22); }
+.cma-icon-btn.cma-active { background: rgba(10,14,26,0.35); }
+.cma-close-btn { font-size: 20px; line-height: 1; }
 
+/* ---------- Messages ---------- */
 .cma-messages {
   flex: 1;
   overflow-y: auto;
   padding: 16px;
   background: #0a0e1a;
 }
+.cma-msg-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+}
+.cma-msg-row.user { align-items: flex-end; }
+.cma-msg-row.assistant { align-items: flex-start; }
+
 .cma-msg {
-  margin-bottom: 12px;
   padding: 10px 14px;
   border-radius: 12px;
   max-width: 82%;
@@ -92,7 +115,6 @@
 .cma-msg.user {
   background: linear-gradient(135deg, #00d4ff, #0099bb);
   color: #0a0e1a;
-  margin-left: auto;
   border-bottom-right-radius: 2px;
   font-weight: 600;
 }
@@ -100,10 +122,15 @@
   background: #141929;
   border: 1px solid #1e2d4a;
   color: #e2e8f0;
-  margin-right: auto;
   border-bottom-left-radius: 2px;
 }
-.cma-msg.assistant code {
+.cma-msg img.cma-msg-image {
+  max-width: 220px;
+  border-radius: 10px;
+  display: block;
+  margin-bottom: 6px;
+}
+.cma-msg code {
   background: #1e2d4a;
   color: #00d4ff;
   padding: 1px 5px;
@@ -111,7 +138,7 @@
   font-size: 0.82rem;
   font-family: 'JetBrains Mono', monospace;
 }
-.cma-msg.assistant pre {
+.cma-msg pre {
   background: #0d1117;
   border: 1px solid #1e2d4a;
   color: #98c379;
@@ -122,47 +149,25 @@
   margin: 6px 0;
   font-family: 'JetBrains Mono', monospace;
 }
-.cma-msg.assistant pre code {
+.cma-msg pre code { background: none; padding: 0; color: inherit; }
+
+/* small "play voice" button under assistant messages */
+.cma-msg-actions {
+  margin-top: 4px;
+}
+.cma-play-btn {
   background: none;
-  padding: 0;
-  color: inherit;
-}
-
-.cma-input-row {
-  display: flex;
-  border-top: 1px solid #1e2d4a;
-  padding: 10px;
-  gap: 8px;
-  background: #0f1526;
-}
-.cma-input {
-  flex: 1;
-  background: #0a0e1a;
   border: 1px solid #1e2d4a;
-  color: #e2e8f0;
-  border-radius: 10px;
-  padding: 10px 12px;
-  font-size: 0.88rem;
-  resize: none;
-  font-family: inherit;
-}
-.cma-input:focus {
-  outline: none;
-  border-color: #00d4ff;
-}
-.cma-input::placeholder { color: #64748b; }
-
-.cma-send-btn {
-  background: linear-gradient(135deg, #00d4ff, #a855f7);
-  color: #0a0e1a;
-  border: none;
-  border-radius: 10px;
-  padding: 0 18px;
+  color: #64748b;
+  font-size: 0.7rem;
+  padding: 3px 9px;
+  border-radius: 999px;
   cursor: pointer;
-  font-weight: 800;
-  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
-.cma-send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.cma-play-btn:hover { border-color: #00d4ff; color: #00d4ff; }
 
 .cma-typing {
   font-size: 0.78rem;
@@ -171,6 +176,148 @@
   font-style: italic;
   background: #0a0e1a;
 }
+
+/* ---------- Popups (clear menu, plus menu, voice list) ---------- */
+.cma-popup {
+  position: absolute;
+  background: #141929;
+  border: 1px solid #1e2d4a;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  z-index: 20;
+  overflow: hidden;
+  min-width: 190px;
+}
+.cma-popup button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  background: none;
+  border: none;
+  color: #e2e8f0;
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  border-bottom: 1px solid #1e2d4a;
+}
+.cma-popup button:last-child { border-bottom: none; }
+.cma-popup button:hover { background: #1e2d4a; color: #00d4ff; }
+
+.cma-clear-popup { top: 48px; right: 44px; }
+.cma-plus-menu { bottom: 66px; left: 10px; }
+.cma-voice-popup { bottom: 66px; left: 10px; max-height: 220px; overflow-y: auto; }
+.cma-voice-list button.cma-voice-active { color: #00ff88; }
+
+/* ---------- Input area ---------- */
+.cma-input-area {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  border-top: 1px solid #1e2d4a;
+  padding: 10px;
+  background: #0f1526;
+}
+
+.cma-plus-btn, .cma-mic-btn, .cma-send-btn {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: transform 0.15s, background 0.15s;
+}
+
+.cma-plus-btn {
+  background: #1e2d4a;
+  color: #00d4ff;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.cma-plus-btn:hover { background: #26375c; transform: scale(1.05); }
+
+.cma-mic-btn {
+  background: #1e2d4a;
+  color: #a855f7;
+}
+.cma-mic-btn:hover { background: #26375c; transform: scale(1.05); }
+.cma-mic-btn.cma-recording {
+  background: #ff5f56;
+  color: #fff;
+  animation: cmaPulse 1s ease-in-out infinite;
+}
+@keyframes cmaPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,95,86,0.5); }
+  50% { box-shadow: 0 0 0 8px rgba(255,95,86,0); }
+}
+
+.cma-send-btn {
+  background: linear-gradient(135deg, #00d4ff, #a855f7);
+  color: #0a0e1a;
+  font-weight: 800;
+}
+.cma-send-btn:hover { transform: scale(1.05); }
+.cma-send-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.cma-input-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cma-image-preview {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  background: #0a0e1a;
+  border: 1px solid #1e2d4a;
+  border-radius: 10px;
+  padding: 6px 8px;
+  margin-bottom: 6px;
+  font-size: 0.78rem;
+  color: #94a3b8;
+}
+.cma-image-preview.cma-show { display: flex; }
+.cma-image-preview img {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+.cma-image-preview button {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: #ff5f56;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.cma-input {
+  width: 100%;
+  background: #0a0e1a;
+  border: 1px solid #1e2d4a;
+  color: #e2e8f0;
+  border-radius: 14px;
+  padding: 10px 12px;
+  font-size: 0.88rem;
+  font-family: inherit;
+  resize: none;
+  min-height: 38px;
+  max-height: 140px;
+  overflow-y: auto;
+  line-height: 1.4;
+}
+.cma-input:focus { outline: none; border-color: #00d4ff; }
+.cma-input::placeholder { color: #64748b; }
 
 @media (max-width: 640px) {
   .cma-window {
@@ -182,4 +329,5 @@
     bottom: 18px;
     right: 18px;
   }
+  .cma-plus-menu, .cma-voice-popup { left: 4px; }
 }

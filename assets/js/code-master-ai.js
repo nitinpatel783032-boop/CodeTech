@@ -1,26 +1,23 @@
 // ============================================
-// Code Master AI - Chat Widget Logic (v2)
-// New in this version:
-//   - Voice input (speech-to-text) + voice output (text-to-speech)
-//   - Clear chat menu (Clear All / Clear Last / Cancel)
-//   - Image upload + screenshot analysis (sent to Claude's vision)
-//   - Auto-growing multi-line input
-//   - Voice selection (pick which system voice replies)
-//   - "+" button with a quick menu of all these tools
+// Code Master AI - Chat Widget Logic (v3)
+// - Voice input (speech-to-text) + voice output (ElevenLabs TTS)
+// - Clear chat menu (Clear All / Clear Last / Cancel)
+// - Image upload + screenshot analysis
+// - Auto-growing multi-line input
+// - Male/Female voice toggle
+// - Copy button on code blocks
+// - AI Voice Mode (hands-free talk mode)
+// - "+" button with a quick menu of all these tools
 // ============================================
 
-// 👉 IMPORTANT: replace this with YOUR real Flask backend URL
 const CMA_BACKEND_URL = "https://codetech-2-0.onrender.com/api/chat";
 
 function initCodeMasterAI(mode = "bubble", mountSelector = null) {
-  // conversation[] is what we send to the backend/Claude.
-  // Each item looks like: { role: "user"|"assistant", content: [ {type:"text",...} , {type:"image",...} ] }
+  injectExtraStyles();
+
   let conversation = [];
+  let pendingImage = null;
 
-  // pendingImage holds an image the user picked but hasn't sent yet.
-  let pendingImage = null; // { base64, mediaType, previewUrl }
-
-  // ---------- Build the widget DOM ----------
   const windowEl = document.createElement("div");
   windowEl.className = "cma-window" + (mode === "fullpage" ? " cma-fullpage" : "");
   windowEl.innerHTML = `
@@ -28,6 +25,7 @@ function initCodeMasterAI(mode = "bubble", mountSelector = null) {
       <span class="cma-title">🤖 Code Master AI</span>
       <div class="cma-header-actions">
         <button class="cma-icon-btn cma-voice-toggle" title="Voice replies on/off">🔈</button>
+        <button class="cma-icon-btn cma-gender-toggle" title="Male/Female voice">👨</button>
         <button class="cma-icon-btn cma-clear-btn" title="Clear chat">🗑️</button>
         ${mode === "bubble" ? '<button class="cma-icon-btn cma-close-btn">&times;</button>' : ""}
       </div>
@@ -36,22 +34,20 @@ function initCodeMasterAI(mode = "bubble", mountSelector = null) {
     <div class="cma-messages"></div>
     <div class="cma-typing" style="display:none;">Code Master AI is typing...</div>
 
-    <!-- Clear chat popup -->
     <div class="cma-popup cma-clear-popup" style="display:none;">
       <button data-action="all">🗑️ Clear All Chats</button>
       <button data-action="last">⏪ Clear Last Chat</button>
       <button data-action="cancel">✖ Cancel</button>
     </div>
 
-    <!-- "+" quick menu -->
     <div class="cma-popup cma-plus-menu" style="display:none;">
       <button data-action="image">📷 Upload Image / Screenshot</button>
       <button data-action="voice-input">🎤 Voice Input</button>
+      <button data-action="voice-mode">🎙️ AI Voice Mode (Bolke Baat Karo)</button>
       <button data-action="voice-select">🔊 Voice Selection</button>
       <button data-action="clear">🗑️ Clear Chat</button>
     </div>
 
-    <!-- Voice selection popup -->
     <div class="cma-popup cma-voice-popup" style="display:none;">
       <div class="cma-voice-list"></div>
     </div>
@@ -74,7 +70,6 @@ function initCodeMasterAI(mode = "bubble", mountSelector = null) {
     </div>
   `;
 
-  // ---------- Grab references to the pieces we need ----------
   const messagesEl     = windowEl.querySelector(".cma-messages");
   const inputEl        = windowEl.querySelector(".cma-input");
   const sendBtn        = windowEl.querySelector(".cma-send-btn");
@@ -91,8 +86,18 @@ function initCodeMasterAI(mode = "bubble", mountSelector = null) {
   const voicePopup     = windowEl.querySelector(".cma-voice-popup");
   const voiceListEl    = windowEl.querySelector(".cma-voice-list");
   const voiceToggleBtn = windowEl.querySelector(".cma-voice-toggle");
+  const genderToggleBtn = windowEl.querySelector(".cma-gender-toggle");
+    // ---- Language dropdown ----
+  const LANGS = { en: "English", hi: "हिन्दी", hinglish: "Hinglish", ta: "தமிழ்", te: "తెలుగు", bn: "বাংলা", mr: "मराठी", gu: "ગુજરાતી", pa: "ਪੰਜਾਬੀ", ur: "اردو", kn: "ಕನ್ನಡ", ml: "മലയാളം", or: "ଓଡ଼ିଆ", es: "Español", fr: "Français", de: "Deutsch", ar: "العربية", ja: "日本語", zh: "中文" };
+  const langSelect = document.createElement("select");
+  langSelect.title = "Language";
+  langSelect.style.cssText = "background:#1e2140;color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:5px;font-size:12px;max-width:105px;";
+  langSelect.innerHTML = Object.entries(LANGS).map(([c, n]) => `<option value="${c}">${n}</option>`).join("");
+  langSelect.value = localStorage.getItem("cma_language") || "en";
+  if (!langSelect.value) langSelect.value = "en";
+  langSelect.addEventListener("change", () => localStorage.setItem("cma_language", langSelect.value));
+  windowEl.querySelector(".cma-header-actions").prepend(langSelect);
 
-  // ---------- Mount the widget into the page ----------
   if (mode === "bubble") {
     document.body.appendChild(windowEl);
 
@@ -117,34 +122,77 @@ function initCodeMasterAI(mode = "bubble", mountSelector = null) {
     "Yo! 👋 Main Code Master AI hoon. Type karo, bolke pucho (🎤), ya screenshot bhejo (📷) — jo bhi comfortable ho!"
   );
 
+  messagesEl.addEventListener("click", (e) => {
+    const btn = e.target.closest(".cma-copy-btn");
+    if (!btn) return;
+    const codeEl = btn.closest(".cma-code-block").querySelector("code");
+    const codeText = codeEl.textContent;
+    navigator.clipboard.writeText(codeText).then(() => {
+      const original = btn.textContent;
+      btn.textContent = "✅ Copied!";
+      setTimeout(() => { btn.textContent = original; }, 1500);
+    }).catch(() => {
+      btn.textContent = "❌ Failed";
+      setTimeout(() => { btn.textContent = "📋 Copy"; }, 1500);
+    });
+  });
+
   // ============================================================
-  // TEXT FORMATTING (markdown-ish code blocks -> safe HTML)
+  // TEXT FORMATTING
   // ============================================================
   function escapeHtml(str) {
     return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
   function formatMessage(text) {
-    let escaped = escapeHtml(text);
-    escaped = escaped.replace(/```(\w+)?\n([\s\S]*?)```/g, (m, lang, code) => {
-      return `<pre><code>${code.trim()}</code></pre>`;
+    const codeBlocks = [];
+    let working = text.replace(/```(\w+)?\n([\s\S]*?)```/g, (m, lang, code) => {
+      const idx = codeBlocks.length;
+      codeBlocks.push({ lang: (lang || "code").trim(), code: code.replace(/\n$/, "") });
+      return `\u0000CODEBLOCK${idx}\u0000`;
     });
+
+    let escaped = escapeHtml(working);
     escaped = escaped.replace(/`([^`]+)`/g, "<code>$1</code>");
     escaped = escaped.replace(/\n/g, "<br>");
+
+    escaped = escaped.replace(/\u0000CODEBLOCK(\d+)\u0000/g, (m, idx) => {
+      const block = codeBlocks[Number(idx)];
+      const escapedCode = escapeHtml(block.code);
+      return `<div class="cma-code-block"><div class="cma-code-header"><span class="cma-code-lang">${block.lang}</span><button class="cma-copy-btn">📋 Copy</button></div><pre><code>${escapedCode}</code></pre></div>`;
+    });
+
     return escaped;
   }
 
-  // Plain text version for text-to-speech (strip code/markdown noise)
     function stripForSpeech(text) {
     return text
+      // 1. code blocks aur links
       .replace(/```[\s\S]*?```/g, " code snippet ")
+      .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1")
+      .replace(/https?:\/\/\S+/g, " link ")
       .replace(/`([^`]+)`/g, "$1")
-      .replace(/[*_#>~]/g, "")
-      .replace(/\[(.*?)\]\(.*?\)/g, "$1")
+      // 2. emoji hatao
       .replace(
         /[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{1F1E6}-\u{1F1FF}\u{2190}-\u{21FF}\u{2B00}-\u{2BFF}\uFE0F]/gu,
         ""
       )
+      // 3. list bullets / headings / quotes
+      .replace(/^\s*[-*•>#]+\s+/gm, "")
+      // 4. dashes ko pause bana do
+      .replace(/[—–]/g, ", ")
+      .replace(/\s-\s/g, ", ")
+      // 5. kuch symbols ko bolne layak shabd
+      .replace(/&/g, " and ")
+      .replace(/%/g, " percent")
+      .replace(/[:;]/g, ",")
+      // 6. baaki saare brackets / operators / symbols hata do
+      .replace(/[-_()\[\]{}<>\\\/|=+*#~^@$"“”‘’`]/g, " ")
+      // 7. newline ko pause banao
+      .replace(/\s*\n+\s*/g, ". ")
+      // 8. safai
+      .replace(/\s+([,.?!])/g, "$1")
+      .replace(/([,.?!])(\s*[,.])+/g, "$1")
       .replace(/\s{2,}/g, " ")
       .trim();
   }
@@ -165,9 +213,7 @@ function initCodeMasterAI(mode = "bubble", mountSelector = null) {
     }
     row.appendChild(bubble);
 
-    // Assistant messages get a small "play voice" button so the user
-    // can hear any reply out loud, even if auto-voice is switched off.
-        if (role === "assistant") {
+    if (role === "assistant") {
       const actions = document.createElement("div");
       actions.className = "cma-msg-actions";
       actions.innerHTML = `<button class="cma-play-btn">🔊 Play</button>`;
@@ -214,7 +260,7 @@ function initCodeMasterAI(mode = "bubble", mountSelector = null) {
   });
 
   // ============================================================
-  // POPUP HELPERS (only one popup open at a time)
+  // POPUP HELPERS
   // ============================================================
   function closeAllPopups() {
     clearPopup.style.display = "none";
@@ -228,9 +274,8 @@ function initCodeMasterAI(mode = "bubble", mountSelector = null) {
     popupEl.style.display = isOpen ? "none" : "block";
   }
 
-  // Close popups if the user clicks outside them
   document.addEventListener("click", (e) => {
-    if (!windowEl.contains(e.target)) return; // click was fully outside the widget, ignore
+    if (!windowEl.contains(e.target)) return;
     const clickedInsidePopup =
       clearPopup.contains(e.target) || plusMenu.contains(e.target) || voicePopup.contains(e.target);
     const clickedTrigger =
@@ -252,7 +297,6 @@ function initCodeMasterAI(mode = "bubble", mountSelector = null) {
       messagesEl.innerHTML = "";
       addTextMessage("assistant", "Chat clear kar diya bro! Naye sawaal se shuru karte hain. 🔄");
     } else if (action === "last") {
-      // Remove the last user+assistant pair from both the display and the conversation sent to the API
       if (conversation.length >= 2) conversation.splice(-2, 2);
       else if (conversation.length === 1) conversation.splice(-1, 1);
       const rows = messagesEl.querySelectorAll(".cma-msg-row");
@@ -278,12 +322,13 @@ function initCodeMasterAI(mode = "bubble", mountSelector = null) {
 
     if (action === "image") fileInput.click();
     else if (action === "voice-input") toggleVoiceInput();
+    else if (action === "voice-mode") openVoiceMode();
     else if (action === "voice-select") { populateVoiceList(); voicePopup.style.display = "block"; }
     else if (action === "clear") clearPopup.style.display = "block";
   });
 
   // ============================================================
-  // IMAGE UPLOAD / SCREENSHOT ANALYSIS
+  // IMAGE UPLOAD
   // ============================================================
   fileInput.addEventListener("change", () => {
     const file = fileInput.files[0];
@@ -296,7 +341,7 @@ function initCodeMasterAI(mode = "bubble", mountSelector = null) {
 
     const reader = new FileReader();
     reader.onload = () => {
-      const dataUrl = reader.result; // e.g. "data:image/png;base64,AAAA..."
+      const dataUrl = reader.result;
       const base64 = dataUrl.split(",")[1];
       pendingImage = { base64, mediaType: file.type, previewUrl: dataUrl };
 
@@ -305,7 +350,7 @@ function initCodeMasterAI(mode = "bubble", mountSelector = null) {
       inputEl.focus();
     };
     reader.readAsDataURL(file);
-    fileInput.value = ""; // reset so the same file can be picked again later
+    fileInput.value = "";
   });
 
   removeImageBtn.addEventListener("click", () => {
@@ -314,13 +359,12 @@ function initCodeMasterAI(mode = "bubble", mountSelector = null) {
   });
 
   // ============================================================
-  // SENDING A MESSAGE (text and/or image)
+  // SENDING A MESSAGE
   // ============================================================
   async function sendMessage() {
     const text = inputEl.value.trim();
-    if (!text && !pendingImage) return; // nothing to send
+    if (!text && !pendingImage) return;
 
-    // Build the content blocks for THIS message
     const blocks = [];
     if (pendingImage) {
       blocks.push({
@@ -330,7 +374,6 @@ function initCodeMasterAI(mode = "bubble", mountSelector = null) {
     }
     blocks.push({ type: "text", text: text || "Is screenshot mein kya coding error hai? Kaise fix karu?" });
 
-    // Show it in the chat window
     if (pendingImage) {
       addImageUserMessage(pendingImage.previewUrl, text);
     } else {
@@ -339,7 +382,6 @@ function initCodeMasterAI(mode = "bubble", mountSelector = null) {
 
     conversation.push({ role: "user", content: blocks });
 
-    // Reset the input area
     inputEl.value = "";
     inputEl.style.height = "auto";
     pendingImage = null;
@@ -352,13 +394,13 @@ function initCodeMasterAI(mode = "bubble", mountSelector = null) {
       const res = await fetch(CMA_BACKEND_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: conversation }),
+        body: JSON.stringify({ messages: conversation, language: langSelect.value }),
       });
       const data = await res.json();
 
       if (data.error) {
         addTextMessage("assistant", "Oops, kuch gadbad ho gayi: " + data.error);
-      }else {
+      } else {
         const newRow = addTextMessage("assistant", data.reply);
         conversation.push({ role: "assistant", content: [{ type: "text", text: data.reply }] });
         if (voiceRepliesOn) {
@@ -391,14 +433,14 @@ function initCodeMasterAI(mode = "bubble", mountSelector = null) {
 
   if (SpeechRecognitionAPI) {
     recognition = new SpeechRecognitionAPI();
-    recognition.lang = "en-IN"; // handles Hinglish reasonably well
+    recognition.lang = "en-IN";
     recognition.continuous = false;
     recognition.interimResults = false;
 
     recognition.onresult = (event) => {
       const said = event.results[0][0].transcript;
       inputEl.value = (inputEl.value ? inputEl.value + " " : "") + said;
-      inputEl.dispatchEvent(new Event("input")); // trigger auto-resize
+      inputEl.dispatchEvent(new Event("input"));
       inputEl.focus();
     };
     recognition.onend = () => {
@@ -429,7 +471,7 @@ function initCodeMasterAI(mode = "bubble", mountSelector = null) {
   micBtn.addEventListener("click", toggleVoiceInput);
 
   // ============================================================
-  // VOICE OUTPUT (text-to-speech) + VOICE SELECTION
+  // VOICE OUTPUT (ElevenLabs TTS) + GENDER TOGGLE
   // ============================================================
   let voiceRepliesOn = localStorage.getItem("cma_voice_enabled") === "true";
   updateVoiceToggleBtn();
@@ -446,96 +488,367 @@ function initCodeMasterAI(mode = "bubble", mountSelector = null) {
     voiceToggleBtn.title = voiceRepliesOn ? "Voice replies: ON" : "Voice replies: OFF";
   }
 
-    function getSelectedVoice() {
-    const savedURI = localStorage.getItem("cma_voice_uri");
-    const voices = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
-    if (savedURI) {
-      const match = voices.find((v) => v.voiceURI === savedURI);
-      if (match) return match;
-    }
-    // Google/Natural/Online voices browser ki default OS voice se kaafi clear hoti hain
-    const preferred = voices.find(
-      (v) => v.lang && v.lang.startsWith("en") && /Google|Natural|Online|Enhanced/i.test(v.name)
-    );
-    return preferred || voices.find((v) => v.lang && v.lang.startsWith("en")) || voices[0] || null;
+  let voiceGender = localStorage.getItem("cma_voice_gender") || "male";
+  updateGenderToggleBtn();
+
+  genderToggleBtn.addEventListener("click", () => {
+    voiceGender = voiceGender === "male" ? "female" : "male";
+    localStorage.setItem("cma_voice_gender", voiceGender);
+    updateGenderToggleBtn();
+  });
+
+  function updateGenderToggleBtn() {
+    genderToggleBtn.textContent = voiceGender === "male" ? "👨" : "👩";
+    genderToggleBtn.title = voiceGender === "male" ? "Voice: Male (tap for Female)" : "Voice: Female (tap for Male)";
   }
-    let currentUtterance = null;
+
+  let currentAudio = null;
   let currentPlayBtn = null;
 
   function resetPlayBtn(btn) {
     if (btn) btn.textContent = "🔊 Play";
   }
 
-  function speakText(text, btnEl) {
-    if (!window.speechSynthesis) {
-      addTextMessage("assistant", "Ye browser voice output support nahi karta.");
-      return;
-    }
-
-    // Same message ka button dobara dabaya -> pause/resume karo, restart mat karo
-    if (btnEl && currentUtterance && currentPlayBtn === btnEl) {
-      if (window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
-        window.speechSynthesis.pause();
+  async function speakText(text, btnEl) {
+    if (btnEl && currentAudio && currentPlayBtn === btnEl) {
+      if (!currentAudio.paused) {
+        currentAudio.pause();
         btnEl.textContent = "▶ Resume";
         return;
-      } else if (window.speechSynthesis.paused) {
-        window.speechSynthesis.resume();
+      } else {
+        currentAudio.play();
         btnEl.textContent = "⏸ Pause";
         return;
       }
     }
 
-    // Naya message -> jo bhi pehle chal raha tha use rok do
-    window.speechSynthesis.cancel();
-    resetPlayBtn(currentPlayBtn);
+    if (currentAudio) {
+      currentAudio.pause();
+      resetPlayBtn(currentPlayBtn);
+    }
 
-    const utterance = new SpeechSynthesisUtterance(stripForSpeech(text));
-    const voice = getSelectedVoice();
-    if (voice) utterance.voice = voice;
-    utterance.rate = 0.98;  // thoda slow = zyada clear sunta hai
-    utterance.pitch = 1;
+    if (btnEl) btnEl.textContent = "⏳ Loading...";
 
-    utterance.onstart = () => { if (btnEl) btnEl.textContent = "⏸ Pause"; };
-    utterance.onend = () => { resetPlayBtn(btnEl); currentUtterance = null; currentPlayBtn = null; };
-    utterance.onerror = () => { resetPlayBtn(btnEl); currentUtterance = null; currentPlayBtn = null; };
+    try {
+      const cleanText = stripForSpeech(text);
+      const res = await fetch(CMA_BACKEND_URL.replace("/api/chat", "/api/tts"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: cleanText, voice: voiceGender }),
+      });
 
-    currentUtterance = utterance;
-    currentPlayBtn = btnEl;
-    window.speechSynthesis.speak(utterance);
+      if (!res.ok) {
+        resetPlayBtn(btnEl);
+        addTextMessage("assistant", "Voice generate nahi ho payi, phir se try karo.");
+        return;
+      }
+
+      const audioBlob = await res.blob();
+      const audioUrl = URL.createObjectURL(audioBlob);
+      const audio = new Audio(audioUrl);
+
+      audio.onplay = () => { if (btnEl) btnEl.textContent = "⏸ Pause"; };
+      audio.onended = () => { resetPlayBtn(btnEl); currentAudio = null; currentPlayBtn = null; };
+      audio.onerror = () => { resetPlayBtn(btnEl); currentAudio = null; currentPlayBtn = null; };
+
+      currentAudio = audio;
+      currentPlayBtn = btnEl;
+      audio.play();
+    } catch (err) {
+      resetPlayBtn(btnEl);
+      addTextMessage("assistant", "Voice service tak nahi pahunch paya.");
+    }
   }
+
   function populateVoiceList() {
-    if (!window.speechSynthesis) {
-      voiceListEl.innerHTML = "<button disabled>Voice output supported nahi hai</button>";
-      return;
-    }
-    const voices = window.speechSynthesis.getVoices();
-    const savedURI = localStorage.getItem("cma_voice_uri");
-
-    if (!voices.length) {
-      voiceListEl.innerHTML = "<button disabled>Voices load ho rahi hain, dobara try karo...</button>";
-      return;
-    }
-
-    voiceListEl.innerHTML = voices
-      .map((v) => {
-        const active = v.voiceURI === savedURI ? "cma-voice-active" : "";
-        return `<button class="${active}" data-uri="${v.voiceURI}">${v.name} (${v.lang})</button>`;
-      })
-      .join("");
-
-    voiceListEl.querySelectorAll("button[data-uri]").forEach((btn) => {
+    voiceListEl.innerHTML = `
+      <button data-gender="male">👨 Male Voice (Chris)</button>
+      <button data-gender="female">👩 Female Voice</button>
+    `;
+    voiceListEl.querySelectorAll("button[data-gender]").forEach((btn) => {
       btn.addEventListener("click", () => {
-        localStorage.setItem("cma_voice_uri", btn.dataset.uri);
+        voiceGender = btn.dataset.gender;
+        localStorage.setItem("cma_voice_gender", voiceGender);
+        updateGenderToggleBtn();
         closeAllPopups();
-        speakText("Ye meri awaaz hai!");
+        speakText("Ye meri awaaz hai!", null);
       });
     });
   }
 
-  // Some browsers load voices asynchronously
-  if (window.speechSynthesis) {
-    window.speechSynthesis.onvoiceschanged = () => {
-      if (voicePopup.style.display === "block") populateVoiceList();
-    };
+  // ============================================================
+  // AI VOICE MODE (hands-free talk mode)
+  // ============================================================
+  function openVoiceMode() {
+    if (!SpeechRecognitionAPI) {
+      addTextMessage("assistant", "Ye browser voice mode support nahi karta — Chrome try karo.");
+      return;
+    }
+
+    let modeActive = true;
+    let muted = false;
+    let liveRecognition = null;
+
+    const overlay = document.createElement("div");
+    overlay.className = "cma-voice-overlay";
+    overlay.innerHTML = `
+      <div class="cma-voice-circle" id="cma-vc"></div>
+      <div class="cma-voice-status" id="cma-vs">Sun rha hoon...</div>
+      <div class="cma-voice-controls">
+        <button class="cma-voice-btn" id="cma-vmute">🎤</button>
+        <button class="cma-voice-btn cma-voice-close" id="cma-vclose">✕</button>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+
+    const circleEl = overlay.querySelector("#cma-vc");
+    const statusEl = overlay.querySelector("#cma-vs");
+    const muteBtn  = overlay.querySelector("#cma-vmute");
+    const closeBtn = overlay.querySelector("#cma-vclose");
+
+    muteBtn.addEventListener("click", () => {
+      muted = !muted;
+      muteBtn.textContent = muted ? "🔇" : "🎤";
+      if (muted) {
+        stopListening();
+        statusEl.textContent = "Mic band hai";
+        circleEl.className = "cma-voice-circle";
+      } else {
+        startListening();
+      }
+    });
+
+    closeBtn.addEventListener("click", closeMode);
+
+    function startListening() {
+      if (!modeActive || muted) return;
+      if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+
+      liveRecognition = new SpeechRecognitionAPI();
+      liveRecognition.lang = "en-IN";
+      liveRecognition.continuous = false;
+      liveRecognition.interimResults = false;
+
+      circleEl.className = "cma-voice-circle listening";
+      statusEl.textContent = "Sun rha hoon...";
+
+      liveRecognition.onresult = async (event) => {
+        const said = event.results[0][0].transcript;
+        if (!said || !said.trim()) { if (modeActive && !muted) startListening(); return; }
+        circleEl.className = "cma-voice-circle";
+        statusEl.textContent = "Soch raha hoon...";
+        await handleVoiceMessage(said);
+      };
+      liveRecognition.onerror = () => { if (modeActive && !muted) startListening(); };
+      liveRecognition.start();
+    }
+
+    function stopListening() {
+      if (liveRecognition) {
+        liveRecognition.onresult = null;
+        liveRecognition.onerror = null;
+        try { liveRecognition.stop(); } catch (e) {}
+        liveRecognition = null;
+      }
+    }
+
+    async function handleVoiceMessage(text) {
+      addTextMessage("user", text);
+      conversation.push({ role: "user", content: [{ type: "text", text }] });
+
+      try {
+        const res = await fetch(CMA_BACKEND_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ messages: conversation }),
+        });
+        const data = await res.json();
+
+        if (data.error) {
+          addTextMessage("assistant", "Oops, kuch gadbad ho gayi: " + data.error);
+          statusEl.textContent = "Error aayi, phir try karo";
+          if (modeActive && !muted) startListening();
+          return;
+        }
+
+        addTextMessage("assistant", data.reply);
+        conversation.push({ role: "assistant", content: [{ type: "text", text: data.reply }] });
+
+        statusEl.textContent = "Bol raha hoon...";
+        circleEl.className = "cma-voice-circle speaking";
+
+        const cleanText = stripForSpeech(data.reply);
+        const ttsRes = await fetch(CMA_BACKEND_URL.replace("/api/chat", "/api/tts"), {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text: cleanText, voice: voiceGender }),
+        });
+
+        if (!ttsRes.ok) {
+          circleEl.className = "cma-voice-circle";
+          if (modeActive && !muted) startListening();
+          return;
+        }
+
+        const audioBlob = await ttsRes.blob();
+        const audio = new Audio(URL.createObjectURL(audioBlob));
+        currentAudio = audio;
+
+        audio.onended = () => {
+          circleEl.className = "cma-voice-circle";
+          currentAudio = null;
+          if (modeActive && !muted) startListening();
+        };
+        audio.onerror = () => {
+          circleEl.className = "cma-voice-circle";
+          if (modeActive && !muted) startListening();
+        };
+        audio.play();
+      } catch (err) {
+        statusEl.textContent = "Server tak nahi pahuncha";
+        circleEl.className = "cma-voice-circle";
+        if (modeActive && !muted) startListening();
+      }
+    }
+
+    function closeMode() {
+      modeActive = false;
+      stopListening();
+      if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+      overlay.remove();
+    }
+
+    startListening();
+  }
+
+  // ============================================================
+  // EXTRA STYLES (code blocks + voice mode overlay)
+  // ============================================================
+  function injectExtraStyles() {
+    if (document.getElementById("cma-extra-styles")) return;
+    const style = document.createElement("style");
+    style.id = "cma-extra-styles";
+    style.textContent = `
+      .cma-code-block { margin: 8px 0; border-radius: 8px; overflow: hidden; background: #1e1e1e; border: 1px solid #333; }
+      .cma-code-header { display: flex; justify-content: space-between; align-items: center; padding: 6px 12px; background: #2a2a2a; }
+      .cma-code-lang { color: #9ca3af; font-size: 0.75rem; text-transform: uppercase; }
+      .cma-copy-btn { background: #3f3f46; color: #fff; border: none; border-radius: 6px; padding: 4px 10px; font-size: 0.75rem; cursor: pointer; }
+      .cma-copy-btn:hover { background: #52525b; }
+      .cma-code-block pre { margin: 0; padding: 12px; overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
+      .cma-code-block code { color: #e5e7eb; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; }
+
+      .cma-voice-overlay { position: fixed; inset: 0; background: rgba(10,10,15,0.97); z-index: 999999; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+      .cma-voice-circle { width:160px; height:160px; border-radius:50%; background: radial-gradient(circle at 30% 30%, #7c3aed, #4c1d95); box-shadow: 0 0 60px rgba(124,58,237,0.6); transition: transform 0.3s ease; }
+      .cma-voice-circle.listening { animation: cma-pulse 1.2s ease-in-out infinite; }
+      .cma-voice-circle.speaking { animation: cma-speak 0.5s ease-in-out infinite alternate; }
+      @keyframes cma-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+      @keyframes cma-speak { 0% { transform: scale(1); } 100% { transform: scale(1.06); } }
+      .cma-voice-status { color:#e5e7eb; margin-top:28px; font-size:1rem; font-family:inherit; text-align:center; padding:0 20px; }
+      .cma-voice-controls { position:absolute; bottom:48px; display:flex; gap:24px; }
+      .cma-voice-btn { width:56px; height:56px; border-radius:50%; border:none; background:#27272a; color:#fff; font-size:1.4rem; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+      .cma-voice-btn:hover { background:#3f3f46; }
+      .cma-voice-btn.cma-voice-close { background:#dc2626; }
+    `;
+    document.head.appendChild(style);
   }
 }
+
+// ===== Code Master AI: Language Settings (paste at the END of the file) =====
+(function () {
+  const SHOW_ON_ALL_PAGES = false; // true karoge to gear har page pe dikhega
+  const STORAGE_KEY = "cm_ai_language";
+
+  // IMPORTANT: "value" app.py ke LANGUAGES dictionary ki keys se match hona chahiye
+  const LANGS = [
+    { value: "en", label: "English" },
+    { value: "hi", label: "हिन्दी (Hindi)" },
+    { value: "gu", label: "ગુજરાતી (Gujarati)" },
+    { value: "mr", label: "मराठी (Marathi)" },
+    { value: "bn", label: "বাংলা (Bengali)" },
+    { value: "ta", label: "தமிழ் (Tamil)" },
+    { value: "te", label: "తెలుగు (Telugu)" }
+  ];
+
+  const getLang = () => localStorage.getItem(STORAGE_KEY) || "en";
+
+  // Har /api/chat request mein selected language automatically add karta hai
+  const originalFetch = window.fetch;
+  window.fetch = function (url, options) {
+    try {
+      const u = typeof url === "string" ? url : url.url;
+      if (u && u.includes("/api/chat") && options && typeof options.body === "string") {
+        const body = JSON.parse(options.body);
+        body.language = getLang();
+        options = Object.assign({}, options, { body: JSON.stringify(body) });
+      }
+    } catch (e) {}
+    return originalFetch.call(this, url, options);
+  };
+
+  function buildSettingsUI() {
+    if (!SHOW_ON_ALL_PAGES && !location.pathname.includes("code-master-ai")) return;
+
+    const style = document.createElement("style");
+    style.textContent = `
+      #cm-settings-btn{position:fixed;right:20px;bottom:90px;width:46px;height:46px;border-radius:50%;
+        border:none;background:#1f2937;color:#fff;font-size:22px;cursor:pointer;z-index:9998;
+        box-shadow:0 4px 14px rgba(0,0,0,.35)}
+      #cm-settings-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;
+        align-items:center;justify-content:center;z-index:9999}
+      #cm-settings-overlay.open{display:flex}
+      #cm-settings-box{background:#111827;color:#fff;width:90%;max-width:340px;border-radius:14px;
+        padding:20px;font-family:inherit}
+      #cm-settings-box h3{margin:0 0 14px}
+      #cm-settings-box label{display:block;margin-bottom:6px;font-size:14px;opacity:.85}
+      #cm-settings-box select{width:100%;padding:10px;border-radius:8px;border:1px solid #374151;
+        background:#1f2937;color:#fff;font-size:15px}
+      #cm-settings-close{margin-top:16px;width:100%;padding:10px;border:none;border-radius:8px;
+        background:#2563eb;color:#fff;font-size:15px;cursor:pointer}
+    `;
+    document.head.appendChild(style);
+
+    const btn = document.createElement("button");
+    btn.id = "cm-settings-btn";
+    btn.title = "Settings";
+    btn.textContent = "⚙️";
+
+    const overlay = document.createElement("div");
+    overlay.id = "cm-settings-overlay";
+    overlay.innerHTML = `
+      <div id="cm-settings-box">
+        <h3>⚙️ Settings</h3>
+        <label for="cm-lang-select">AI Reply Language</label>
+        <select id="cm-lang-select"></select>
+        <button id="cm-settings-close">Done</button>
+      </div>`;
+
+    document.body.appendChild(btn);
+    document.body.appendChild(overlay);
+
+    const select = overlay.querySelector("#cm-lang-select");
+    LANGS.forEach(function (l) {
+      const opt = document.createElement("option");
+      opt.value = l.value;
+      opt.textContent = l.label;
+      select.appendChild(opt);
+    });
+    select.value = getLang();
+
+    select.addEventListener("change", function () {
+      localStorage.setItem(STORAGE_KEY, select.value);
+    });
+    btn.addEventListener("click", function () { overlay.classList.add("open"); });
+    overlay.querySelector("#cm-settings-close").addEventListener("click", function () {
+      overlay.classList.remove("open");
+    });
+    overlay.addEventListener("click", function (e) {
+      if (e.target === overlay) overlay.classList.remove("open");
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", buildSettingsUI);
+  } else {
+    buildSettingsUI();
+  }
+})();
