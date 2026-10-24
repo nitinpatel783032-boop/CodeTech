@@ -2,6 +2,12 @@
 // Har page par ek floating ⚙️ Settings button lagata hai
 (function () {
   "use strict";
+    // AI ke andar ki duplicate settings chhupao (delete nahi, sirf hide)
+  var hideStyle = document.createElement("style");
+  hideStyle.textContent =
+    "#cm-settings-btn, #cm-settings-overlay { display: none !important; }" +
+    ".cma-header-actions select[title='Language'] { display: none !important; }";
+  document.head.appendChild(hideStyle);
 
   // Settings page par button ki zaroorat nahi
   var page = location.pathname.split("/").pop();

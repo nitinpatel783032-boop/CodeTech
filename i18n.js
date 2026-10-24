@@ -47,6 +47,16 @@
     [`ready ho rahe hain`, `Getting ready`],
     [`chalte hain=`, `Let's Go`],
 
+        // ===== Bacha hua text (tutorial, home, AI) =====
+    [`jaise ki har ek chiz ko sahi se exicute karne k liye`, `Just as, to execute everything properly,`],
+    [`ki jarurat hoti hai vaise hi code ko sahi se run`, `is needed, in the same way code needs an environment to run or execute properly.`],
+    [`html, css js and another coding languages ko run karne k liye`, `Many environments have been built to run HTML, CSS, JS and other coding languages. The best among them is`],
+    [`hai, ,kyunki`, `, because`],
+    [`naam=`, `Name`],
+    [`india's best coding tutorial website`, `India's best coding tutorial website. The journey from noob to pro starts here.`],
+    [`yo! 👋 main code master ai hoon`, `Yo! 👋 I'm Code Master AI. Type, speak (🎤), or send a screenshot (📷), whichever you're comfortable with!`],
+    [`ai voice mode (bolke baat karo)`, `AI Voice Mode (Talk by Speaking)`],
+
     // ===== Shared (nav, buttons, footer) =====
     [`hd videos=`, `HD Videos`],
     [`hd videos dekho=`, `Watch HD Videos`],
@@ -435,16 +445,15 @@
   }
 
   // Pass D: "Try karo" demos (textarea ka code) + iframe dobara chalao
-  function rerun(ta) {
+      function rerun(ta) {
     var box = ta.closest(".try-it-box");
     var frame = box && box.querySelector("iframe");
     if (!frame) return;
-    try {
-      var d = frame.contentDocument || frame.contentWindow.document;
-      d.open(); d.write(ta.value); d.close();
-    } catch (e) {}
+    // Page load ke dauran mat chalao, page khud chalayega
+    if (document.readyState === "loading") return;
+    // srcdoc: har baar naya document, isliye const/let dobara declare nahi hote
+    frame.srcdoc = ta.value;
   }
-
   function translateDemos(root) {
     if (!PAIRS.length) return;
     var tas = root.querySelectorAll(".try-it-box textarea");

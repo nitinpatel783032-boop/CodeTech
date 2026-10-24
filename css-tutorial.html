@@ -1139,7 +1139,7 @@
       const iframe = box.querySelector('iframe');
       if (ta && iframe) {
         const doc = iframe.contentDocument || iframe.contentWindow.document;
-        doc.open(); doc.write(ta.value); doc.close();
+        iframe.srcdoc = ta.value;
       }
     });
     document.querySelectorAll('.try-it-run').forEach(btn => {
@@ -1149,7 +1149,7 @@
         const iframe = box.querySelector('iframe');
         if (ta && iframe) {
           const doc = iframe.contentDocument || iframe.contentWindow.document;
-          doc.open(); doc.write(ta.value); doc.close();
+          iframe.srcdoc = ta.value;
         }
       });
     });

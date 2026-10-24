@@ -1182,7 +1182,7 @@ document.querySelectorAll(<span class="vl">".highlight"</span>).forEach(el =&gt;
     document.querySelectorAll('.try-it-box').forEach(box => {
       const ta = box.querySelector('textarea');
       const fr = box.querySelector('iframe');
-      if(ta && fr){ const d=fr.contentDocument||fr.contentWindow.document; d.open();d.write(ta.value);d.close(); }
+      if(ta && fr){ fr.srcdoc = ta.value; }
     });
     // Progress + scroll spy
     const links = document.querySelectorAll('.sidebar-link[data-n]');

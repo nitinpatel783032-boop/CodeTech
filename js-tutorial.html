@@ -1390,7 +1390,7 @@ promise.<span class="fn">then</span>(data => <span class="fn">console</span>.<sp
       let iframe = box.querySelector('iframe');
       if (ta && iframe) {
         let doc = iframe.contentDocument || iframe.contentWindow.document;
-        doc.open(); doc.write(ta.value); doc.close();
+        iframe.srcdoc = ta.value;
       }
     });
     document.querySelectorAll('.try-it-run').forEach(btn => {
@@ -1400,7 +1400,7 @@ promise.<span class="fn">then</span>(data => <span class="fn">console</span>.<sp
         let iframe = box.querySelector('iframe');
         if (ta && iframe) {
           let doc = iframe.contentDocument || iframe.contentWindow.document;
-          doc.open(); doc.write(ta.value); doc.close();
+          iframe.srcdoc = ta.value;
         }
       });
     });
