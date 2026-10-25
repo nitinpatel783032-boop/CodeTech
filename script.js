@@ -109,7 +109,7 @@ function activateObStep(stepEl, isBack) {
 
 // ── Navigation ──────────────────────────────────────────────
 function obGoStep1(isBack) {
-  updateObDots(1);
+  updateObDots(2);
   activateObStep(document.getElementById('obStep1'), isBack);
 }
 
@@ -119,13 +119,25 @@ function obGoStep2(isBack) {
   if (nameInput && nameInput.value.trim()) {
     obUserName = nameInput.value.trim();
   }
-  updateObDots(2);
+  updateObDots(3);
   activateObStep(document.getElementById('obStep2'), !!isBack);
 }
 
 function obGoStep3(isBack) {
-  updateObDots(3);
+  updateObDots(4);
   activateObStep(document.getElementById('obStep3'), !!isBack);
+}
+
+// ── Step 0: Language chuno ─────────────────────────────────
+function obChooseLang(lang) {
+  try {
+    if (window.CMLang && typeof window.CMLang.set === 'function') {
+      window.CMLang.set(lang);
+    } else {
+      localStorage.setItem('cm_ai_language', lang);
+    }
+  } catch (e) {}
+  obGoStep1();
 }
 
 function obSkipAll() {
@@ -183,7 +195,7 @@ function _showWelcome(skipped) {
   }
 
   // Activate step
-  updateObDots(3);
+  updateObDots(4);
   activateObStep(welcomeEl, false);
 
   // Confetti
@@ -266,27 +278,27 @@ function _makeConfetti() {
 }
 
 // ══════════════════════════════════════════════════════════════
-//  THEME TOGGLE  (Dark ↔ Night)
+//  THEME TOGGLE  (Night ↔ Day)
 //
 //  Dark Mode  = existing cool blue-dark (default)
 //  Night Mode = warm amber-dark (blue light kam, aankhen
 //               thak ti nahi)
 // ══════════════════════════════════════════════════════════════
-var _isNightMode = false;
+var _isDayMode = false;
 
 function initTheme() {
   var saved = localStorage.getItem('cm_theme');
-  if (saved === 'night') {
-    _isNightMode = true;
-    document.body.classList.add('night-mode');
-  }
+  _isDayMode = (saved === 'day');
+  document.body.classList.remove('night-mode');
+  document.body.classList.toggle('day-mode', _isDayMode);
   _updateThemeBtn();
 }
 
 function toggleTheme() {
-  _isNightMode = !_isNightMode;
-  document.body.classList.toggle('night-mode', _isNightMode);
-  localStorage.setItem('cm_theme', _isNightMode ? 'night' : 'dark');
+  _isDayMode = !_isDayMode;
+  document.body.classList.remove('night-mode');
+  document.body.classList.toggle('day-mode', _isDayMode);
+  localStorage.setItem('cm_theme', _isDayMode ? 'day' : 'night');
   _updateThemeBtn();
 }
 
@@ -295,15 +307,22 @@ function _updateThemeBtn() {
   var label = document.getElementById('themeLabel');
   if (!icon || !label) return;
 
-  if (_isNightMode) {
-    // Ab night hai → button Dark dikhaye (switch back option)
-    icon.className  = 'fas fa-desktop';
-    label.textContent = 'Dark';
-  } else {
-    // Ab dark hai → button Night dikhaye
-    icon.className  = 'fas fa-moon';
+  if (_isDayMode) {
+    // Ab Day hai -> button Night dikhaye (switch back option)
+    icon.className    = 'fas fa-moon';
     label.textContent = 'Night';
+  } else {
+    // Ab Night hai -> button Day dikhaye
+    icon.className    = 'fas fa-sun';
+    label.textContent = 'Day';
   }
+}
+
+// Har page par saved theme lagao (dobara chalne se koi nuksan nahi)
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initTheme);
+} else {
+  initTheme();
 }
 
 /* ================================================================

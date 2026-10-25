@@ -105,8 +105,8 @@
     <p class="st-hint">Night mode mein aankhon par kam zor padta hai</p>
     <div class="st-line">
       <select id="stTheme">
-        <option value="dark">Dark</option>
         <option value="night">Night</option>
+        <option value="day">Day</option>
       </select>
       <span class="st-ok" id="okTheme"></span>
     </div>
@@ -231,7 +231,8 @@
   var themeSel = $('stTheme');
   themeSel.addEventListener('change', function () {
     localStorage.setItem(K.theme, themeSel.value);
-    document.body.classList.toggle('night-mode', themeSel.value === 'night');
+    document.body.classList.remove('night-mode');
+    document.body.classList.toggle('day-mode', themeSel.value === 'day');
     flash('okTheme');
   });
 
@@ -257,7 +258,7 @@
   $('stClear').addEventListener('click', function () {
     if (!confirm(CONFIRM[CMLang.get()] || CONFIRM.en)) return;
     mine().forEach(function (k) { localStorage.removeItem(k); });
-    document.body.classList.remove('night-mode');
+    document.body.classList.remove('night-mode', 'day-mode');
     renderAll();
   });
 
@@ -270,7 +271,7 @@
     emailIn.value = em || '';
     buildGroup('stWhy', WHY, K.why);
     buildGroup('stPc', PC, K.pc);
-    themeSel.value = get(K.theme) === 'night' ? 'night' : 'dark';
+    themeSel.value = get(K.theme) === 'day' ? 'day' : 'night';
     CMLang.apply();
   }
 

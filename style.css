@@ -1970,3 +1970,29 @@ body.night-mode .ob-container::before {
   0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.5); }
   50%       { box-shadow: 0 0 40px rgba(0, 212, 255, 0.9); }
 }
+
+/* ===== DAY MODE — Cream Grey Light Theme ===== */
+body.day-mode {
+  --bg-dark:    #ebeae5;
+  --bg-card:    #f5f4f0;
+  --bg-surface: #e2e0d9;
+  --border:     #cdc9be;
+  --accent:     #0369a1;
+  --accent2:    #047857;
+  --purple:     #7e22ce;
+  --text:       #1f2430;
+  --text-muted: #5c616d;
+  --text-dim:   #434957;
+  --shadow:     0 8px 32px rgba(60,50,30,0.14);
+  --glow-accent: 0 0 20px rgba(3,105,161,0.20);
+  --glow-green:  0 0 20px rgba(4,120,87,0.20);
+}
+
+body.day-mode .topnav {
+  background: rgba(235,234,229,0.92);
+}
+
+body.day-mode .btn-primary {
+  background: linear-gradient(135deg, var(--accent), #0284c7);
+  color: #ffffff;
+}
