@@ -2,6 +2,23 @@
 // Har page par ek floating ⚙️ Settings button lagata hai
 (function () {
   "use strict";
+  // Back dabane par browser purani page memory se dikha deta hai.
+  // Agar Settings mein theme/language/naam badla ho, to page apne aap reload ho.
+  function cmSnap() {
+    try {
+      return [
+        localStorage.getItem("cm_theme"),
+        localStorage.getItem("cm_ai_language"),
+        localStorage.getItem("cm_user_name")
+      ].join("|");
+    } catch (e) { return ""; }
+  }
+  var cmSnapAtLeave = cmSnap();
+  window.addEventListener("pagehide", function () { cmSnapAtLeave = cmSnap(); });
+  window.addEventListener("pageshow", function (e) {
+    if (e.persisted && cmSnap() !== cmSnapAtLeave) location.reload();
+  });
+
     // AI ke andar ki duplicate settings chhupao (delete nahi, sirf hide)
   var hideStyle = document.createElement("style");
   hideStyle.textContent =
